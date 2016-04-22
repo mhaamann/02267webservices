@@ -9,6 +9,7 @@ import dk.dtu.imm.fastmoney.BankService;
 import dk.dtu.imm.fastmoney.CreditCardFaultMessage;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -34,12 +35,12 @@ public class HotelWebService {
     }
     
     @WebMethod(operationName = "getHotels")
-    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") XMLGregorianCalendar arrivalDate, @WebParam(name = "departureDate") XMLGregorianCalendar departureDate){     
+    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") Date arrivalDate, @WebParam(name = "departureDate") Date departureDate){     
         return hotelsDB.getHotels(city, arrivalDate, departureDate);
     }
-    
+     
     @WebMethod(operationName = "bookHotel")
-    public boolean bookHotel(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "creditCard") CreditCardInfoType creditCard){
+    public boolean bookHotel(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "creditCard") dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard){
         return true;
     }
     

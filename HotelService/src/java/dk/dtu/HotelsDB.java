@@ -46,7 +46,10 @@ public class HotelsDB {
         ArrayList<Hotel> availableRooms = new ArrayList<Hotel>();
 
         for (Hotel room : rooms) {
-            if (room.city.toLowerCase() == city.toLowerCase()) {
+            if (room.city.toLowerCase().equals(city.toLowerCase())) {
+                if (room.bookings.isEmpty()) {
+                    availableRooms.add(room);
+                }
                 for (Booking booking : room.bookings) {
                     if (booking.startDate.before(departureDate) && booking.endDate.after(arrivalDate)) {
                         // Conflict
