@@ -2,3 +2,10 @@
 /AirlineService/build/
 /ArlineClient/nbproject/private/
 /ArlineClient/build/
+/HotelService/nbproject/private/
+/HotelClient/nbproject/private/
+/HotelService/build/
+/HotelClient/build/
+/HotelClient/dist/
+/HotelService/dist/
+/ArlineClient/dist/

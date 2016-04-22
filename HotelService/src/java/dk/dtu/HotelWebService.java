@@ -13,14 +13,14 @@ import javax.jws.WebParam;
  *
  * @author User
  */
-@WebService(serviceName = "AirlineWebService")
-public class AirlineWebService {
+@WebService(serviceName = "HotelWebService")
+public class HotelWebService {
 
     /**
      * This is a sample web service operation
      */
     @WebMethod(operationName = "hello")
     public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " ! from Airline";
+        return "Hello " + txt + " ! from Hotel";
     }
 }

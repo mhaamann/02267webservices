@@ -11,17 +11,16 @@ import static org.junit.Assert.*;
  *
  * @author User
  */
-public class AirlineClientTest {
+public class HotelClientTest {
+    
+    public HotelClientTest() {
+    }
     
     @Test
-    public void AirlineClientTest1() {
+    public void sayHi(){
         String result = hello("Me");
-        assertEquals("Hello Me ! from Airline", result);
+        assertEquals("Hello Me ! from Hotel", result);
     }
-    
-    public AirlineClientTest() {
-    }
-    
     // TODO add test methods here.
     // The methods must be annotated with annotation @Test. For example:
     //
@@ -29,8 +28,8 @@ public class AirlineClientTest {
     // public void hello() {}
 
     private static String hello(java.lang.String name) {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        dk.dtu.HotelWebService_Service service = new dk.dtu.HotelWebService_Service();
+        dk.dtu.HotelWebService port = service.getHotelWebServicePort();
         return port.hello(name);
     }
 }
