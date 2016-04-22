@@ -5,10 +5,25 @@
  */
 package dk.dtu;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  *
  * @author mhaamann
  */
 class Hotel {
+    
+    public String city;
+    public String hotel;
+    public int pricePerDay;
+    ArrayList<Booking> bookings = new ArrayList<Booking>();
+    
+    
+    public Hotel(String city, String hotel, int pricePerDay) {
+        this.city = city;
+        this.hotel = hotel;
+        this.pricePerDay = pricePerDay;
+    }
     
 }
