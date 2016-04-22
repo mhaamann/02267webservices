@@ -4,6 +4,21 @@
  * and open the template in the editor.
  */
 
+import dk.dtu.CreditCard;
+import dk.dtu.FlightInfo;
+import java.math.BigDecimal;
+import java.math.BigInteger;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
+import javax.xml.datatype.DatatypeConfigurationException;
+import javax.xml.datatype.DatatypeFactory;
+import javax.xml.datatype.Duration;
+import javax.xml.datatype.XMLGregorianCalendar;
+import javax.xml.namespace.QName;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -19,6 +34,32 @@ public class AirlineClientTest {
         assertEquals("Hello Me ! from Airline", result);
     }
     
+    @Test
+    public void AirlineClientTest2() {
+        CreditCard cc =  new CreditCard();
+        boolean result = bookFlight("Me", cc);
+        assertEquals(true, result);
+    }
+    
+    @Test
+    public void AirlineClientTest3() {
+        CreditCard cc =  new CreditCard();
+        boolean result = cancelFlight("Blah", 1234, cc);
+        assertEquals(true, result);
+    }
+    
+    @Test
+    public void AirlineClientTest4() throws DatatypeConfigurationException {
+        GregorianCalendar c = new GregorianCalendar();
+        c.setTime(new Date());
+        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        List<FlightInfo> result;
+        List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
+        
+        result = getFlights("Me", "QWERTY", startDate);
+        assertEquals(expectedResult, result);
+    }
+    
     public AirlineClientTest() {
     }
     
@@ -32,5 +73,23 @@ public class AirlineClientTest {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
         return port.hello(name);
+    }
+
+    private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.CreditCard creditCard) {
+        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
+        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        return port.bookFlight(bookingNumber, creditCard);
+    }
+
+    private static boolean cancelFlight(java.lang.String bookingNumber, java.lang.Integer price, dk.dtu.CreditCard creditCard) {
+        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
+        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        return port.cancelFlight(bookingNumber, price, creditCard);
+    }
+
+    private static java.util.List<dk.dtu.FlightInfo> getFlights(java.lang.String origin, java.lang.String destination, java.lang.Object startDate) {
+        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
+        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        return port.getFlights(origin, destination, startDate);
     }
 }
