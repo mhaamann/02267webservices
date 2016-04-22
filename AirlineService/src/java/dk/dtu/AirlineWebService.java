@@ -8,6 +8,8 @@ package dk.dtu;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
+import java.util.*;
+import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -23,4 +25,23 @@ public class AirlineWebService {
     public String hello(@WebParam(name = "name") String txt) {
         return "Hello " + txt + " ! from Airline";
     }
+    @WebMethod(operationName = "getFlights")
+    public ArrayList<FlightInfo> getFlights(String origin, String destination, XMLGregorianCalendar startDate){     
+        FlightInfo a = new FlightInfo();
+        ArrayList<FlightInfo> strings = new ArrayList<FlightInfo>();
+        strings.add(a);
+        return strings;
+    }
+    
+    @WebMethod(operationName = "bookFlight")
+    public boolean bookFlight(String bookingNumber, CreditCard creditCard){
+        return true;
+    }
+    
+    @WebMethod(operationName = "cancelFlight")
+    public boolean cancelFlight(String bookingNumber, Integer price, CreditCard creditCard){
+        return true;
+    }
+    
+    
 }
