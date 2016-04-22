@@ -7,7 +7,6 @@ package dk.dtu;
 
 import java.util.ArrayList;
 import java.util.Date;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
@@ -15,29 +14,49 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class HotelsDB {
 
-    ArrayList<Hotel> availableRooms = new ArrayList<Hotel>();
-    ArrayList<Booking> bookings = new ArrayList<Booking>();
+    ArrayList<Hotel> rooms = new ArrayList<Hotel>();
 
     public HotelsDB() {
-        
-        // Add rooms to the database.
-        availableRooms.add(new Hotel("Copenhagen", "CabIn", 40000));
-        availableRooms.add(new Hotel("Copenhagen", "CabIn", 40000));
-        availableRooms.add(new Hotel("Copenhagen", "CabIn", 40000));
-        availableRooms.add(new Hotel("Amsterdam", "CabIn", 40000));
-        availableRooms.add(new Hotel("Amsterdam", "CabIn", 40000));
-        availableRooms.add(new Hotel("Amsterdam", "CabIn", 40000));
-        availableRooms.add(new Hotel("Berlin", "CabIn", 40000));
-        availableRooms.add(new Hotel("Berlin", "CabIn", 40000));
-        availableRooms.add(new Hotel("Berlin", "CabIn", 40000));
-        availableRooms.add(new Hotel("Berlin", "CabIn", 40000));
-        availableRooms.add(new Hotel("Berlin", "CabIn", 40000));
-        
+
+        // Each hotel represents a Room. The second parameter represents the hotel name.
+        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+
+        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+
+        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+
+    }
+    
+    /**
+     * Returns a list of rooms that does not have a booking that conflicts with the given date.
+     * @param city The city where the hotel is located.
+     * @param arrivalDate
+     * @param departureDate
+     * @return 
+     */
+    public ArrayList<Hotel> getHotels(String city, Date arrivalDate, Date departureDate) {
+        ArrayList<Hotel> availableRooms = new ArrayList<Hotel>();
+
+        for (Hotel room : rooms) {
+            if (room.city.toLowerCase() == city.toLowerCase()) {
+                for (Booking booking : room.bookings) {
+                    if (booking.startDate.before(departureDate) && booking.endDate.after(arrivalDate)) {
+                        // Conflict
+                    } else {
+                        availableRooms.add(room);
+                    }
+                }
+            }
+        }
+        return availableRooms;
     }
 
-    public ArrayList<Hotel> getHotels(String city, XMLGregorianCalendar arrivalDate, XMLGregorianCalendar departureDate) {
-        return null;
-    }
-    
-    
 }
