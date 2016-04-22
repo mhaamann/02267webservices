@@ -5,10 +5,30 @@
  */
 package dk.dtu;
 
+import javax.xml.datatype.XMLGregorianCalendar;
+
 /**
  *
  * @author User
  */
 class FlightInfo {
     
+    String origin, destination, bookingNumber, reservationService, carrier;
+    XMLGregorianCalendar startDate, endDate;
+    Integer price;
+    
+    public FlightInfo(String origin, String destination, String bookingNumber, 
+            String reservationService, String carrier, XMLGregorianCalendar startDate, 
+            XMLGregorianCalendar endDate, Integer price){
+        this.origin = origin; 
+        this.destination = destination;
+        this.bookingNumber = bookingNumber; 
+        this.reservationService = reservationService; 
+        this.carrier = carrier;
+        this.startDate = startDate; 
+        this.endDate = endDate;
+        this.price = price;
+    }
+ 
+    public FlightInfo(){}
 }
