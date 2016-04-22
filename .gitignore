@@ -13,3 +13,6 @@ HotelService/nbproject/genfiles.properties
 
 AirlineService/dist/AirlineService.war
 /AirlineService/dist/
+/Utils/nbproject/private/
+/Utils/build/
+/Utils/dist/

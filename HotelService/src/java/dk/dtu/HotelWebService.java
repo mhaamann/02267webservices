@@ -5,10 +5,11 @@
  */
 package dk.dtu;
 
+import java.util.ArrayList;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-
+import javax.xml.datatype.XMLGregorianCalendar;
 /**
  *
  * @author User
@@ -22,5 +23,20 @@ public class HotelWebService {
     @WebMethod(operationName = "hello")
     public String hello(@WebParam(name = "name") String txt) {
         return "Hello " + txt + " ! from Hotel";
+    }
+    
+    @WebMethod(operationName = "getHotels")
+    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") XMLGregorianCalendar arrivalDate, @WebParam(name = "departureDate") XMLGregorianCalendar departureDate){     
+        return null;
+    }
+    
+    @WebMethod(operationName = "bookHotel")
+    public boolean bookHotel(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "creditCard") CreditCard creditCard){
+        return true;
+    }
+    
+    @WebMethod(operationName = "cancelHotel")
+    public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber){
+        return true;
     }
 }
