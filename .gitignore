@@ -10,3 +10,5 @@
 /HotelService/dist/
 /ArlineClient/dist/
 HotelService/nbproject/genfiles.properties
+
+AirlineService/dist/AirlineService.war
