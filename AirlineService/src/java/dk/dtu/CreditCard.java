@@ -5,10 +5,27 @@
  */
 package dk.dtu;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlType;
+
 /**
  *
  * @author User
  */
-class CreditCard {
-    
+@XmlType(name = "CreditCard")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class CreditCard {
+
+    @XmlElement(name = "cvc")
+    String cvc;
+
+    public CreditCard() {
+    }
+
+    public CreditCard(String cvc) {
+        this.cvc = cvc;
+    }
+
 }

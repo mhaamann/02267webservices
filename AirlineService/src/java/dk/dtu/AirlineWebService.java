@@ -26,20 +26,17 @@ public class AirlineWebService {
         return "Hello " + txt + " ! from Airline";
     }
     @WebMethod(operationName = "getFlights")
-    public ArrayList<FlightInfo> getFlights(String origin, String destination, XMLGregorianCalendar startDate){     
-        FlightInfo a = new FlightInfo();
-        ArrayList<FlightInfo> strings = new ArrayList<FlightInfo>();
-        strings.add(a);
-        return strings;
+    public ArrayList<FlightInfo> getFlights(@WebParam(name = "origin") String origin, @WebParam(name = "destination") String destination, @WebParam(name = "startDate") XMLGregorianCalendar startDate){     
+        return null;
     }
     
     @WebMethod(operationName = "bookFlight")
-    public boolean bookFlight(String bookingNumber, CreditCard creditCard){
+    public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "creditCard") CreditCard creditCard){
         return true;
     }
     
     @WebMethod(operationName = "cancelFlight")
-    public boolean cancelFlight(String bookingNumber, Integer price, CreditCard creditCard){
+    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "price") Integer price, @WebParam(name = "creditCard") CreditCard creditCard){
         return true;
     }
     
