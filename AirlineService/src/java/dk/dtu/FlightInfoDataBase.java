@@ -5,6 +5,8 @@
  */
 package dk.dtu;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -46,6 +48,7 @@ public class FlightInfoDataBase {
     FlightInfo flight_3;
     FlightInfo flight_4;
     FlightInfo flight_5;
+    ArrayList<FlightInfo> flightList = new ArrayList<>();
 
     public FlightInfoDataBase() throws DatatypeConfigurationException {
         this.flight_1 = new FlightInfo("Copenhagen", "Berlin", "B12341", 
@@ -58,5 +61,24 @@ public class FlightInfoDataBase {
                 "LameDuck", "Ryanair", startDate4, endDate4, 66);        
         this.flight_5 = new FlightInfo("Madrid", "Copenhagen", "B12345", 
                 "LameDuck", "SAS", startDate5, endDate5, 70);
+        
+        flightList.add(flight_1);
+        flightList.add(flight_2);
+        flightList.add(flight_3);
+        flightList.add(flight_4);
+        flightList.add(flight_5);
+    }
+    
+    public ArrayList<FlightInfo> getFlights(String origin, String destination, XMLGregorianCalendar startDate) {
+        ArrayList<FlightInfo> flightListToReturn = new ArrayList<FlightInfo>();
+
+        for (FlightInfo flight : flightList) {
+            if (flight.origin.toLowerCase().equals(origin.toLowerCase()) && 
+                    flight.destination.toLowerCase().equals(destination.toLowerCase())&&
+                    flight.startDate.equals(startDate)) {
+                flightList.add(flight);
+            }
+        }
+        return flightList;
     }
 }
