@@ -12,7 +12,9 @@
     xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling">
     <import namespace="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" location="HotelWebServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://dtu.dk/" location="http://localhost:8080/HotelService/HotelWebService?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://bookingservice.ws" location="BookingService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <partnerLinks>
+        <partnerLink name="PartnerLink1" xmlns:tns="http://bookingservice.ws" partnerLinkType="tns:BookingService" myRole="BookingServicePortTypeRole"/>
         <partnerLink name="HotelServiceLink" xmlns:tns="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" partnerLinkType="tns:HotelWebServiceLinkType" partnerRole="HotelWebServiceRole"/>
     </partnerLinks>
     <sequence>
