@@ -50,13 +50,12 @@ public class AirlineClientTest {
     
     @Test
     public void AirlineClientTest4() throws DatatypeConfigurationException {
-        GregorianCalendar c = new GregorianCalendar();
-        c.setTime(new Date());
-        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(c);
+        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
+        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
         List<FlightInfo> result;
         List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
         
-        result = getFlights("Me", "QWERTY", startDate);
+        result = getFlights("Copenhagen", "Berlin", startDate);
         assertEquals(expectedResult, result);
     }
     
