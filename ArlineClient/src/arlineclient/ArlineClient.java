@@ -7,7 +7,7 @@ package arlineclient;
 
 /**
  *
- * @author User
+ * @author DFS
  */
 public class ArlineClient {
 

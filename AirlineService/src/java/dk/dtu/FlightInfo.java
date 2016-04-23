@@ -12,7 +12,7 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- * @author User
+ * @author DFS
  */
 class FlightInfo {
     

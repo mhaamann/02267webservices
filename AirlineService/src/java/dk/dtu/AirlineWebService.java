@@ -14,7 +14,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
- * @author User
+ * @author DFS
  */
 @WebService(serviceName = "AirlineWebService")
 public class AirlineWebService {
