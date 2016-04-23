@@ -43,3 +43,5 @@ AirlineService/nbproject/genfiles.properties
 *.lock
 /HelloWorldApp/src/jbiServiceUnits/
 /HelloWorldApp/test/results/
+/HelloWorldCA/src/jbiServiceUnits/
+/HelloWorldCA/test/results/

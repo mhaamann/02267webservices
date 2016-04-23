@@ -33,39 +33,7 @@ public class AirlineWebService {
     public ArrayList<FlightInfo> getFlights(@WebParam(name = "origin") String origin, 
             @WebParam(name = "destination") String destination, 
             @WebParam(name = "startDate") XMLGregorianCalendar startDate){     
-        ArrayList<FlightInfo> flightInfoList = new ArrayList<FlightInfo>();
-        
-        if(flightDB.flight_1.origin.equals(origin) && 
-                flightDB.flight_1.destination.equals(destination) &&
-                flightDB.flight_1.startDate.equals(startDate)){
-            flightInfoList.add(flightDB.flight_1);
-        }
-        
-        if(flightDB.flight_2.origin.equals(origin) && 
-                flightDB.flight_2.destination.equals(destination) &&
-                flightDB.flight_2.startDate.equals(startDate)){
-            flightInfoList.add(flightDB.flight_2);
-        }
-        
-        if(flightDB.flight_3.origin.equals(origin) && 
-                flightDB.flight_3.destination.equals(destination) &&
-                flightDB.flight_3.startDate.equals(startDate)){
-            flightInfoList.add(flightDB.flight_3);
-        }
-        
-        if(flightDB.flight_4.origin.equals(origin) && 
-                flightDB.flight_4.destination.equals(destination) &&
-                flightDB.flight_4.startDate.equals(startDate)){
-            flightInfoList.add(flightDB.flight_4);
-        }
-        
-        if(flightDB.flight_5.origin.equals(origin) && 
-                flightDB.flight_5.destination.equals(destination) &&
-                flightDB.flight_5.startDate.equals(startDate)){
-            flightInfoList.add(flightDB.flight_5);
-        }
-        
-        return flightInfoList;
+        return flightDB.getFlights(origin, destination, startDate);
     }
     
     @WebMethod(operationName = "bookFlight")
