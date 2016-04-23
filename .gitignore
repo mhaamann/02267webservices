@@ -17,3 +17,27 @@ AirlineService/dist/AirlineService.war
 /Utils/build/
 /Utils/dist/
 AirlineService/nbproject/genfiles.properties
+/BookingService/nbproject/private/
+
+
+
+#ant specific
+*/dist/
+*/build/
+
+#netbeans specific
+*/nbproject/*
+!*/nbproject/project.properties
+!*/nbproject/project.xml
+
+#java specific
+*.class
+
+#general swap/backup files
+*.so
+*.log
+*.out
+*~
+*.swp
+*.DS_Store
+*.lock
