@@ -12,7 +12,6 @@ import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
- *
  * @author User
  */
 class FlightInfo {
@@ -24,13 +23,6 @@ class FlightInfo {
     public FlightInfo(String origin, String destination, String bookingNumber, 
             String reservationService, String carrier, XMLGregorianCalendar startDate, 
             XMLGregorianCalendar endDate, Integer price) throws DatatypeConfigurationException{
-        
-        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
-        XMLGregorianCalendar startingDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
-        
-        GregorianCalendar ed = new GregorianCalendar(2015, 9, 7);
-        XMLGregorianCalendar endingDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed);
-        
         
         this.origin = origin; 
         this.destination = destination;
