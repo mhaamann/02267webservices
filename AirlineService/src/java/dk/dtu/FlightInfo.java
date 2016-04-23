@@ -18,11 +18,11 @@ class FlightInfo {
     
     String origin, destination, bookingNumber, reservationService, carrier;
     XMLGregorianCalendar startDate, endDate;
-    Integer price;
+    int price;
     
     public FlightInfo(String origin, String destination, String bookingNumber, 
             String reservationService, String carrier, XMLGregorianCalendar startDate, 
-            XMLGregorianCalendar endDate, Integer price) throws DatatypeConfigurationException{
+            XMLGregorianCalendar endDate, int price) throws DatatypeConfigurationException{
         
         this.origin = origin; 
         this.destination = destination;
