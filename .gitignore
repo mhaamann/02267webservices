@@ -41,3 +41,4 @@ AirlineService/nbproject/genfiles.properties
 *.swp
 *.DS_Store
 *.lock
+/HelloWorldApp/src/jbiServiceUnits/

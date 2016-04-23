@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<casa xmlns="http://java.sun.com/xml/ns/casa" xmlns:ns1="http://j2ee.netbeans.org/wsdl/BookingService/src/newWSDL" xmlns:ns2="http://enterprise.netbeans.org/bpel/BookingService/bookingService" xmlns:xlink="http://www.w3.org/2000/xlink">
+    <endpoints>
+        <endpoint endpoint-name="newWSDLPort" interface-name="ns1:newWSDLPortType" name="endpoint1" service-name="ns1:newWSDLService"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="newWSDLPortTypeRole_myRole" file-path="bookingService.bpel" interface-name="ns1:newWSDLPortType" name="endpoint2" process-name="bookingService" service-name="ns2:PartnerLink1"/>
+    </endpoints>
+    <service-units>
+        <service-engine-service-unit artifacts-zip="BookingService.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="HelloWorldApp-BookingService" unit-name="BookingService" unknown="false" x="144" y="97">
+            <provides endpoint="endpoint2"/>
+        </service-engine-service-unit>
+        <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="HelloWorldApp-sun-http-binding" unit-name="sun-http-binding">
+            <ports>
+                <port x="67" y="37">
+                    <link xlink:href="../jbiServiceUnits/BookingService/newWSDL.wsdl#xpointer(/definitions/service[@name='newWSDLService']/port[@name='newWSDLPort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint1"/>
+                    <provides endpoint="endpoint1"/>
+                </port>
+            </ports>
+        </binding-component-service-unit>
+    </service-units>
+    <connections>
+        <connection consumer="endpoint1" provider="endpoint2" state="unchanged"/>
+    </connections>
+    <porttypes>
+        <link xlink:href="../jbiServiceUnits/BookingService/newWSDL.wsdl#xpointer(/definitions/portType[@name='newWSDLPortType'])" xlink:type="simple"/>
+    </porttypes>
+    <bindings>
+        <link xlink:href="../jbiServiceUnits/BookingService/newWSDL.wsdl#xpointer(/definitions/binding[@name='newWSDLBinding'])" xlink:type="simple"/>
+    </bindings>
+    <services>
+        <link xlink:href="../jbiServiceUnits/BookingService/newWSDL.wsdl#xpointer(/definitions/service[@name='newWSDLService'])" xlink:type="simple"/>
+    </services>
+    <regions>
+        <region name="WSDL Endpoints" width="150"/>
+        <region name="JBI Modules" width="500"/>
+        <region name="External Modules" width="200"/>
+    </regions>
+</casa>
