@@ -76,9 +76,9 @@ public class FlightInfoDataBase {
             if (flight.origin.toLowerCase().equals(origin.toLowerCase()) && 
                     flight.destination.toLowerCase().equals(destination.toLowerCase())&&
                     flight.startDate.equals(startDate)) {
-                flightList.add(flight);
+                flightListToReturn.add(flight);
             }
         }
-        return flightList;
+        return flightListToReturn;
     }
 }
