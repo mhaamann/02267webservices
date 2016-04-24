@@ -9,7 +9,7 @@
     xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
     xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
     xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
-    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxxf="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions">
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxxf="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions" xmlns:ns0="http://bookingservice.ws">
     <import namespace="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" location="HotelWebServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://dtu.dk/" location="http://localhost:8080/HotelService/HotelWebService?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://bookingservice.ws" location="BookingService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -26,6 +26,9 @@
         <variable name="GetHotelsIn1" xmlns:tns="http://dtu.dk/" messageType="tns:getHotels"/>
         <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
     </variables>
+    <correlationSets>
+        <correlationSet name="CorrelationSet1" properties=""/>
+    </correlationSets>
     <sequence>
         <receive name="Receive2" createInstance="yes" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryIn"/>
         <assign name="Assign3">
@@ -38,7 +41,11 @@
                 <to variable="PlanningState"/>
             </copy>
         </assign>
-        <reply name="Reply2" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryOut"/>
+        <reply name="Reply2" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryOut">
+            <correlations>
+                <correlation set="CorrelationSet1" initiate="yes"/>
+            </correlations>
+        </reply>
         <scope name="Scope1">
             <variables>
                 <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
@@ -47,8 +54,11 @@
             <sequence name="Sequence2" xmlns:tns="http://bookingservice.ws">
                 <while name="While1">
                     <condition>$PlanningState</condition>
-                    <pick name="Pick1">
+                    <pick name="Pick1" createInstance="no">
                         <onMessage partnerLink="PartnerLink1" operation="GetHotels" portType="tns:BookingServicePortType" variable="GetHotelsIn">
+                            <correlations>
+                                <correlation set="CorrelationSet1" initiate="no"/>
+                            </correlations>
                             <sequence name="Sequence1">
                                     <assign name="Assign1">
                                         <copy>
