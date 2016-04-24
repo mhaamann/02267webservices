@@ -4,6 +4,10 @@
  * and open the template in the editor.
  */
 
+import dk.dtu.imm.fastmoney.types.ObjectFactory;
+import dk.dtu.imm.fastmoney.types.AccountType;
+import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
+import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
 import dk.dtu.CreditCard;
 import dk.dtu.FlightInfo;
 import java.math.BigDecimal;
@@ -28,10 +32,33 @@ import static org.junit.Assert.*;
  */
 public class AirlineClientTest {
     
+    public static final CreditCardInfoType creditCard = new CreditCardInfoType();
+    static{
+        //Creditcard has credit of 1000
+        creditCard.setName("Tobiasen Inge");
+        creditCard.setNumber("50408823");
+        ExpirationDate exDate = new ExpirationDate();
+        exDate.setMonth(9);
+        exDate.setYear(10);
+        creditCard.setExpirationDate(exDate);
+    }
+    
+    private static final AccountType account = new AccountType();
+    static{
+        account.setName("CheapBird");
+        account.setNumber("50208813");
+    }
+    
+    
     @Test
-    public void AirlineClientTest1() {
-        String result = hello("Me");
-        assertEquals("Hello Me ! from Airline", result);
+    public void AirlineClientTest1() throws DatatypeConfigurationException {
+        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
+        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
+        List<FlightInfo> result;
+        List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
+        
+        result = getFlights("Copenhagen", "Berlin", startDate);
+        assertEquals(expectedResult, result);
     }
     
     @Test
@@ -47,33 +74,9 @@ public class AirlineClientTest {
         boolean result = cancelFlight("Blah", 1234, cc);
         assertEquals(true, result);
     }
-    
-    @Test
-    public void AirlineClientTest4() throws DatatypeConfigurationException {
-        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
-        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
-        List<FlightInfo> result;
-        List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
-        
-        result = getFlights("Copenhagen", "Berlin", startDate);
-        assertEquals(expectedResult, result);
-    }
-    
+       
     public AirlineClientTest() {
     }
-    
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
-
-    private static String hello(java.lang.String name) {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
-        return port.hello(name);
-    }
-
     private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.CreditCard creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
