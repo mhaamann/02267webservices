@@ -42,25 +42,25 @@
     <operation name="CreateItinerary">
       <soap:operation/>
       <input name="CreateItineraryRequest">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </input>
       <output name="CreateItineraryResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </output>
     </operation>
     <operation name="GetHotels">
       <soap:operation/>
       <input name="GetHotelsRequest">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </input>
       <output name="GetHotelsResponse">
-        <soap:body use="literal"/>
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </output>
     </operation>
   </binding>
   <service name="service1">
     <port binding="tns:BookingServicePortTypeBinding" name="BookingServicePortTypeBindingPort">
-      <soap:address location="http://localhost:9080/service"/>
+      <soap:address location="http://192.168.1.4:9080/service"/>
     </port>
   </service>
     <plnk:partnerLinkType name="BookingService">

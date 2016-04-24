@@ -35,19 +35,19 @@
         <operation name="CreateItinerary">
             <soap:operation/>
             <input name="CreateItineraryRequest">
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </input>
             <output name="CreateItineraryResponse">
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>
         <operation name="GetHotels">
             <soap:operation/>
             <input name="GetHotelsRequest">
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </input>
             <output name="GetHotelsResponse">
-                <soap:body use="literal"/>
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>
     </binding>
