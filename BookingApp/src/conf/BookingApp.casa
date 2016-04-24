@@ -7,7 +7,7 @@
         <endpoint display-name="HotelServiceLink" endpoint-name="HotelWebServiceRole_partnerRole" file-path="bookingBPEL.bpel" interface-name="ns1:HotelWebService" name="endpoint4" process-name="bookingBPEL" service-name="ns3:HotelServiceLink"/>
     </endpoints>
     <service-units>
-        <service-engine-service-unit artifacts-zip="BookingBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="BookingApp-BookingBPEL" unit-name="BookingBPEL" unknown="false" x="142" y="97">
+        <service-engine-service-unit artifacts-zip="BookingBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="BookingApp-BookingBPEL" unit-name="BookingBPEL" unknown="false" x="143" y="97">
             <provides endpoint="endpoint3"/>
             <consumes endpoint="endpoint4"/>
         </service-engine-service-unit>
