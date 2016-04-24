@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://bookingservice.ws" xmlns:ns2="http://enterprise.netbeans.org/bpel/BookingBPEL/bookingBPEL" xmlns:ns3="http://dtu.dk/" version="1.0">
+    <services binding-component="true">
+        <provides endpoint-name="HotelWebServicePort" interface-name="ns3:HotelWebService" service-name="ns3:HotelWebService"/>
+        <consumes endpoint-name="BookingServicePortTypeBindingPort" interface-name="ns1:BookingServicePortType" service-name="ns1:service1"/>
+    </services>
+</jbi>

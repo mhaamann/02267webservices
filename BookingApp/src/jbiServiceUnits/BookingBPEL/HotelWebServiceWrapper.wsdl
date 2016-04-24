@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<definitions
+    xmlns="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+    xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="HotelWebServiceWrapper" targetNamespace="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" xmlns:tns="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns="http://dtu.dk/">
+    <import location="http://localhost:8080/HotelService/HotelWebService?wsdl" namespace="http://dtu.dk/"/>
+    <plnk:partnerLinkType name="HotelWebServiceLinkType">
+        <plnk:role name="HotelWebServiceRole" portType="ns:HotelWebService"/>
+    </plnk:partnerLinkType>
+</definitions>

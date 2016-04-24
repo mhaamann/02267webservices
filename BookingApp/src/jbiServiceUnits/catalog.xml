@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/HotelService/HotelWebService?wsdl" uri="../BookingBPEL/localhost_8080/HotelService/HotelWebService.wsdl"/>
+    <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=1" uri="../BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=2" uri="../BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_2.xsd"/>
+    <system systemId="http://dtu.dk/" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.dtu.dk/index"/>
+</catalog>

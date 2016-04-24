@@ -1,34 +1,13 @@
-/AirlineService/nbproject/private/
-/AirlineService/build/
-/ArlineClient/nbproject/private/
-/ArlineClient/build/
-/HotelService/nbproject/private/
-/HotelClient/nbproject/private/
-/HotelService/build/
-/HotelClient/build/
-/HotelClient/dist/
-/HotelService/dist/
-/ArlineClient/dist/
-HotelService/nbproject/genfiles.properties
-
-AirlineService/dist/AirlineService.war
-/AirlineService/dist/
-/Utils/nbproject/private/
-/Utils/build/
-/Utils/dist/
-AirlineService/nbproject/genfiles.properties
-/BookingService/nbproject/private/
-
-
-
 #ant specific
 */dist/
 */build/
-
+*/test/results
 #netbeans specific
-*/nbproject/*
-!*/nbproject/project.properties
-!*/nbproject/project.xml
+*/nbproject/private/
+*/nbbuild/
+*/nbdist/
+*/nbactions.xml
+*/.nb-gradle/
 
 #java specific
 *.class
@@ -36,18 +15,6 @@ AirlineService/nbproject/genfiles.properties
 #general swap/backup files
 *.so
 *.log
-*.out
-*~
 *.swp
 *.DS_Store
 *.lock
-/HelloWorldApp/src/jbiServiceUnits/
-/HelloWorldApp/test/results/
-/HelloWorldCA/src/jbiServiceUnits/
-/HelloWorldCA/test/results/
-/HelloWorldApp2/src/jbiServiceUnits/
-/HelloWorldApp2/test/results/
-/HelloWorldCA/src/jbiServiceUnits/
-/HelloWorldCA/test/results/
-/BookingApp/src/jbiServiceUnits/
-/BookingApp/test/results/

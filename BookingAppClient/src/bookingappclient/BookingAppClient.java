@@ -16,9 +16,10 @@ public class BookingAppClient {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        //String createItinerary = createItinerary();
         
-        //System.out.println(createItinerary);
+        String createItinerary = createItinerary();
+        
+        System.out.println(createItinerary);
         
         GetHotelsResponse hotels = getHotels("Copenhagen", "2016-01-01", "2016-01-30");
         
