@@ -11,3 +11,7 @@ GlassFish_Server/bin/asadmin start-domain --verbose=true domain1
 
 Start Studio
 Downloads/OpenESB-SE-3.0.5/OE-Studio/netbeans/bin/openesb
+
+
+BPEL debug session needs 
+Add ```127.0.0.1 openesb-standalone-deployer``` to your host file
