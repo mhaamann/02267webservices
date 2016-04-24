@@ -28,8 +28,8 @@ public class AirlineWebService {
     FlightInfoDataBase flightDB;
     private static final AccountType account = new AccountType();
     static{
-        account.setName("something");
-        account.setNumber("123456");
+        account.setName("CheapBird");
+        account.setNumber("50208813");
     }
     
     public AirlineWebService() throws DatatypeConfigurationException {
