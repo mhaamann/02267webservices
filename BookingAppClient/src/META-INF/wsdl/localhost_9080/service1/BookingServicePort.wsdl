@@ -60,7 +60,7 @@
   </binding>
   <service name="service1">
     <port binding="tns:BookingServicePortTypeBinding" name="BookingServicePortTypeBindingPort">
-      <soap:address location="http://localhost.localdomain:9080/service"/>
+      <soap:address location="http://localhost:9080/service"/>
     </port>
   </service>
     <plnk:partnerLinkType name="BookingService">
