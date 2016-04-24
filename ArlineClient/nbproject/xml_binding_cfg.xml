@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<schemas xmlns='http://xml.netbeans.org/schema/JAXBWizConfig' destdir='build/generated-sources/jaxb' projectName='ArlineClient' version='1.0'>
+	<schema type='-xmlschema' package='' name='BankService'>
+		<xjc-options>
+		</xjc-options>
+		<schema-sources>
+			<schema-source location='xml-resources/jaxb/BankService/fastmoney.imm.dtu.dk_8080/BankServiceTypes.xsd' origLocation='http://fastmoney.imm.dtu.dk:8080/BankServiceTypes.xsd' origLocationType='url'/>
+		</schema-sources>
+		<bindings>
+		</bindings>
+		<catalog/>
+	</schema>
+</schemas>
