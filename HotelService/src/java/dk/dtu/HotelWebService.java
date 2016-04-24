@@ -8,6 +8,8 @@ package dk.dtu;
 import dk.dtu.imm.fastmoney.BankService;
 import dk.dtu.imm.fastmoney.CreditCardFaultMessage;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import javax.jws.WebService;
@@ -26,17 +28,11 @@ public class HotelWebService {
     private HotelsDB hotelsDB = new HotelsDB();
     
 
-    /**
-     * This is a sample web service operation
-     */
-    @WebMethod(operationName = "hello")
-    public String hello(@WebParam(name = "name") String txt) {
-        return "Hello " + txt + " ! from Hotel";
-    }
-    
     @WebMethod(operationName = "getHotels")
-    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") Date arrivalDate, @WebParam(name = "departureDate") Date departureDate){     
-        return hotelsDB.getHotels(city, arrivalDate, departureDate);
+    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate) throws ParseException{     
+        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
+        
+        return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
     }
      
     @WebMethod(operationName = "bookHotel")

@@ -15,6 +15,7 @@ import java.util.Date;
 public class HotelsDB {
 
     ArrayList<Hotel> rooms = new ArrayList<Hotel>();
+    private Integer currentBookingNumber = 1;
 
     public HotelsDB() {
 
@@ -54,6 +55,7 @@ public class HotelsDB {
                     if (booking.startDate.before(departureDate) && booking.endDate.after(arrivalDate)) {
                         // Conflict
                     } else {
+                        // TODO: Make reservation and include the current booking number.
                         availableRooms.add(room);
                     }
                 }
