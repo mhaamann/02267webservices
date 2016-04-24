@@ -27,7 +27,7 @@
         <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
     </variables>
     <correlationSets>
-        <correlationSet name="CorrelationSet1" properties=""/>
+        <correlationSet name="CorrelationSet1" properties="tns:customerId"/>
     </correlationSets>
     <sequence>
         <receive name="Receive2" createInstance="yes" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryIn"/>

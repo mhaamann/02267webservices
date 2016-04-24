@@ -2,10 +2,12 @@
 <definitions name="BookingService" targetNamespace="http://bookingservice.ws"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+    xmlns:bss="urn://http://bookingserviceSchema.ws"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://bookingserviceSchema.ws">
     <types>
         <xsd:schema targetNamespace="http://bookingservice.ws" xmlns:tns="http://bookingservice.ws">
             <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/HotelService/HotelWebService?xsd=2"/>
+            <xsd:import schemaLocation="BookingService.xsd" namespace="http://bookingserviceSchema.ws"/>
         </xsd:schema>
     </types>
     <message name="CreateItineraryRequest"></message>
@@ -62,4 +64,5 @@ In a BPEL process, a partner link represents the interaction between the BPEL pr
 A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
         <plnk:role name="BookingServicePortTypeRole" portType="tns:BookingServicePortType"/>
     </plnk:partnerLinkType>
+    <vprop:property name="customerID" type="bss:customerIdType"/>
 </definitions>
