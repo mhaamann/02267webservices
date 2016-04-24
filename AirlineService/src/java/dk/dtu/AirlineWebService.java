@@ -51,12 +51,12 @@ public class AirlineWebService {
                 //try to charge creditcard if the flight was found
                 try{
                     chargeCreditCard(1, creditCard, flight.price, account);
+                    return true;
                 }catch(CreditCardFaultMessage e){
                 }//end try/catch
                 //if flight was booked successfully
                 //which means that the flight was found and
                 //there were sufficient funds on the creditcard
-                return true;
             }else{
                 return false;
             }//end if/else
@@ -68,7 +68,18 @@ public class AirlineWebService {
     public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber, 
             @WebParam(name = "price") int price, 
             @WebParam(name = "creditCard") dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard){
-        return true;
+        for(FlightInfo flight : flightDB.flightList){
+            if(flight.bookingNumber.equals(bookingNumber)){
+                try{
+                    refundCreditCard(1, creditCard, flight.price, account);
+                    return true;
+                }catch(CreditCardFaultMessage e){
+                }//end try/catch
+            }else{
+                return false;
+            }//end if/else
+        }//end for
+        return false;
     }
     
     private boolean chargeCreditCard(int group, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCardInfo, 
