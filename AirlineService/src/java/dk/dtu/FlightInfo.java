@@ -16,9 +16,14 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 class FlightInfo {
     
-    String origin, destination, bookingNumber, reservationService, carrier;
-    XMLGregorianCalendar startDate, endDate;
-    int price;
+    public String origin, destination, bookingNumber, reservationService, carrier;
+    public XMLGregorianCalendar startDate, endDate;
+    public int price;
+    
+    
+    public String getBookingNumber(){
+            return this.bookingNumber;
+    }
     
     public FlightInfo(String origin, String destination, String bookingNumber, 
             String reservationService, String carrier, XMLGregorianCalendar startDate, 

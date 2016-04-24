@@ -49,7 +49,6 @@ public class AirlineClientTest {
         account.setNumber("50208813");
     }
     
-    
     @Test
     public void AirlineClientTest1() throws DatatypeConfigurationException {
         GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
@@ -58,14 +57,23 @@ public class AirlineClientTest {
         List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
         
         result = getFlights("Copenhagen", "Berlin", startDate);
-        assertEquals(expectedResult, result);
+        FlightInfo flight = result.get(0);
+        assertNotNull(flight);
     }
     
     @Test
-    public void AirlineClientTest2() {
-        CreditCard cc =  new CreditCard();
-        boolean result = bookFlight("Me", cc);
-        assertEquals(true, result);
+    public void AirlineClientTest2() throws DatatypeConfigurationException {
+        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
+        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
+        List<FlightInfo> result;
+        
+        result = getFlights("Copenhagen", "Berlin", startDate);
+        FlightInfo flight = (FlightInfo)result.get(0);
+        
+        boolean isBooked;
+        
+        //isBooked = bookFlight();
+        //assertEquals(true, isBooked);
     }
     
     @Test

@@ -23,7 +23,7 @@ import javax.xml.ws.WebServiceRef;
 @WebService(serviceName = "AirlineWebService")
 public class AirlineWebService {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
+    //@WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
     private BankService service;
     FlightInfoDataBase flightDB;
     private static final AccountType account = new AccountType();
