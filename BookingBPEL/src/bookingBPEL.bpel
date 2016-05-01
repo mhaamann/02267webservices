@@ -52,6 +52,14 @@
                 <from>boolean(true())</from>
                 <to variable="PlanningState"/>
             </copy>
+            <copy>
+                <from>0</from>
+                <to variable="numberOfFlights"/>
+            </copy>
+            <copy>
+                <from>0</from>
+                <to variable="numberOfHotels"/>
+            </copy>
         </assign>
         <reply name="Reply2" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryOut">
         </reply>
