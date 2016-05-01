@@ -4,24 +4,16 @@
  * and open the template in the editor.
  */
 
-import dk.dtu.imm.fastmoney.types.ObjectFactory;
 import dk.dtu.imm.fastmoney.types.AccountType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
 import dk.dtu.FlightInfo;
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Locale;
-import java.util.TimeZone;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.Duration;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.namespace.QName;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -53,7 +45,7 @@ public class AirlineClientTest {
         GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
         XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
         List<FlightInfo> result;
-        List<FlightInfo> expectedResult = new ArrayList<FlightInfo>();
+        List<FlightInfo> expectedResult = new ArrayList<>();
         
         result = getFlights("Copenhagen", "Berlin", startDate);
         FlightInfo flight = result.get(0);
@@ -71,17 +63,21 @@ public class AirlineClientTest {
         
         boolean isBooked;
         
-        //isBooked = bookFlight();
-        //assertEquals(true, isBooked);
+        isBooked = bookFlight("B12341", creditCard);
+        assertEquals(true, isBooked);
     }
-    /*
+
+ /*   
+
     @Test
     public void AirlineClientTest3() {
         CreditCard cc =  new CreditCard();
         boolean result = cancelFlight("Blah", 1234, cc);
         assertEquals(true, result);
     }
-      */ 
+
+   */    
+
     public AirlineClientTest() {
     }
     private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
