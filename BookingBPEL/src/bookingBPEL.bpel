@@ -49,6 +49,7 @@
         </reply>
         <scope name="Scope1">
             <variables>
+                <variable name="AddHotelOut" messageType="ns0:AddHotelResponse"/>
                 <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
                 <variable name="GetHotelsIn2" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
             </variables>
@@ -91,7 +92,7 @@
                             </correlations>
                             <sequence name="Sequence3">
                                 <assign name="Assign4"/>
-                                <reply name="Reply3" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType"/>
+                                <reply name="AddHotelReply" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelOut"/>
                             </sequence>
                         </onMessage>
                     </pick>
