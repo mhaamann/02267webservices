@@ -85,6 +85,15 @@
                                     <reply name="Reply1" partnerLink="PartnerLink1" operation="GetHotels" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="GetHotelsOut3"/>
                             </sequence>
                         </onMessage>
+                        <onMessage partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType">
+                            <correlations>
+                                <correlation set="CorrelationSet2" initiate="no"/>
+                            </correlations>
+                            <sequence name="Sequence3">
+                                <assign name="Assign4"/>
+                                <reply name="Reply3" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType"/>
+                            </sequence>
+                        </onMessage>
                     </pick>
                 </while>
             </sequence>

@@ -25,11 +25,11 @@
     <message name="GetHotelsResponse">
         <part name="hotelList" type="ns0:getHotelsResponse"/>
     </message>
-    <message name="AddHotel">
+    <message name="AddHotelRequest">
         <part name="bookingNumber" type="xsd:string"/>
     </message>
     <message name="AddHotelResponse">
-        <part name="addHotelResponse" type="xsd:string"/>
+        <part name="status" type="xsd:string"/>
     </message>
     <portType name="BookingServicePortType">
         <operation name="CreateItinerary">
@@ -39,6 +39,10 @@
         <operation name="GetHotels">
             <input name="GetHotelsRequest" message="tns:GetHotelsRequest"/>
             <output name="GetHotelsResponse" message="tns:GetHotelsResponse"/>
+        </operation>
+        <operation name="AddHotel">
+            <input name="AddHotelRequest" message="tns:AddHotelRequest"/>
+            <output name="AddHotelResponse" message="tns:AddHotelResponse"/>
         </operation>
     </portType>
     <binding name="BookingServicePortTypeBinding" type="tns:BookingServicePortType">
@@ -60,6 +64,10 @@
             <output name="GetHotelsResponse">
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
+        </operation>
+        <operation name="AddHotel">
+            <input name="AddHotelRequest"/>
+            <output name="AddHotelResponse"/>
         </operation>
     </binding>
     <service name="service1">
