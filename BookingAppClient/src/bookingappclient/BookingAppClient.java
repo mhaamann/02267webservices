@@ -17,27 +17,29 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String createItinerary = createItinerary();
+        String createItinerary = createItinerary("1");
         
         System.out.println(createItinerary);
         
-        GetHotelsResponse hotels = getHotels("Copenhagen", "2016-01-01", "2016-01-30");
+        GetHotelsResponse hotels = getHotels("Copenhagen", "2016-01-01", "2016-01-30", "1");
         
         
-        System.out.println(hotels);
+        System.out.println(Arrays.toString(hotels));
         
     }
 
-    private static String createItinerary() {
+    private static String createItinerary(java.lang.String customerId) {
         bookingappclient.Service1 service = new bookingappclient.Service1();
         bookingappclient.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.createItinerary();
+        return port.createItinerary(customerId);
     }
 
-    private static GetHotelsResponse getHotels(java.lang.String city, java.lang.String arrival, java.lang.String departure) {
+    private static GetHotelsResponse getHotels(java.lang.String city, java.lang.String arrival, java.lang.String departure, java.lang.String customerId) {
         bookingappclient.Service1 service = new bookingappclient.Service1();
         bookingappclient.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.getHotels(city, arrival, departure);
+        return port.getHotels(city, arrival, departure, customerId);
     }
+
+
     
 }
