@@ -66,14 +66,18 @@ public class AirlineClientTest {
         isBooked = bookFlight("B12341", creditCard);
         assertEquals(true, isBooked);
     }
+
  /*   
+
     @Test
     public void AirlineClientTest3() {
         CreditCard cc =  new CreditCard();
         boolean result = cancelFlight("Blah", 1234, cc);
         assertEquals(true, result);
     }
+
    */    
+
     public AirlineClientTest() {
     }
     private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {

@@ -27,14 +27,18 @@
         <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
     </variables>
     <correlationSets>
-        <correlationSet name="CorrelationSet1" properties=""/>
+        <correlationSet name="CorrelationSet2" properties="ns0:itineraryId"/>
     </correlationSets>
     <sequence>
-        <receive name="Receive2" createInstance="yes" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryIn"/>
+        <receive name="Receive2" createInstance="yes" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryIn">
+            <correlations>
+                <correlation set="CorrelationSet2" initiate="yes"/>
+            </correlations>
+        </receive>
         <assign name="Assign3">
             <copy>
                 <from>sxxf:getGUID()</from>
-                <to variable="CreateItineraryOut" part="itineraryId"/>
+                <to variable="CreateItineraryOut" part="itineraryIdResponse"/>
             </copy>
             <copy>
                 <from>boolean(true())</from>
@@ -42,12 +46,10 @@
             </copy>
         </assign>
         <reply name="Reply2" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryOut">
-            <correlations>
-                <correlation set="CorrelationSet1" initiate="yes"/>
-            </correlations>
         </reply>
         <scope name="Scope1">
             <variables>
+                <variable name="AddHotelOut" messageType="ns0:AddHotelResponse"/>
                 <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
                 <variable name="GetHotelsIn2" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
             </variables>
@@ -57,7 +59,7 @@
                     <pick name="Pick1" createInstance="no">
                         <onMessage partnerLink="PartnerLink1" operation="GetHotels" portType="tns:BookingServicePortType" variable="GetHotelsIn">
                             <correlations>
-                                <correlation set="CorrelationSet1" initiate="no"/>
+                                <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
                             <sequence name="Sequence1">
                                     <assign name="Assign1">
@@ -82,6 +84,15 @@
                                             </copy>
                                     </assign>
                                     <reply name="Reply1" partnerLink="PartnerLink1" operation="GetHotels" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="GetHotelsOut3"/>
+                            </sequence>
+                        </onMessage>
+                        <onMessage partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType">
+                            <correlations>
+                                <correlation set="CorrelationSet2" initiate="no"/>
+                            </correlations>
+                            <sequence name="Sequence3">
+                                <assign name="Assign4"/>
+                                <reply name="AddHotelReply" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelOut"/>
                             </sequence>
                         </onMessage>
                     </pick>
