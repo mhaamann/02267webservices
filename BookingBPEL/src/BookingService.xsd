@@ -3,17 +3,33 @@
 <xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
             targetNamespace="http://bookingserviceSchema.ws"
     xmlns:tns="http://bookingservice.ws"
-    elementFormDefault="qualified">
+    elementFormDefault="qualified" xmlns:ns="http://bookingserviceSchema.ws">
     <xsd:simpleType name="itineraryIdType">
         <xsd:restriction base="xsd:string"/>
     </xsd:simpleType>
-    <xsd:complexType name="hotelList">
+    <xsd:element name="hotelList" nillable="true" type="ns:hotelListType"/>
+    <xsd:element name="flightList" nillable="true" type="ns:flightListType"/>
+    
+    <xsd:complexType name="hotelListType">
         <xsd:sequence minOccurs="0" maxOccurs="unbounded">
-            <xsd:element name="hotelBooking">
-                <xsd:complexType>
-                    <xsd:sequence/>
-                </xsd:complexType>
-            </xsd:element>
+            <xsd:element name="reservation" type="ns:hotelReservation"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="hotelReservation">
+        <xsd:sequence>
+            <xsd:element name="status" type="xsd:string"></xsd:element>
+            <xsd:element name="bookingNumber" type="xsd:string"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="flightListType">
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="reservation" type="ns:flightReservation"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+    <xsd:complexType name="flightReservation">
+        <xsd:sequence>
+            <xsd:element name="status" type="xsd:string"></xsd:element>
+            <xsd:element name="bookingNumber" type="xsd:string"></xsd:element>
         </xsd:sequence>
     </xsd:complexType>
 </xsd:schema>
