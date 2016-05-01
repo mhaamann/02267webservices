@@ -27,7 +27,7 @@
         <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
     </variables>
     <correlationSets>
-        <correlationSet name="CorrelationSet2" properties="ns0:customerId"/>
+        <correlationSet name="CorrelationSet2" properties="ns0:itineraryId"/>
     </correlationSets>
     <sequence>
         <receive name="Receive2" createInstance="yes" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryIn">
@@ -38,7 +38,7 @@
         <assign name="Assign3">
             <copy>
                 <from>sxxf:getGUID()</from>
-                <to variable="CreateItineraryOut" part="itineraryId"/>
+                <to variable="CreateItineraryOut" part="itineraryIdResponse"/>
             </copy>
             <copy>
                 <from>boolean(true())</from>

@@ -11,19 +11,25 @@
         </xsd:schema>
     </types>
     <message name="CreateItineraryRequest">
-        <part name="customerId" type="xsd:string"/>
+        <part name="itineraryId" type="xsd:string"/>
     </message>
     <message name="CreateItineraryResponse">
-        <part name="itineraryId" type="xsd:string"/>
+        <part name="itineraryIdResponse" type="xsd:string"/>
     </message>
     <message name="GetHotelsRequest">
         <part name="city" type="xsd:string"/>
         <part name="arrival" type="xsd:string"/>
         <part name="departure" type="xsd:string"/>
-        <part name="customerId" type="xsd:string"/>
+        <part name="itineraryId" type="xsd:string"/>
     </message>
     <message name="GetHotelsResponse">
         <part name="hotelList" type="ns0:getHotelsResponse"/>
+    </message>
+    <message name="AddHotel">
+        <part name="bookingNumber" type="xsd:string"/>
+    </message>
+    <message name="AddHotelResponse">
+        <part name="addHotelResponse" type="xsd:string"/>
     </message>
     <portType name="BookingServicePortType">
         <operation name="CreateItinerary">
@@ -67,7 +73,7 @@ In a BPEL process, a partner link represents the interaction between the BPEL pr
 A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
         <plnk:role name="BookingServicePortTypeRole" portType="tns:BookingServicePortType"/>
     </plnk:partnerLinkType>
-    <vprop:property name="customerId" type="ns1:customerIdType"/>
-    <vprop:propertyAlias propertyName="tns:customerId" messageType="tns:CreateItineraryRequest" part="customerId"/>
-    <vprop:propertyAlias propertyName="tns:customerId" messageType="tns:GetHotelsRequest" part="customerId"/>
+    <vprop:property name="itineraryId" type="ns1:itineraryIdType"/>
+    <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:CreateItineraryRequest" part="itineraryId"/>
+    <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:GetHotelsRequest" part="itineraryId"/>
 </definitions>

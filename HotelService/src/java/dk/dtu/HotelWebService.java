@@ -29,7 +29,7 @@ public class HotelWebService {
     
 
     @WebMethod(operationName = "getHotels")
-    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "customerId") String customerId) throws ParseException{     
+    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException{     
         SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
         
         return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));

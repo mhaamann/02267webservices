@@ -13,15 +13,15 @@
     </part>
     <part name="departure" type="xsd:string">
     </part>
-    <part name="customerId" type="xsd:string">
+    <part name="itineraryId" type="xsd:string">
     </part>
   </message>
   <message name="CreateItineraryRequest">
-    <part name="customerId" type="xsd:string">
+    <part name="itineraryId" type="xsd:string">
     </part>
   </message>
   <message name="CreateItineraryResponse">
-    <part name="itineraryId" type="xsd:string">
+    <part name="itineraryIdResponse" type="xsd:string">
     </part>
   </message>
   <message name="GetHotelsResponse">
@@ -74,7 +74,7 @@ In a BPEL process, a partner link represents the interaction between the BPEL pr
 A partner link type characterizes the conversational relationship between two services. The partner link type can have one or two roles.-->
         <plnk:role name="BookingServicePortTypeRole" portType="tns:BookingServicePortType"/>
     </plnk:partnerLinkType>
-    <vprop:property name="customerId" type="ns1:customerIdType"/>
-    <vprop:propertyAlias messageType="tns:GetHotelsRequest" part="customerId" propertyName="tns:customerId"/>
-    <vprop:propertyAlias messageType="tns:CreateItineraryRequest" part="customerId" propertyName="tns:customerId"/>
+    <vprop:property name="itineraryId" type="ns1:itineraryIdType"/>
+    <vprop:propertyAlias messageType="tns:CreateItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
+    <vprop:propertyAlias messageType="tns:GetHotelsRequest" part="itineraryId" propertyName="tns:itineraryId"/>
 </definitions>

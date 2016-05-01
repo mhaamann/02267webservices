@@ -4,9 +4,6 @@
             targetNamespace="http://bookingserviceSchema.ws"
     xmlns:tns="http://bookingservice.ws"
     elementFormDefault="qualified">
-    <xsd:simpleType name="customerIdType">
-        <xsd:restriction base="xsd:string"/>
-    </xsd:simpleType>
     <xsd:simpleType name="itineraryIdType">
         <xsd:restriction base="xsd:string"/>
     </xsd:simpleType>

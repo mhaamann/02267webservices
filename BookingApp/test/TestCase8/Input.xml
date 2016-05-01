@@ -4,7 +4,7 @@
       <city>Copenhagen</city>
       <arrival>20016-01-01</arrival>
       <departure>2016-01-30</departure>
-      <customerId>1</customerId>
+      <itineraryId>11</itineraryId>
     </book:GetHotels>
   </soapenv:Body>
 </soapenv:Envelope>
