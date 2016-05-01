@@ -7,4 +7,13 @@
     <xsd:simpleType name="itineraryIdType">
         <xsd:restriction base="xsd:string"/>
     </xsd:simpleType>
+    <xsd:complexType name="hotelList">
+        <xsd:sequence minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="hotelBooking">
+                <xsd:complexType>
+                    <xsd:sequence/>
+                </xsd:complexType>
+            </xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
 </xsd:schema>

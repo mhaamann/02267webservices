@@ -8,6 +8,20 @@
         <xsd:schema targetNamespace="http://bookingservice.ws" xmlns:tns="http://bookingservice.ws">
             <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/HotelService/HotelWebService?xsd=2"/>
             <xsd:import schemaLocation="BookingService.xsd" namespace="http://bookingserviceSchema.ws"/>
+            <xsd:complexType name="hotelList">
+                <xsd:complexContent>
+                    <xsd:extension xmlns:ns="http://bookingserviceSchema.ws" base="ns1:hotelListType">
+                        <xsd:sequence/>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
+            <xsd:complexType name="flightList">
+                <xsd:complexContent>
+                    <xsd:extension xmlns:ns="http://bookingserviceSchema.ws" base="ns1:flightListType">
+                        <xsd:sequence/>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
         </xsd:schema>
     </types>
     <message name="CreateItineraryRequest">
@@ -25,6 +39,13 @@
     <message name="GetHotelsResponse">
         <part name="hotelList" type="ns0:getHotelsResponse"/>
     </message>
+    <message name="AddHotelRequest">
+        <part name="bookingNumber" type="xsd:string"/>
+        <part name="itineraryId" type="xsd:string"/>
+    </message>
+    <message name="AddHotelResponse">
+        <part name="status" type="tns:hotelList"/>
+    </message>
     <portType name="BookingServicePortType">
         <operation name="CreateItinerary">
             <input name="CreateItineraryRequest" message="tns:CreateItineraryRequest"/>
@@ -33,6 +54,10 @@
         <operation name="GetHotels">
             <input name="GetHotelsRequest" message="tns:GetHotelsRequest"/>
             <output name="GetHotelsResponse" message="tns:GetHotelsResponse"/>
+        </operation>
+        <operation name="AddHotel">
+            <input name="AddHotelRequest" message="tns:AddHotelRequest"/>
+            <output name="AddHotelResponse" message="tns:AddHotelResponse"/>
         </operation>
     </portType>
     <binding name="BookingServicePortTypeBinding" type="tns:BookingServicePortType">
@@ -55,6 +80,15 @@
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>
+        <operation name="AddHotel">
+            <soap:operation/>
+            <input name="AddHotelRequest">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </input>
+            <output name="AddHotelResponse">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </output>
+        </operation>
     </binding>
     <service name="service1">
         <port name="BookingServicePortTypeBindingPort" binding="tns:BookingServicePortTypeBinding">
@@ -70,4 +104,5 @@ A partner link type characterizes the conversational relationship between two se
     <vprop:property name="itineraryId" type="ns1:itineraryIdType"/>
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:CreateItineraryRequest" part="itineraryId"/>
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:GetHotelsRequest" part="itineraryId"/>
+    <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:AddHotelRequest" part="itineraryId"/>
 </definitions>

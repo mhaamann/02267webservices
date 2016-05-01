@@ -9,7 +9,7 @@
     xmlns:sxt="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Trace" 
     xmlns:sxed="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2"
     xmlns:sxat="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment"
-    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxxf="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions" xmlns:ns0="http://bookingservice.ws">
+    xmlns:sxeh="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/ErrorHandling" xmlns:sxxf="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions" xmlns:ns0="http://bookingservice.ws" xmlns:ns1="http://bookingserviceSchema.ws">
     <import namespace="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" location="HotelWebServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://dtu.dk/" location="http://localhost:8080/HotelService/HotelWebService?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://bookingservice.ws" location="BookingService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
@@ -18,6 +18,14 @@
         <partnerLink name="HotelServiceLink" xmlns:tns="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" partnerLinkType="tns:HotelWebServiceLinkType" partnerRole="HotelWebServiceRole"/>
     </partnerLinks>
     <variables>
+        <variable name="numberOfFlights" type="xs:int"/>
+        <variable name="numberOfHotels" type="xs:int"/>
+        <variable name="flightList" type="ns0:flightList"/>
+        <variable name="hotelList" type="ns0:hotelList">
+            <sxed:editor>
+                <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
+            </sxed:editor>
+        </variable>
         <variable name="PlanningState" type="xs:boolean"/>
         <variable name="CreateItineraryOut" xmlns:tns="http://bookingservice.ws" messageType="tns:CreateItineraryResponse"/>
         <variable name="CreateItineraryIn" xmlns:tns="http://bookingservice.ws" messageType="tns:CreateItineraryRequest"/>
@@ -92,7 +100,30 @@
                                 <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
                             <sequence name="Sequence3">
-                                <assign name="Assign4"/>
+                                <assign name="Assign4">
+                                    <copy>
+                                        <from variable="AddHotelIn" part="bookingNumber"/>
+                                        <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:bookingNumber
+                                            <sxed:editor>
+                                                <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
+                                            </sxed:editor>
+                                        </to>
+                                    </copy>
+                                    <copy>
+                                        <from>'unconfirmed'</from>
+                                        <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:status
+                                            <sxed:editor>
+                                                <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
+                                            </sxed:editor>
+                                        </to>
+                                    </copy>
+                                </assign>
+                                <assign name="Assign5">
+                                    <copy>
+                                        <from variable="hotelList"/>
+                                        <to variable="AddHotelOut" part="status"/>
+                                    </copy>
+                                </assign>
                                 <reply name="AddHotelResponse" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelOut"/>
                             </sequence>
                         </onMessage>
