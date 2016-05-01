@@ -8,7 +8,6 @@ import dk.dtu.imm.fastmoney.types.ObjectFactory;
 import dk.dtu.imm.fastmoney.types.AccountType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
-import dk.dtu.CreditCard;
 import dk.dtu.FlightInfo;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -75,23 +74,23 @@ public class AirlineClientTest {
         //isBooked = bookFlight();
         //assertEquals(true, isBooked);
     }
-    
+    /*
     @Test
     public void AirlineClientTest3() {
         CreditCard cc =  new CreditCard();
         boolean result = cancelFlight("Blah", 1234, cc);
         assertEquals(true, result);
     }
-       
+      */ 
     public AirlineClientTest() {
     }
-    private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.CreditCard creditCard) {
+    private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
         return port.bookFlight(bookingNumber, creditCard);
     }
 
-    private static boolean cancelFlight(java.lang.String bookingNumber, java.lang.Integer price, dk.dtu.CreditCard creditCard) {
+    private static boolean cancelFlight(java.lang.String bookingNumber, java.lang.Integer price, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
         return port.cancelFlight(bookingNumber, price, creditCard);
