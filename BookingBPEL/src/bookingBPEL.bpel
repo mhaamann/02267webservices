@@ -171,22 +171,6 @@
                                                     <to>$BookHotelIn.parameters/bookingNumber</to>
                                                 </copy>
                                                 <copy>
-                                                    <from></from>
-                                                    <to>$BookHotelIn.parameters/month</to>
-                                                </copy>
-                                                <copy>
-                                                    <from></from>
-                                                    <to>$BookHotelIn.parameters/year</to>
-                                                </copy>
-                                                <copy>
-                                                    <from></from>
-                                                    <to>$BookHotelIn.parameters/name</to>
-                                                </copy>
-                                                <copy>
-                                                    <from></from>
-                                                    <to>$BookHotelIn.parameters/number</to>
-                                                </copy>
-                                                <copy>
                                                     <from variable="BookItineraryIn" part="name"/>
                                                     <to>$BookHotelIn.parameters/name</to>
                                                 </copy>
