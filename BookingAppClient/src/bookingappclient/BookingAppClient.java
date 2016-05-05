@@ -38,23 +38,7 @@ public class BookingAppClient {
         
     }
 
-    private static String createItinerary(java.lang.String itineraryId) {
-        bookingappclient.Service1 service = new bookingappclient.Service1();
-        bookingappclient.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.createItinerary(itineraryId);
-    }
-
-    private static GetHotelsResponse getHotels(java.lang.String city, java.lang.String arrival, java.lang.String departure, java.lang.String itineraryId) {
-        bookingappclient.Service1 service = new bookingappclient.Service1();
-        bookingappclient.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.getHotels(city, arrival, departure, itineraryId);
-    }
-
-    private static HotelList addHotel(java.lang.String bookingNumber, java.lang.String itineraryId) {
-        bookingappclient.Service1 service = new bookingappclient.Service1();
-        bookingappclient.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.addHotel(bookingNumber, itineraryId);
-    }
+    
 
     
 }

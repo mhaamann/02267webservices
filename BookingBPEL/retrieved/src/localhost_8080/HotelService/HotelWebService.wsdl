@@ -4,7 +4,7 @@
 <xsd:import namespace="http://types.fastmoney.imm.dtu.dk" schemaLocation="http://localhost:8080/HotelService/HotelWebService?xsd=1"/>
 </xsd:schema>
 <xsd:schema>
-<xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/HotelService/HotelWebService?xsd=2"/>
+<xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/HotelService/HotelWebService.xsd_1.xsd"/>
 </xsd:schema>
 </types>
 <message name="getHotels">

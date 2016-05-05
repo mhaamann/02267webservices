@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:9080/service1/BookingServicePort?wsdl" uri="xml-resources/web-service-references/BookingServicePort/wsdl/localhost_9080/service1/BookingServicePort.wsdl"/>
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=2" uri="xml-resources/web-service-references/BookingServicePort/wsdl/localhost_8080/HotelService/HotelWebService.xsd_2.xsd"/>
-    <system systemId="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd" uri="xml-resources/web-service-references/BookingServicePort/wsdl/192.168.1.5_9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=1" uri="xml-resources/web-service-references/BookingServicePort/wsdl/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=1" uri="xml-resources/web-service-references/BookingServicePort/wsdl/fastmoney.imm.dtu.dk_8080/BankService.xsd_1.xsd"/>
+    <system systemId="http://localhost:9080/service1/BookingServicePort?wsdl" uri="xml-resources/web-service-references/BookingServicePort/wsdl/localhost_9080/service1/BookingServicePort.wsdl"/>
+    <system systemId="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd" uri="xml-resources/web-service-references/BookingServicePort/wsdl/192.168.1.5_9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+    <system systemId="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd" uri="xml-resources/web-service-references/BookingServicePort/wsdl/192.168.1.5_9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
 </catalog>

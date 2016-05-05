@@ -4,7 +4,7 @@
         *** TO CHANGE TARGETS GENERATED TO jaxws-build.xml COPY THOSE             ***
         *** TARGETS TO ../build.xml AND MODIFY THAT FILE INSTEAD                  ***
 
-        --><project xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:xalan="http://xml.apache.org/xslt" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
+        --><project xmlns:xalan="http://xml.apache.org/xslt" xmlns:j2seproject3="http://www.netbeans.org/ns/j2se-project/3" xmlns:jaxws="http://www.netbeans.org/ns/jax-ws/1">
     <!--
                 ===================
                 JAX-WS WSIMPORT SECTION
@@ -19,7 +19,7 @@
     <target name="wsimport-client-BookingServicePort" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/BookingServicePort"/>
         <property name="wsdl-BookingServicePort" location="xml-resources/web-service-references/BookingServicePort/wsdl/localhost_9080/service1/BookingServicePort.wsdl"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BookingServicePort" destdir="${build.generated.dir}/jax-wsCache/BookingServicePort" wsdl="${wsdl-BookingServicePort}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9080/service1/BookingServicePort?wsdl" xnocompile="true" xendorsed="true" package="bookingappclient">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/BookingServicePort" destdir="${build.generated.dir}/jax-wsCache/BookingServicePort" wsdl="${wsdl-BookingServicePort}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9080/service1/BookingServicePort?wsdl" xnocompile="true" xendorsed="true" package="ExternalBookingService">
             <depends file="${wsdl-BookingServicePort}"/>
             <produces dir="${build.generated.dir}/jax-wsCache/BookingServicePort"/>
         </wsimport>
@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-BookingServicePort" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/BookingServicePort"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/bookingappclient"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/ExternalBookingService"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-BookingServicePort"/>
 </project>

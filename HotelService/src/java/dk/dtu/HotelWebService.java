@@ -17,31 +17,38 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.WebServiceRef;
+
 /**
  *
  * @author User
  */
 @WebService(serviceName = "HotelWebService")
 public class HotelWebService {
+
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
     private BankService service;
     private HotelsDB hotelsDB = new HotelsDB();
-    
 
     @WebMethod(operationName = "getHotels")
-    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException{     
-        SimpleDateFormat dateFormat = new SimpleDateFormat ("yyyy-MM-dd");
-        
+    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
     }
-     
+
     @WebMethod(operationName = "bookHotel")
-    public boolean bookHotel(@WebParam(name = "bookingNumber") String bookingNumber, @WebParam(name = "creditCard") dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard){
+    public boolean bookHotel(
+            @WebParam(name = "bookingNumber") String bookingNumber,
+            @WebParam(name = "year") int year,
+            @WebParam(name = "month") int month,
+            @WebParam(name = "number") int number,
+            @WebParam(name = "name") String name
+    ) {
         return true;
     }
-    
+
     @WebMethod(operationName = "cancelHotel")
-    public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber){
+    public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber) {
         return true;
     }
 

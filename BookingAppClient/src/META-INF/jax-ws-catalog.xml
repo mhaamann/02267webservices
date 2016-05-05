@@ -4,4 +4,6 @@
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=2" uri="wsdl/localhost_8080/HotelService/HotelWebService.xsd_2.xsd"/>
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=1" uri="wsdl/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
     <system systemId="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd" uri="wsdl/192.168.1.5_9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
+    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=1" uri="wsdl/fastmoney.imm.dtu.dk_8080/BankService.xsd_1.xsd"/>
+    <system systemId="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd" uri="wsdl/192.168.1.5_9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
 </catalog>

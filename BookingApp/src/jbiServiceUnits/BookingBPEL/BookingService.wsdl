@@ -6,7 +6,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://bookingserviceSchema.ws" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop">
     <types>
         <xsd:schema targetNamespace="http://bookingservice.ws" xmlns:tns="http://bookingservice.ws">
-            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/HotelService/HotelWebService?xsd=2"/>
+            <xsd:import namespace="http://dtu.dk/" schemaLocation="localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
             <xsd:import schemaLocation="BookingService.xsd" namespace="http://bookingserviceSchema.ws"/>
             <xsd:complexType name="hotelList">
                 <xsd:complexContent>
@@ -46,6 +46,16 @@
     <message name="AddHotelResponse">
         <part name="status" type="tns:hotelList"/>
     </message>
+    <message name="BookItineraryRequest">
+        <part name="itineraryId" type="xsd:string"/>
+        <part name="name" type="xsd:string"/>
+        <part name="number" type="xsd:integer"/>
+        <part name="month" type="xsd:integer"/>
+        <part name="year" type="xsd:integer"/>
+    </message>
+    <message name="BookItineraryResponse">
+        <part name="status" type="tns:hotelList"/>
+    </message>
     <portType name="BookingServicePortType">
         <operation name="CreateItinerary">
             <input name="CreateItineraryRequest" message="tns:CreateItineraryRequest"/>
@@ -58,6 +68,10 @@
         <operation name="AddHotel">
             <input name="AddHotelRequest" message="tns:AddHotelRequest"/>
             <output name="AddHotelResponse" message="tns:AddHotelResponse"/>
+        </operation>
+        <operation name="BookItinerary">
+            <input name="BookItineraryRequest" message="tns:BookItineraryRequest"/>
+            <output name="BookItineraryResponse" message="tns:BookItineraryResponse"/>
         </operation>
     </portType>
     <binding name="BookingServicePortTypeBinding" type="tns:BookingServicePortType">
@@ -86,6 +100,15 @@
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </input>
             <output name="AddHotelResponse">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </output>
+        </operation>
+        <operation name="BookItinerary">
+            <soap:operation/>
+            <input name="BookItineraryRequest">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </input>
+            <output name="BookItineraryResponse">
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>

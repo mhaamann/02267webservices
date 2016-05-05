@@ -5,8 +5,9 @@
     <client name="BookingServicePort">
       <wsdl-url>http://localhost:9080/service1/BookingServicePort?wsdl</wsdl-url>
       <local-wsdl-file>localhost_9080/service1/BookingServicePort.wsdl</local-wsdl-file>
-      <package-name forceReplace="true">bookingappclient</package-name>
+      <package-name forceReplace="true">ExternalBookingService</package-name>
       <catalog-file>catalog.xml</catalog-file>
+      <use-dispatch>true</use-dispatch>
       <wsimport-options>
         <wsimport-option>
           <wsimport-option-name>extension</wsimport-option-name>
@@ -34,7 +35,7 @@
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>package</wsimport-option-name>
-          <wsimport-option-value>bookingappclient</wsimport-option-value>
+          <wsimport-option-value>ExternalBookingService</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>
