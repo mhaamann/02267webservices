@@ -30,6 +30,14 @@
     <part name="itineraryId" type="xsd:string">
     </part>
   </message>
+  <message name="ListItineraryResponse">
+    <part name="status" type="tns:hotelList">
+    </part>
+  </message>
+  <message name="ListItineraryRequest">
+    <part name="itineraryId" type="xsd:string">
+    </part>
+  </message>
   <message name="AddHotelResponse">
     <part name="status" type="tns:hotelList">
     </part>
@@ -87,6 +95,12 @@
       <output message="tns:AddHotelResponse" name="AddHotelResponse">
     </output>
     </operation>
+    <operation name="ListItinerary">
+      <input message="tns:ListItineraryRequest" name="ListItineraryRequest">
+    </input>
+      <output message="tns:ListItineraryResponse" name="ListItineraryResponse">
+    </output>
+    </operation>
     <operation name="BookItinerary">
       <input message="tns:BookItineraryRequest" name="BookItineraryRequest">
     </input>
@@ -123,6 +137,15 @@
         <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </output>
     </operation>
+    <operation name="ListItinerary">
+      <soap:operation/>
+      <input name="ListItineraryRequest">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </input>
+      <output name="ListItineraryResponse">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </output>
+    </operation>
     <operation name="BookItinerary">
       <soap:operation/>
       <input name="BookItineraryRequest">
@@ -149,4 +172,5 @@ A partner link type characterizes the conversational relationship between two se
     <vprop:propertyAlias messageType="tns:GetHotelsRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:AddHotelRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:BookItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
+    <vprop:propertyAlias messageType="tns:ListItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
 </definitions>

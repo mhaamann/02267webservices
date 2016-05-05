@@ -70,6 +70,8 @@
         
         <scope name="Scope1">
             <variables>
+                <variable name="ListItineraryOut" messageType="ns0:ListItineraryResponse"/>
+                <variable name="ListItineraryIn" messageType="ns0:ListItineraryRequest"/>
                 <variable name="BookItineraryOut" messageType="ns0:BookItineraryResponse"/>
                 <variable name="BookItineraryIn" messageType="ns0:BookItineraryRequest"/>
                 <variable name="AddHotelIn" messageType="ns0:AddHotelRequest"/>
@@ -79,13 +81,25 @@
             </variables>
             <flow name="Flow1">
                 <sequence name="Sequence4">
+                    <documentation>List Itinerary</documentation>
                     <while name="While2">
                         <condition>true()</condition>
-                        <sequence name="Sequence6">
-                            <receive name="Receive3"/>
-                            <assign name="Assign22"/>
-                            <reply name="Reply4"/>
-                        </sequence>
+                        <pick name="Pick2" createInstance="no">
+                            <onMessage partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryIn"> 
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence6">
+                                    <assign name="Assign22">
+                                        <copy>
+                                            <from variable="hotelList"/>
+                                            <to variable="ListItineraryOut" part="status"/>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply4" partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryOut"/>
+                                </sequence>
+                            </onMessage>
+                        </pick>
                     </while>
                 </sequence>
                 <sequence name="Sequence2" xmlns:tns="http://bookingservice.ws">
