@@ -81,6 +81,7 @@
                     <condition>$PlanningState</condition>
                     <pick name="Pick1" createInstance="no">
                         <onMessage partnerLink="PartnerLink1" operation="GetHotels" portType="tns:BookingServicePortType" variable="GetHotelsIn">
+                            <documentation>Get hotels</documentation>
                             <correlations>
                                 <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
@@ -110,6 +111,7 @@
                             </sequence>
                         </onMessage>
                         <onMessage partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelIn">
+                            <documentation>Add hotel</documentation>
                             <correlations>
                                 <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
@@ -148,6 +150,7 @@
                             </sequence>
                         </onMessage>
                         <onMessage partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryIn">
+                            <documentation>Book itinerary</documentation>
                             <correlations>
                                 <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
@@ -212,12 +215,17 @@
                                         <from variable="hotelList"/>
                                         <to variable="BookItineraryOut" part="status"/>
                                     </copy>
+                                    <copy>
+                                        <from>false()</from>
+                                        <to variable="PlanningState"/>
+                                    </copy>
                                 </assign>
                                 <reply name="Reply3" partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryOut"/>
                             </sequence>
                         </onMessage>
                     </pick>
                 </while>
+                <scope name="Scope3"/>
             </sequence>
         </scope>
     </sequence>
