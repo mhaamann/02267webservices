@@ -48,7 +48,13 @@ public class BookingAppClient {
             System.out.println(reservation.getStatus());
         }
         
-        bookItinerary(itinerary, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
+        HotelList hotelListBooked = bookItinerary(itinerary, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
+        for (HotelReservation reservation : hotelListBooked.getReservation()) {
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
+        
+        
         
     }
 
