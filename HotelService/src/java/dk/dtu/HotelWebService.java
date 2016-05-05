@@ -32,7 +32,7 @@ public class HotelWebService {
     @WebMethod(operationName = "getHotels")
     public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        // TODO: Return booking number on each hotel.
         return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
     }
 
@@ -44,6 +44,7 @@ public class HotelWebService {
             @WebParam(name = "number") int number,
             @WebParam(name = "name") String name
     ) throws Exception {
+        // TODO: When booking a hotel, save the credit card information to be able to refund the money
         throw new Exception("Not enough money");
     }
 
