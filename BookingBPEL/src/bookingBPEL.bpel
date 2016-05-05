@@ -114,12 +114,6 @@
                                 <correlation set="CorrelationSet2" initiate="no"/>
                             </correlations>
                             <sequence name="Sequence3">
-                                <assign name="Assign6">
-                                    <copy>
-                                        <from>$numberOfHotels + 1</from>
-                                        <to variable="numberOfHotels"/>
-                                    </copy>
-                                </assign>
                                 <assign name="Assign4">
                                     <copy>
                                         <from variable="AddHotelIn" part="bookingNumber"/>
@@ -136,6 +130,12 @@
                                                 <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
                                             </sxed:editor>
                                         </to>
+                                    </copy>
+                                </assign>
+                                <assign name="Assign6">
+                                    <copy>
+                                        <from>$numberOfHotels + 1</from>
+                                        <to variable="numberOfHotels"/>
                                     </copy>
                                 </assign>
                                 <assign name="Assign5">

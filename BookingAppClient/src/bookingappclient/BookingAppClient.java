@@ -30,7 +30,7 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itinerary = "6";
+        String itinerary = "7";
         String createItinerary = createItinerary(itinerary);
 
         System.out.println(createItinerary);
