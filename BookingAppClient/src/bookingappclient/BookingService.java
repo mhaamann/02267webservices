@@ -43,4 +43,10 @@ public class BookingService {
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.listItinerary(itineraryId);
     }
+
+    public static HotelList cancelItinerary(java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.cancelItinerary(itineraryId);
+    }
 }

@@ -20,6 +20,10 @@
             </xsd:complexType>
         </xsd:schema>
   </types>
+  <message name="CancelItineraryResponse">
+    <part name="status" type="tns:hotelList">
+    </part>
+  </message>
   <message name="GetHotelsRequest">
     <part name="city" type="xsd:string">
     </part>
@@ -32,6 +36,10 @@
   </message>
   <message name="ListItineraryResponse">
     <part name="status" type="tns:hotelList">
+    </part>
+  </message>
+  <message name="CancelItineraryRequest">
+    <part name="itineraryId" type="xsd:string">
     </part>
   </message>
   <message name="ListItineraryRequest">
@@ -95,6 +103,12 @@
       <output message="tns:AddHotelResponse" name="AddHotelResponse">
     </output>
     </operation>
+    <operation name="CancelItinerary">
+      <input message="tns:CancelItineraryRequest" name="CancelItineraryRequest">
+    </input>
+      <output message="tns:CancelItineraryResponse" name="CancelItineraryResponse">
+    </output>
+    </operation>
     <operation name="ListItinerary">
       <input message="tns:ListItineraryRequest" name="ListItineraryRequest">
     </input>
@@ -125,6 +139,15 @@
         <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </input>
       <output name="GetHotelsResponse">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </output>
+    </operation>
+    <operation name="CancelItinerary">
+      <soap:operation/>
+      <input name="CancelItineraryRequest">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </input>
+      <output name="CancelItineraryResponse">
         <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </output>
     </operation>
@@ -173,4 +196,5 @@ A partner link type characterizes the conversational relationship between two se
     <vprop:propertyAlias messageType="tns:AddHotelRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:BookItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:ListItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
+    <vprop:propertyAlias messageType="tns:CancelItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
 </definitions>

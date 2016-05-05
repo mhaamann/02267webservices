@@ -24,13 +24,18 @@ import java.math.BigInteger;
  */
 public class BookingAppClient {
     
+    // TODO: BPEL proccess
+    // Add airline service, get, add, cancel and book
+    // merge lists when calling get itinerary
+    
+    
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "7";
+        String itineraryId = "8";
         String createItinerary = BookingService.createItinerary(itineraryId);
 
         System.out.println(createItinerary);
@@ -66,6 +71,20 @@ public class BookingAppClient {
         System.out.println("Listing..");
         HotelList list2 = BookingService.listItinerary(itineraryId);
         for (HotelReservation reservation : list2.getReservation()) {
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
+        
+        System.out.println("Cancelling..");
+        HotelList list3 = BookingService.cancelItinerary(itineraryId);
+        for (HotelReservation reservation : list3.getReservation()) {
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
+        
+        System.out.println("Listing..");
+        HotelList list4 = BookingService.listItinerary(itineraryId);
+        for (HotelReservation reservation : list4.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }

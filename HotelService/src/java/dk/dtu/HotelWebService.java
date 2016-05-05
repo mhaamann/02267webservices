@@ -45,7 +45,8 @@ public class HotelWebService {
             @WebParam(name = "name") String name
     ) throws Exception {
         // TODO: When booking a hotel, save the credit card information to be able to refund the money
-        throw new Exception("Not enough money");
+        return true;
+        // throw new Exception("Not enough money");
     }
 
     @WebMethod(operationName = "cancelHotel")
