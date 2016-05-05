@@ -15,8 +15,10 @@ import javax.jws.WebService;
 public class BankService {
 
     public boolean chargeCreditCard(int group, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCardInfo, int amount, dk.dtu.imm.fastmoney.types.AccountType account) throws dk.dtu.imm.fastmoney.CreditCardFaultMessage {
+        
+        return true;
         //TODO implement this method
-        throw new UnsupportedOperationException("Not implemented yet.");
+        //throw new UnsupportedOperationException("Not implemented yet.");
     }
 
     public boolean validateCreditCard(int group, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCardInfo, int amount) throws dk.dtu.imm.fastmoney.CreditCardFaultMessage {

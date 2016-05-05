@@ -65,7 +65,7 @@ public class AirlineClientTest {
         creditCard.setExpirationDate(exDate);
     }
     /*
-    private static final AccountType account = new AccountType();
+    private static final dk.dtu.imm.fastmoney.types.AccountType account = new dk.dtu.imm.fastmoney.types.AccountType();
     static{
         account.setName("CheapBird");
         account.setNumber("50208813");
@@ -114,6 +114,8 @@ public class AirlineClientTest {
     private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        
+        //return true;
         return port.bookFlight(bookingNumber, creditCard);
     }
 

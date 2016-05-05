@@ -49,7 +49,7 @@ public class AirlineWebService {
             if(flight.bookingNumber.equals(bookingNumber)){
                 //try to charge creditcard if the flight was found
                 try{
-                    chargeCreditCard(1, creditCard, flight.price, account);
+                    chargeCreditCard(01, creditCard, flight.price, account);
                     return true;
                 }catch(CreditCardFaultMessage e){
                 }//end try/catch
