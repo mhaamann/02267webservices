@@ -103,160 +103,217 @@
                     </while>
                 </sequence>
                 <sequence name="Sequence2" xmlns:tns="http://bookingservice.ws">
-                <while name="While1">
-                    <condition>$PlanningState</condition>
-                    <pick name="Pick1" createInstance="no">
-                        <onMessage partnerLink="PartnerLink1" operation="GetHotels" portType="tns:BookingServicePortType" variable="GetHotelsIn">
-                            <documentation>Get hotels</documentation>
-                            <correlations>
-                                <correlation set="CorrelationSet2" initiate="no"/>
-                            </correlations>
-                            <sequence name="Sequence1">
-                                <assign name="Assign1">
-                                    <copy>
-                                        <from variable="GetHotelsIn" part="city"/>
-                                        <to>$GetHotelsIn1.parameters/city</to>
-                                    </copy>
-                                    <copy>
-                                        <from variable="GetHotelsIn" part="arrival"/>
-                                        <to>$GetHotelsIn1.parameters/arrivalDate</to>
-                                    </copy>
-                                    <copy>
-                                        <from variable="GetHotelsIn" part="departure"/>
-                                        <to>$GetHotelsIn1.parameters/departureDate</to>
-                                    </copy>
-                                </assign>
-                                <invoke name="Invoke1" partnerLink="HotelServiceLink" operation="getHotels" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="GetHotelsIn1" outputVariable="GetHotelsOut1"/>
-                                <assign name="Assign2">
-                                    <copy>
-                                        <from>$GetHotelsOut1.parameters/return</from>
-                                        <to>$GetHotelsOut3.hotelList/return</to>
-                                    </copy>
-                                </assign>
-                                <reply name="Reply1" partnerLink="PartnerLink1" operation="GetHotels" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="GetHotelsOut3"/>
-                            </sequence>
-                        </onMessage>
-                        <onMessage partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelIn">
-                            <documentation>Add hotel</documentation>
-                            <correlations>
-                                <correlation set="CorrelationSet2" initiate="no"/>
-                            </correlations>
-                            <sequence name="Sequence3">
-                                <assign name="Assign4">
-                                    <copy>
-                                        <from variable="AddHotelIn" part="bookingNumber"/>
-                                        <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:bookingNumber
-                                            <sxed:editor>
-                                                <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
-                                            </sxed:editor>
-                                        </to>
-                                    </copy>
-                                    <copy>
-                                        <from>'unconfirmed'</from>
-                                        <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:status
-                                            <sxed:editor>
-                                                <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
-                                            </sxed:editor>
-                                        </to>
-                                    </copy>
-                                </assign>
-                                <assign name="Assign6">
-                                    <copy>
-                                        <from>$numberOfHotels + 1</from>
-                                        <to variable="numberOfHotels"/>
-                                    </copy>
-                                </assign>
-                                <assign name="Assign5">
-                                    <copy>
-                                        <from variable="hotelList"/>
-                                        <to variable="AddHotelOut" part="status"/>
-                                    </copy>
-                                </assign>
-                                <reply name="AddHotelResponse" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelOut"/>
-                            </sequence>
-                        </onMessage>
-                        <onMessage partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryIn">
-                            <documentation>Book itinerary</documentation>
-                            <correlations>
-                                <correlation set="CorrelationSet2" initiate="no"/>
-                            </correlations>
-                            <sequence name="Sequence5">
-                                <forEach name="ForEach1" parallel="no" counterName="ForEach1Counter" xmlns:tns="http://dtu.dk/">
-                                    <startCounterValue>1</startCounterValue>
-                                    <finalCounterValue>$numberOfHotels</finalCounterValue>
-                                    <scope name="Scope2">
-                                        <variables>
-                                            <variable name="BookHotelOut" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotelResponse"/>
-                                            <variable name="BookHotelIn" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotel"/>
-                                        </variables>
-                                        <faultHandlers>
-                                            <catchAll>
-                                                <assign name="Assign21">
+                    <while name="While1">
+                        <condition>$PlanningState</condition>
+                        <pick name="Pick1" createInstance="no">
+                            <onMessage partnerLink="PartnerLink1" operation="GetHotels" portType="tns:BookingServicePortType" variable="GetHotelsIn">
+                                <documentation>Get hotels</documentation>
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence1">
+                                    <assign name="Assign1">
+                                        <copy>
+                                            <from variable="GetHotelsIn" part="city"/>
+                                            <to>$GetHotelsIn1.parameters/city</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="GetHotelsIn" part="arrival"/>
+                                            <to>$GetHotelsIn1.parameters/arrivalDate</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="GetHotelsIn" part="departure"/>
+                                            <to>$GetHotelsIn1.parameters/departureDate</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="Invoke1" partnerLink="HotelServiceLink" operation="getHotels" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="GetHotelsIn1" outputVariable="GetHotelsOut1"/>
+                                    <assign name="Assign2">
+                                        <copy>
+                                            <from>$GetHotelsOut1.parameters/return</from>
+                                            <to>$GetHotelsOut3.hotelList/return</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply1" partnerLink="PartnerLink1" operation="GetHotels" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="GetHotelsOut3"/>
+                                </sequence>
+                            </onMessage>
+                            <onMessage partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelIn">
+                                <documentation>Add hotel</documentation>
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence3">
+                                    <assign name="Assign4">
+                                        <copy>
+                                            <from variable="AddHotelIn" part="bookingNumber"/>
+                                            <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:bookingNumber
+                                                <sxed:editor>
+                                                    <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
+                                                </sxed:editor>
+                                            </to>
+                                        </copy>
+                                        <copy>
+                                            <from>'unconfirmed'</from>
+                                            <to>$hotelList/ns1:reservation[$numberOfHotels + 1]/ns1:status
+                                                <sxed:editor>
+                                                    <sxed:predicate path="$hotelList/ns1:reservation[$numberOfHotels + 1]" source="to"/>
+                                                </sxed:editor>
+                                            </to>
+                                        </copy>
+                                    </assign>
+                                    <assign name="Assign6">
+                                        <copy>
+                                            <from>$numberOfHotels + 1</from>
+                                            <to variable="numberOfHotels"/>
+                                        </copy>
+                                    </assign>
+                                    <assign name="Assign5">
+                                        <copy>
+                                            <from variable="hotelList"/>
+                                            <to variable="AddHotelOut" part="status"/>
+                                        </copy>
+                                    </assign>
+                                    <reply name="AddHotelResponse" partnerLink="PartnerLink1" operation="AddHotel" portType="tns:BookingServicePortType" variable="AddHotelOut"/>
+                                </sequence>
+                            </onMessage>
+                            <onMessage partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryIn">
+                                <documentation>Book itinerary</documentation>
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence5">
+                                    <forEach name="ForEach1" parallel="no" counterName="ForEach1Counter" xmlns:tns="http://dtu.dk/">
+                                        <startCounterValue>1</startCounterValue>
+                                        <finalCounterValue>$numberOfHotels</finalCounterValue>
+                                        <scope name="Scope2">
+                                            <variables>
+                                                <variable name="BookHotelOut" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotelResponse"/>
+                                                <variable name="BookHotelIn" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotel"/>
+                                            </variables>
+                                            <faultHandlers>
+                                                <catchAll>
+                                                    <assign name="Assign21">
+                                                        <copy>
+                                                            <from>'cancelled'</from>
+                                                            <to>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:status</to>
+                                                        </copy>
+                                                    </assign>
+                                                </catchAll>
+                                            </faultHandlers>
+                                            <sequence name="Sequence4">
+                                                <assign name="Assign7">
                                                     <copy>
-                                                        <from>'cancelled'</from>
+                                                        <from>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:bookingNumber
+                                                            <sxed:editor>
+                                                                <sxed:predicate path="$hotelList/ns1:reservation[$ForEach1Counter]" source="from"/>
+                                                            </sxed:editor>
+                                                        </from>
+                                                        <to>$BookHotelIn.parameters/bookingNumber</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="name"/>
+                                                        <to>$BookHotelIn.parameters/name</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="number"/>
+                                                        <to>$BookHotelIn.parameters/number</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="month"/>
+                                                        <to>$BookHotelIn.parameters/month</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="year"/>
+                                                        <to>$BookHotelIn.parameters/year</to>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="InvokeBookHotel" partnerLink="HotelServiceLink" operation="bookHotel" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="BookHotelIn" outputVariable="BookHotelOut"/>
+                                                <assign name="Assign8">
+                                                    <copy>
+                                                        <from>'confirmed'</from>
                                                         <to>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:status</to>
                                                     </copy>
                                                 </assign>
-                                            </catchAll>
-                                        </faultHandlers>
-                                        <sequence name="Sequence4">
-                                            <assign name="Assign7">
+                                            </sequence>
+                                        </scope>
+                                    </forEach>
+                                    <assign name="Assign9">
+                                        <copy>
+                                            <from variable="hotelList"/>
+                                            <to variable="BookItineraryOut" part="status"/>
+                                        </copy>
+                                        <copy>
+                                            <from>false()</from>
+                                            <to variable="PlanningState"/>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply3" partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryOut"/>
+                                </sequence>
+                            </onMessage>
+                        </pick>
+                    </while>
+                    <scope name="Scope3">
+                        <variables>
+                            <variable name="CancelItineraryOut" messageType="tns:CancelItineraryResponse"/>
+                            <variable name="CancelItineraryIn" messageType="tns:CancelItineraryRequest"/>
+                        </variables>
+                        <sequence name="Sequence7">
+                            <while name="While3">
+                                <condition>true()</condition>
+                                <pick name="Pick3">
+                                    <onMessage partnerLink="PartnerLink1" operation="CancelItinerary" portType="tns:BookingServicePortType" variable="CancelItineraryIn">
+                                        <documentation>Cancel itinerary</documentation>
+                                        <correlations>
+                                            <correlation set="CorrelationSet2" initiate="no"/>
+                                        </correlations>
+                                        <sequence name="Sequence5">
+                                            <forEach name="ForEach1" parallel="no" counterName="ForEach1Counter" xmlns:tns="http://dtu.dk/">
+                                                <startCounterValue>1</startCounterValue>
+                                                <finalCounterValue>$numberOfHotels</finalCounterValue>
+                                                <scope name="Scope2">
+                                                    <variables>
+                                                        <variable name="CancelHotelOut" messageType="tns:cancelHotelResponse"/>
+                                                        <variable name="CancelHotelIn" messageType="tns:cancelHotel"/>
+                                                    </variables>
+                                                    <faultHandlers>
+                                                        <catchAll>
+                                                            <empty name="Empty1"/>
+                                                        </catchAll>
+                                                    </faultHandlers>
+                                                    <sequence name="Sequence4">
+                                                        <assign name="Assign7">
+                                                            <copy>
+                                                                <from>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:bookingNumber
+                                                                    <sxed:editor>
+                                                                        <sxed:predicate path="$hotelList/ns1:reservation[$ForEach1Counter]" source="from"/>
+                                                                    </sxed:editor>
+                                                                </from>
+                                                                <to>$CancelHotelIn.parameters/bookingNumber</to>
+                                                            </copy>
+                                                        </assign>
+                                                        <invoke name="InvokeBookHotel" partnerLink="HotelServiceLink" operation="cancelHotel" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="CancelHotelIn" outputVariable="CancelHotelOut"/>
+                                                        <assign name="Assign8">
+                                                            <copy>
+                                                                <from>'cancelled'</from>
+                                                                <to>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:status</to>
+                                                            </copy>
+                                                        </assign>
+                                                    </sequence>
+                                                </scope>
+                                            </forEach>
+                                            <assign name="Assign9">
                                                 <copy>
-                                                    <from>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:bookingNumber
-                                                        <sxed:editor>
-                                                            <sxed:predicate path="$hotelList/ns1:reservation[$ForEach1Counter]" source="from"/>
-                                                        </sxed:editor>
-                                                    </from>
-                                                    <to>$BookHotelIn.parameters/bookingNumber</to>
-                                                </copy>
-                                                <copy>
-                                                    <from variable="BookItineraryIn" part="name"/>
-                                                    <to>$BookHotelIn.parameters/name</to>
-                                                </copy>
-                                                <copy>
-                                                    <from variable="BookItineraryIn" part="number"/>
-                                                    <to>$BookHotelIn.parameters/number</to>
-                                                </copy>
-                                                <copy>
-                                                    <from variable="BookItineraryIn" part="month"/>
-                                                    <to>$BookHotelIn.parameters/month</to>
-                                                </copy>
-                                                <copy>
-                                                    <from variable="BookItineraryIn" part="year"/>
-                                                    <to>$BookHotelIn.parameters/year</to>
+                                                    <from variable="hotelList"/>
+                                                    <to variable="CancelItineraryOut" part="status"/>
                                                 </copy>
                                             </assign>
-                                            <invoke name="InvokeBookHotel" partnerLink="HotelServiceLink" operation="bookHotel" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="BookHotelIn" outputVariable="BookHotelOut"/>
-                                            <assign name="Assign8">
-                                                <copy>
-                                                    <from>'confirmed'</from>
-                                                    <to>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:status</to>
-                                                </copy>
-                                            </assign>
+                                            <reply name="Reply3" partnerLink="PartnerLink1" operation="CancelItinerary" portType="tns:BookingServicePortType" variable="CancelItineraryOut"/>
                                         </sequence>
-                                    </scope>
-                                </forEach>
-                                <assign name="Assign9">
-                                    <copy>
-                                        <from variable="hotelList"/>
-                                        <to variable="BookItineraryOut" part="status"/>
-                                    </copy>
-                                    <copy>
-                                        <from>false()</from>
-                                        <to variable="PlanningState"/>
-                                    </copy>
-                                </assign>
-                                <reply name="Reply3" partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryOut"/>
-                            </sequence>
-                        </onMessage>
-                    </pick>
-                </while>
-                <scope name="Scope3">
-                    <wait name="Wait1">
-                        <for>'P0Y0M0DT0H0M0S'</for>
-                    </wait>
-                </scope>
-            </sequence>
+                                    </onMessage>
+                                </pick>
+                            </while>
+                        </sequence>
+                    </scope>
+                </sequence>
             </flow>
         </scope>
     </sequence>
