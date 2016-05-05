@@ -4,8 +4,8 @@
  * and open the template in the editor.
  */
 
-import dk.dtu.imm.fastmoney.types.AccountType;
-import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
+//import dk.dtu.imm.fastmoney.types.AccountType;
+//import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
 import dk.dtu.FlightInfo;
 import java.util.ArrayList;
@@ -22,8 +22,39 @@ import static org.junit.Assert.*;
  * @author DFS
  */
 public class AirlineClientTest {
+    /*
+    static class CreditCardInfoType{
+        String name;
+        String number;
+        ExpirationDate ed;
+        
+        public void setName(String name){
+            this.name = name;
+        }
+        public void setNumber(String num){
+            this.number = num;
+        }
+        
+        public void setExpirationDate(ExpirationDate exD){
+            this.ed.setMonth(exD.getMonth());
+            this.ed.setYear(exD.getYear());
+        }
+        
+    }
     
-    public static final CreditCardInfoType creditCard = new CreditCardInfoType();
+    static class AccountType{
+        String name;
+        String number;
+        
+        public void setName(String name){
+            this.name = name;
+        }
+        public void setNumber(String num){
+            this.number = num;
+        }
+    }
+    */
+    public static final dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
     static{
         //Creditcard has credit of 1000
         creditCard.setName("Tobiasen Inge");
@@ -33,13 +64,13 @@ public class AirlineClientTest {
         exDate.setYear(10);
         creditCard.setExpirationDate(exDate);
     }
-    
+    /*
     private static final AccountType account = new AccountType();
     static{
         account.setName("CheapBird");
         account.setNumber("50208813");
     }
-    
+  */  
     @Test
     public void AirlineClientTest1() throws DatatypeConfigurationException {
         GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
