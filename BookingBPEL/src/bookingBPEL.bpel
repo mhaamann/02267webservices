@@ -160,6 +160,16 @@
                                             <variable name="BookHotelOut" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotelResponse"/>
                                             <variable name="BookHotelIn" xmlns:tns="http://dtu.dk/" messageType="tns:bookHotel"/>
                                         </variables>
+                                        <faultHandlers>
+                                            <catchAll>
+                                                <assign name="Assign21">
+                                                    <copy>
+                                                        <from>'cancelled'</from>
+                                                        <to>$hotelList/ns1:reservation[$ForEach1Counter]/ns1:status</to>
+                                                    </copy>
+                                                </assign>
+                                            </catchAll>
+                                        </faultHandlers>
                                         <sequence name="Sequence4">
                                             <assign name="Assign7">
                                                 <copy>

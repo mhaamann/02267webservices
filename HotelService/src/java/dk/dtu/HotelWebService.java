@@ -43,8 +43,8 @@ public class HotelWebService {
             @WebParam(name = "month") int month,
             @WebParam(name = "number") int number,
             @WebParam(name = "name") String name
-    ) {
-        return true;
+    ) throws Exception {
+        throw new Exception("Not enough money");
     }
 
     @WebMethod(operationName = "cancelHotel")
