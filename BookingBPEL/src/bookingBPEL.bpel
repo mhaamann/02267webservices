@@ -67,6 +67,7 @@
         </assign>
         <reply name="Reply2" partnerLink="PartnerLink1" operation="CreateItinerary" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="CreateItineraryOut">
         </reply>
+        
         <scope name="Scope1">
             <variables>
                 <variable name="BookItineraryOut" messageType="ns0:BookItineraryResponse"/>
@@ -76,7 +77,18 @@
                 <variable name="GetHotelsIn" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
                 <variable name="GetHotelsIn2" xmlns:tns="http://bookingservice.ws" messageType="tns:GetHotelsRequest"/>
             </variables>
-            <sequence name="Sequence2" xmlns:tns="http://bookingservice.ws">
+            <flow name="Flow1">
+                <sequence name="Sequence4">
+                    <while name="While2">
+                        <condition>true()</condition>
+                        <sequence name="Sequence6">
+                            <receive name="Receive3"/>
+                            <assign name="Assign22"/>
+                            <reply name="Reply4"/>
+                        </sequence>
+                    </while>
+                </sequence>
+                <sequence name="Sequence2" xmlns:tns="http://bookingservice.ws">
                 <while name="While1">
                     <condition>$PlanningState</condition>
                     <pick name="Pick1" createInstance="no">
@@ -225,8 +237,13 @@
                         </onMessage>
                     </pick>
                 </while>
-                <scope name="Scope3"/>
+                <scope name="Scope3">
+                    <wait name="Wait1">
+                        <for>'P0Y0M0DT0H0M0S'</for>
+                    </wait>
+                </scope>
             </sequence>
+            </flow>
         </scope>
     </sequence>
 </process>
