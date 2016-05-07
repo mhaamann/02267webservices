@@ -12,7 +12,6 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import java.util.*;
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  *
