@@ -14,12 +14,12 @@ import java.util.Date;
  * @author mhaamann
  */
 class Booking {
-    String city;
-    String hotel;
-    String arrivalDate;
-    String departureDate;
-    String status;
-    String bookingNumber;
+    public String city;
+    public String hotel;
+    public String arrivalDate;
+    public String departureDate;
+    public String status;
+    public String bookingNumber;
     //Double totalPrice;
     //Boolean creditcardGuarantee;
             
