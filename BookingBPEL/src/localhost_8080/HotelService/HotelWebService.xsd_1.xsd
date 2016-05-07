@@ -13,10 +13,6 @@
 
 <xs:element name="getHotelsResponse" type="tns:getHotelsResponse"/>
 
-<xs:element name="hello" type="tns:hello"/>
-
-<xs:element name="helloResponse" type="tns:helloResponse"/>
-
 <xs:complexType name="bookHotel">
 <xs:sequence>
 <xs:element name="bookingNumber" type="xs:string" minOccurs="0"/>
@@ -67,15 +63,4 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="hello">
-<xs:sequence>
-<xs:element name="name" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="helloResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
 </xs:schema>
