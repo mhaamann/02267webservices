@@ -15,11 +15,12 @@
     <import namespace="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" location="HotelWebServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://dtu.dk/" location="http://localhost:8080/HotelService/HotelWebService?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <import namespace="http://bookingservice.ws" location="BookingService.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
-    
-
+    <import namespace="http://enterprise.netbeans.org/bpel/AirlineWebServiceWrapper" location="AirlineWebServiceWrapper.wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
+    <import namespace="http://dtu.dk/" location="http://localhost:8080/AirlineService/AirlineWebService?wsdl" importType="http://schemas.xmlsoap.org/wsdl/"/>
     <partnerLinks>
         <partnerLink name="PartnerLink1" xmlns:tns="http://bookingservice.ws" partnerLinkType="tns:BookingService" myRole="BookingServicePortTypeRole"/>
         <partnerLink name="HotelServiceLink" xmlns:tns="http://enterprise.netbeans.org/bpel/HotelWebServiceWrapper" partnerLinkType="tns:HotelWebServiceLinkType" partnerRole="HotelWebServiceRole"/>
+        <partnerLink name="AirlineServiceLink" xmlns:tns="http://enterprise.netbeans.org/bpel/AirlineWebServiceWrapper" partnerLinkType="tns:AirlineWebServiceLinkType" partnerRole="AirlineWebServiceRole"/>
     </partnerLinks>
     <variables>
         <variable name="numberOfFlights" type="xs:int"/>
@@ -70,6 +71,10 @@
         
         <scope name="Scope1">
             <variables>
+                <variable name="GetFlightsOut1" messageType="ns0:GetFlightsResponse"/>
+                <variable name="GetFlightsOut" xmlns:tns="http://dtu.dk/" messageType="tns:getFlightsResponse"/>
+                <variable name="GetFlightsIn1" xmlns:tns="http://dtu.dk/" messageType="tns:getFlights"/>
+                <variable name="GetFlightsIn" messageType="ns0:GetFlightsRequest"/>
                 <variable name="ListItineraryOut" messageType="ns0:ListItineraryResponse"/>
                 <variable name="ListItineraryIn" messageType="ns0:ListItineraryRequest"/>
                 <variable name="BookItineraryOut" messageType="ns0:BookItineraryResponse"/>
@@ -247,6 +252,36 @@
                                         </copy>
                                     </assign>
                                     <reply name="Reply3" partnerLink="PartnerLink1" operation="BookItinerary" portType="tns:BookingServicePortType" variable="BookItineraryOut"/>
+                                </sequence>
+                            </onMessage>
+                            <onMessage partnerLink="PartnerLink1" operation="GetFlights" portType="tns:BookingServicePortType" variable="GetFlightsIn">
+                                <documentation>Get flights</documentation>
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence8">
+                                    <assign name="Assign23">
+                                        <copy>
+                                            <from variable="GetFlightsIn" part="origin"/>
+                                            <to>$GetFlightsIn1.parameters/origin</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="GetFlightsIn" part="destination"/>
+                                            <to>$GetFlightsIn1.parameters/destination</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="GetFlightsIn" part="startDate"/>
+                                            <to>$GetFlightsIn1.parameters/startDate</to>
+                                        </copy>
+                                    </assign>
+                                    <invoke name="Invoke2" partnerLink="AirlineServiceLink" operation="getFlights" xmlns:tns="http://dtu.dk/" portType="tns:AirlineWebService" inputVariable="GetFlightsIn1" outputVariable="GetFlightsOut"/>
+                                    <assign name="Assign24">
+                                        <copy>
+                                            <from>$GetFlightsOut.parameters/return</from>
+                                            <to>$GetFlightsOut1.flightList/return</to>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply5" partnerLink="PartnerLink1" operation="GetFlights" portType="tns:BookingServicePortType" variable="GetFlightsOut1"/>
                                 </sequence>
                             </onMessage>
                         </pick>

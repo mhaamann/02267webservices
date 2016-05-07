@@ -5,6 +5,9 @@
     xmlns:bss="urn://http://bookingserviceSchema.ws"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://bookingserviceSchema.ws" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop">
     <types>
+        <xsd:schema>
+            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/AirlineService/AirlineWebService?xsd=1"/>
+        </xsd:schema>
         <xsd:schema targetNamespace="http://bookingservice.ws" xmlns:tns="http://bookingservice.ws">
             <xsd:import namespace="http://dtu.dk/" schemaLocation="localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
             <xsd:import schemaLocation="BookingService.xsd" namespace="http://bookingserviceSchema.ws"/>
@@ -38,6 +41,15 @@
     </message>
     <message name="GetHotelsResponse">
         <part name="hotelList" type="ns0:getHotelsResponse"/>
+    </message>
+    <message name="GetFlightsRequest">
+        <part name="origin" type="xsd:string"/>
+        <part name="destination" type="xsd:string"/>
+        <part name="startDate" type="xsd:string"/>
+        <part name="itineraryId" type="xsd:string"/>
+    </message>
+    <message name="GetFlightsResponse">
+        <part name="flightList" type="ns0:getFlightsResponse"/>
     </message>
     <message name="AddHotelRequest">
         <part name="bookingNumber" type="xsd:string"/>
@@ -77,6 +89,10 @@
             <input name="GetHotelsRequest" message="tns:GetHotelsRequest"/>
             <output name="GetHotelsResponse" message="tns:GetHotelsResponse"/>
         </operation>
+        <operation name="GetFlights">
+            <input name="GetFlightsRequest" message="tns:GetFlightsRequest"/>
+            <output name="GetFlightsResponse" message="tns:GetFlightsResponse"/>
+        </operation>
         <operation name="AddHotel">
             <input name="AddHotelRequest" message="tns:AddHotelRequest"/>
             <output name="AddHotelResponse" message="tns:AddHotelResponse"/>
@@ -112,6 +128,15 @@
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </input>
             <output name="GetHotelsResponse">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </output>
+        </operation>
+        <operation name="GetFlights">
+            <soap:operation/>
+            <input name="GetFlightsRequest">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </input>
+            <output name="GetFlightsResponse">
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>
@@ -169,5 +194,6 @@ A partner link type characterizes the conversational relationship between two se
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:AddHotelRequest" part="itineraryId"/>
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:BookItineraryRequest" part="itineraryId"/>
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:ListItineraryRequest" part="itineraryId"/>
+    <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:GetFlightsRequest" part="itineraryId"/>
     <vprop:propertyAlias propertyName="tns:itineraryId" messageType="tns:CancelItineraryRequest" part="itineraryId"/>
 </definitions>

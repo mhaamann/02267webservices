@@ -3,5 +3,7 @@
     <system systemId="http://localhost:8080/HotelService/HotelWebService?wsdl" uri="src/localhost_8080/HotelService/HotelWebService.wsdl"/>
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=1" uri="src/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
     <system systemId="file:/Users/mhaamann/Sites/02267webservices/BookingBPEL/src/localhost_8080/HotelService/HotelWebService.xsd_1.xsd" uri="src/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/AirlineService/AirlineWebService?wsdl" uri="src/localhost_8080/AirlineService/AirlineWebService.wsdl"/>
+    <system systemId="http://localhost:8080/AirlineService/AirlineWebService?xsd=1" uri="src/localhost_8080/AirlineService/AirlineWebService.xsd_1.xsd"/>
     <nextCatalog catalog="nbproject/private/retriever/catalog.xml"/>
 </catalog>
