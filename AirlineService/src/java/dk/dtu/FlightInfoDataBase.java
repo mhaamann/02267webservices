@@ -5,9 +5,13 @@
  */
 package dk.dtu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -18,31 +22,6 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class FlightInfoDataBase {
     
-    GregorianCalendar sd1 = new GregorianCalendar(2014, 10, 8);
-    XMLGregorianCalendar startDate1 = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd1);    
-    GregorianCalendar ed1 = new GregorianCalendar(2015, 9, 7);
-    XMLGregorianCalendar endDate1 = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed1);
-    
-    GregorianCalendar sd2 = new GregorianCalendar(2014, 10, 8);
-    XMLGregorianCalendar startDate2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd2);    
-    GregorianCalendar ed2 = new GregorianCalendar(2015, 9, 7);
-    XMLGregorianCalendar endDate2 = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed2);
-    
-    GregorianCalendar sd3 = new GregorianCalendar(2014, 10, 8);
-    XMLGregorianCalendar startDate3 = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd3);    
-    GregorianCalendar ed3 = new GregorianCalendar(2015, 9, 7);
-    XMLGregorianCalendar endDate3 = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed3);
-    
-    GregorianCalendar sd4 = new GregorianCalendar(2014, 10, 8);
-    XMLGregorianCalendar startDate4 = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd4);    
-    GregorianCalendar ed4 = new GregorianCalendar(2015, 9, 7);
-    XMLGregorianCalendar endDate4 = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed4);
-    
-    GregorianCalendar sd5 = new GregorianCalendar(2014, 10, 8);
-    XMLGregorianCalendar startDate5 = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd5);    
-    GregorianCalendar ed5 = new GregorianCalendar(2015, 9, 7);
-    XMLGregorianCalendar endDate5 = DatatypeFactory.newInstance().newXMLGregorianCalendar(ed5);
-    
     FlightInfo flight_1;
     FlightInfo flight_2;
     FlightInfo flight_3;
@@ -51,16 +30,27 @@ public class FlightInfoDataBase {
     ArrayList<FlightInfo> flightList = new ArrayList<>();
 
     public FlightInfoDataBase() throws DatatypeConfigurationException {
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDate1 = new Date(), endDate1 = new Date();
+        try {
+            startDate1 = dateFormat.parse("2016-01-01");
+            endDate1 = dateFormat.parse("2016-01-10");
+        } catch (ParseException ex) {
+            Logger.getLogger(FlightInfoDataBase.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
         this.flight_1 = new FlightInfo("Copenhagen", "Berlin", "B12341", 
                 "LameDuck", "SAS", startDate1, endDate1, 50);
         this.flight_2 = new FlightInfo("Berlin", "Amsterdam", "B12342", 
-                "LameDuck", "Ryanair", startDate2, endDate2, 100);
+                "LameDuck", "Ryanair", startDate1, endDate1, 100);
         this.flight_3 = new FlightInfo("Amsterdam", "Paris", "B12343", 
-                "LameDuck", "SAS", startDate3, endDate3, 88);
+                "LameDuck", "SAS", startDate1, endDate1, 88);
         this.flight_4 = new FlightInfo("Paris", "Madrid", "B12344", 
-                "LameDuck", "Ryanair", startDate4, endDate4, 66);        
+                "LameDuck", "Ryanair", startDate1, endDate1, 66);        
         this.flight_5 = new FlightInfo("Madrid", "Copenhagen", "B12345", 
-                "LameDuck", "SAS", startDate5, endDate5, 70);
+                "LameDuck", "SAS", startDate1, endDate1, 70);
         
         flightList.add(flight_1);
         flightList.add(flight_2);
@@ -69,13 +59,15 @@ public class FlightInfoDataBase {
         flightList.add(flight_5);
     }
     
-    public ArrayList<FlightInfo> getFlights(String origin, String destination, String startDate) {
+    public ArrayList<FlightInfo> getFlights(String origin, String destination, String startDate) throws ParseException {
         ArrayList<FlightInfo> flightListToReturn = new ArrayList<FlightInfo>();
+        
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         for (FlightInfo flight : flightList) {
             if (flight.origin.toLowerCase().equals(origin.toLowerCase()) && 
                     flight.destination.toLowerCase().equals(destination.toLowerCase())&&
-                    flight.startDate.equals(startDate)) {
+                    flight.startDate.equals(dateFormat.parse(startDate))) {
                 flightListToReturn.add(flight);
             }
         }

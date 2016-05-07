@@ -5,6 +5,7 @@
  */
 package bookingappclient;
 
+import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
 
@@ -14,12 +15,9 @@ import ExternalBookingService.HotelList;
  */
 public class BookingService {
     
-    public static HotelList addHotel(java.lang.String bookingNumber, java.lang.String itineraryId) {
-        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
-        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.addHotel(bookingNumber, itineraryId);
-    }
-
+    
+    // Itinerary operations - Start
+    
     public static HotelList bookItinerary(java.lang.String itineraryId, java.lang.String name, java.math.BigInteger number, java.math.BigInteger month, java.math.BigInteger year) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
@@ -31,13 +29,7 @@ public class BookingService {
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.createItinerary(itineraryId);
     }
-
-    public static GetHotelsResponse getHotels(java.lang.String city, java.lang.String arrival, java.lang.String departure, java.lang.String itineraryId) {
-        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
-        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.getHotels(city, arrival, departure, itineraryId);
-    }
-
+    
     public static HotelList listItinerary(java.lang.String itineraryId) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
@@ -49,4 +41,34 @@ public class BookingService {
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.cancelItinerary(itineraryId);
     }
+    
+    // Itinerary operations - End
+    
+    // Hotel operations - Start
+
+    public static GetHotelsResponse getHotels(java.lang.String city, java.lang.String arrival, java.lang.String departure, java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.getHotels(city, arrival, departure, itineraryId);
+    }
+    
+    public static HotelList addHotel(java.lang.String bookingNumber, java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.addHotel(bookingNumber, itineraryId);
+    }
+    
+    // Hotel operations - End
+    
+    // Flight operations - Start
+
+    public static GetFlightsResponse getFlights(java.lang.String origin, java.lang.String destination, java.lang.String startDate, java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.getFlights(origin, destination, startDate, itineraryId);
+    }
+    
+    // Flight operations - End
+
+   
 }

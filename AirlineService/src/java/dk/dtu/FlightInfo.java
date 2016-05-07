@@ -6,10 +6,7 @@
 package dk.dtu;
 
 import java.util.Date;
-import java.util.GregorianCalendar;
 import javax.xml.datatype.DatatypeConfigurationException;
-import javax.xml.datatype.DatatypeFactory;
-import javax.xml.datatype.XMLGregorianCalendar;
 
 /**
  * @author DFS
@@ -17,7 +14,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
 class FlightInfo {
     
     public String origin, destination, bookingNumber, reservationService, carrier;
-    public XMLGregorianCalendar startDate, endDate;
+    public Date startDate, endDate;
     public int price;
     
     
@@ -26,8 +23,8 @@ class FlightInfo {
     }
     
     public FlightInfo(String origin, String destination, String bookingNumber, 
-            String reservationService, String carrier, XMLGregorianCalendar startDate, 
-            XMLGregorianCalendar endDate, int price) throws DatatypeConfigurationException{
+            String reservationService, String carrier, Date startDate, 
+            Date endDate, int price) throws DatatypeConfigurationException{
         
         this.origin = origin; 
         this.destination = destination;

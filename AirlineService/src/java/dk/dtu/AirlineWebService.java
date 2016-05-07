@@ -6,6 +6,7 @@
 package dk.dtu;
 
 
+import java.text.ParseException;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -29,7 +30,7 @@ public class AirlineWebService {
     @WebMethod(operationName = "getFlights")
     public ArrayList<FlightInfo> getFlights(@WebParam(name = "origin") String origin,
             @WebParam(name = "destination") String destination,
-            @WebParam(name = "startDate") String startDate) {
+            @WebParam(name = "startDate") String startDate) throws ParseException {
         return flightDB.getFlights(origin, destination, startDate);
     }//end method getFlights
 
