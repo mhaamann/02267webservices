@@ -20,8 +20,8 @@ class Booking {
     public String departureDate;
     public String status;
     public String bookingNumber;
-    //Double totalPrice;
-    //Boolean creditcardGuarantee;
+    public Double totalPrice;
+    public Boolean creditcardGuarantee;
             
     public Booking (String city, String hotel, Date arrivalDate, Date departureDate, String bookingNumber, Integer price, Boolean creditcardGuarantee) {
         this.city = city;
@@ -32,8 +32,8 @@ class Booking {
         this.arrivalDate = df.format(arrivalDate);
         this.departureDate = df.format(departureDate);
         this.bookingNumber = bookingNumber;
-        //this.creditcardGuarantee = creditcardGuarantee;
-        //totalPrice = (double) price * daysBetween(arrivalDate, departureDate);
+        this.creditcardGuarantee = creditcardGuarantee;
+        totalPrice = (double) price * daysBetween(arrivalDate, departureDate);
     }
     
     /**

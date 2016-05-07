@@ -46,6 +46,7 @@ public class BookingAppClient {
         GetHotelsResponse hotels = BookingService.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
         for (Booking booking : hotels.getReturn()) {
             System.out.println(booking.getCity());
+            System.out.println(booking.getTotalPrice());
         }
         
         System.out.println("Finding Flights..");

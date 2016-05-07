@@ -71,6 +71,8 @@
         
         <scope name="Scope1">
             <variables>
+                <variable name="AddFlightOut" messageType="ns0:AddFlightResponse"/>
+                <variable name="AddFlightIn" messageType="ns0:AddFlightRequest"/>
                 <variable name="GetFlightsOut1" messageType="ns0:GetFlightsResponse"/>
                 <variable name="GetFlightsOut" xmlns:tns="http://dtu.dk/" messageType="tns:getFlightsResponse"/>
                 <variable name="GetFlightsIn1" xmlns:tns="http://dtu.dk/" messageType="tns:getFlights"/>
@@ -282,6 +284,45 @@
                                         </copy>
                                     </assign>
                                     <reply name="Reply5" partnerLink="PartnerLink1" operation="GetFlights" portType="tns:BookingServicePortType" variable="GetFlightsOut1"/>
+                                </sequence>
+                            </onMessage>
+                            <onMessage partnerLink="PartnerLink1" operation="AddFlight" portType="tns:BookingServicePortType" variable="AddFlightIn">
+                                <documentation>Add flight</documentation>
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence9">
+                                    <assign name="Assign25">
+                                        <copy>
+                                            <from variable="AddFlightIn" part="bookingNumber"/>
+                                            <to>$flightList/ns1:reservation[$numberOfFlights + 1]/ns1:bookingNumber
+                                                <sxed:editor>
+                                                    <sxed:predicate path="$flightList/ns1:reservation[$numberOfFlights + 1]" source="to"/>
+                                                </sxed:editor>
+                                            </to>
+                                        </copy>
+                                        <copy>
+                                            <from>'unconfirmed'</from>
+                                            <to>$flightList/ns1:reservation[$numberOfFlights + 1]/ns1:status
+                                                <sxed:editor>
+                                                    <sxed:predicate path="$flightList/ns1:reservation[$numberOfFlights + 1]" source="to"/>
+                                                </sxed:editor>
+                                            </to>
+                                        </copy>
+                                    </assign>
+                                    <assign name="Assign26">
+                                        <copy>
+                                            <from>$numberOfFlights + 1</from>
+                                            <to variable="numberOfFlights"/>
+                                        </copy>
+                                    </assign>
+                                    <assign name="Assign27">
+                                        <copy>
+                                            <from variable="flightList"/>
+                                            <to variable="AddFlightOut" part="status"/>
+                                        </copy>
+                                    </assign>
+                                    <reply name="Reply6" partnerLink="PartnerLink1" operation="AddFlight" portType="tns:BookingServicePortType" variable="AddFlightOut"/>
                                 </sequence>
                             </onMessage>
                         </pick>

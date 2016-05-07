@@ -64,6 +64,9 @@
 <xs:element minOccurs="0" name="departureDate" type="xs:string"/>
 <xs:element minOccurs="0" name="status" type="xs:string"/>
 <xs:element minOccurs="0" name="bookingNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="totalPrice" type="xs:double"/>
+<xs:element minOccurs="0" name="creditcardGuarantee" type="xs:boolean"/>
+
 </xs:sequence>
 </xs:complexType>
 
