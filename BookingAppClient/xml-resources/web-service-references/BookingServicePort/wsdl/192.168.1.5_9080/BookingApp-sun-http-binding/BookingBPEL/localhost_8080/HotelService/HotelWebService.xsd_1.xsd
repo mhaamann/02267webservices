@@ -52,15 +52,18 @@
 
 <xs:complexType name="getHotelsResponse">
 <xs:sequence>
-<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:hotel"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:booking"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="hotel">
+<xs:complexType name="booking">
 <xs:sequence>
 <xs:element minOccurs="0" name="city" type="xs:string"/>
 <xs:element minOccurs="0" name="hotel" type="xs:string"/>
-<xs:element name="pricePerDay" type="xs:int"/>
+<xs:element minOccurs="0" name="arrivalDate" type="xs:string"/>
+<xs:element minOccurs="0" name="departureDate" type="xs:string"/>
+<xs:element minOccurs="0" name="status" type="xs:string"/>
+<xs:element minOccurs="0" name="bookingNumber" type="xs:string"/>
 </xs:sequence>
 </xs:complexType>
 

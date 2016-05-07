@@ -5,6 +5,8 @@
  */
 package dk.dtu;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
@@ -12,20 +14,26 @@ import java.util.Date;
  * @author mhaamann
  */
 class Booking {
-    Date arrivalDate;
-    Date departureDate;
+    String city;
+    String hotel;
+    String arrivalDate;
+    String departureDate;
     String status;
     String bookingNumber;
-    Double totalPrice;
-    Boolean creditcardGuarantee;
+    //Double totalPrice;
+    //Boolean creditcardGuarantee;
             
-    public Booking (Date arrivalDate, Date departureDate, String bookingNumber, Integer price, Boolean creditcardGuarantee) {
+    public Booking (String city, String hotel, Date arrivalDate, Date departureDate, String bookingNumber, Integer price, Boolean creditcardGuarantee) {
+        this.city = city;
+        this.hotel = hotel;
         this.status = "unconfirmed";
-        this.arrivalDate = arrivalDate;
-        this.departureDate = departureDate;
+        
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        this.arrivalDate = df.format(arrivalDate);
+        this.departureDate = df.format(departureDate);
         this.bookingNumber = bookingNumber;
-        this.creditcardGuarantee = creditcardGuarantee;
-        totalPrice = (double) price * daysBetween(arrivalDate, departureDate);
+        //this.creditcardGuarantee = creditcardGuarantee;
+        //totalPrice = (double) price * daysBetween(arrivalDate, departureDate);
     }
     
     /**

@@ -2,7 +2,7 @@
 <definitions name="BookingService" targetNamespace="http://bookingservice.ws"
     xmlns="http://schemas.xmlsoap.org/wsdl/"
     xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
-    xmlns:bss="urn://http://bookingserviceSchema.ws"
+    xmlns:bss="http://bookingserviceSchema.ws"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://bookingserviceSchema.ws" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop">
     <types>
         <xsd:schema>

@@ -5,6 +5,8 @@
  */
 package dk.dtu;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -45,7 +47,7 @@ public class HotelsDB {
      */
     private Booking addReservation(Hotel hotel, Date startDate, Date endDate) {
         // Adds an unconfirmed booking.
-        Booking booking = new Booking(startDate, endDate, Integer.toString(this.currentBookingNumber), hotel.pricePerDay, hotel.creditcardGuarantee);
+        Booking booking = new Booking(hotel.city, hotel.hotel, startDate, endDate, Integer.toString(this.currentBookingNumber), hotel.pricePerDay, hotel.creditcardGuarantee);
         hotel.bookings.add(booking);
         this.currentBookingNumber++;
         return booking;
@@ -58,16 +60,18 @@ public class HotelsDB {
      * @param departureDate
      * @return 
      */
-    public ArrayList<Booking> getHotels(String city, Date arrivalDate, Date departureDate) {
+    public ArrayList<Booking> getHotels(String city, Date arrivalDate, Date departureDate) throws ParseException {
         ArrayList<Booking> reservedBookings = new ArrayList<Booking>();
 
         for (Hotel hotel : rooms) {
             if (hotel.city.toLowerCase().equals(city.toLowerCase())) {
                 if (hotel.bookings.isEmpty()) {
                     reservedBookings.add(addReservation(hotel, arrivalDate, departureDate));
+                    continue;
                 }
                 for (Booking booking : hotel.bookings) {
-                    if (booking.arrivalDate.before(departureDate) && booking.departureDate.after(arrivalDate)) {
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    if (dateFormat.parse(booking.arrivalDate).before(departureDate) && dateFormat.parse(booking.departureDate).after(arrivalDate)) {
                         // Conflict, do nothing.
                     } else {
                         reservedBookings.add(addReservation(hotel, arrivalDate, departureDate));
