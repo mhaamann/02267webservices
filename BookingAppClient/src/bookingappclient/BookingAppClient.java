@@ -5,10 +5,10 @@
  */
 package bookingappclient;
 
+import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
-import ExternalBookingService.Hotel;
 import ExternalBookingService.HotelList;
 import ExternalBookingService.HotelReservation;
 import java.util.Arrays;
@@ -37,15 +37,16 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "10";
+        String itineraryId = "16";
         String createItinerary = BookingService.createItinerary(itineraryId);
 
         System.out.println(createItinerary);
         
         System.out.println("Finding hotels..");
         GetHotelsResponse hotels = BookingService.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
-        for (Hotel hotel : hotels.getReturn()) {
-            System.out.println(hotel.getCity());
+        for (Booking booking : hotels.getReturn()) {
+            System.out.println(booking.getCity());
+            System.out.println(booking.getTotalPrice());
         }
         
         System.out.println("Finding Flights..");

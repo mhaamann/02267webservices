@@ -2,9 +2,9 @@
   <soapenv:Body>
     <book:GetHotels>
       <city>Copenhagen</city>
-      <arrival>20016-01-01</arrival>
-      <departure>2016-01-30</departure>
-      <itineraryId>15</itineraryId>
+      <arrival>2016-01-01</arrival>
+      <departure>2016-01-10</departure>
+      <itineraryId>26</itineraryId>
     </book:GetHotels>
   </soapenv:Body>
 </soapenv:Envelope>
