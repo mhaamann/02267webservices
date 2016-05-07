@@ -3,22 +3,30 @@
     <endpoints>
         <endpoint endpoint-name="HotelWebServicePort" interface-name="ns1:HotelWebService" name="endpoint1" service-name="ns1:HotelWebService"/>
         <endpoint endpoint-name="BookingServicePortTypeBindingPort" interface-name="ns2:BookingServicePortType" name="endpoint2" service-name="ns2:service1"/>
-        <endpoint display-name="PartnerLink1" endpoint-name="BookingServicePortTypeRole_myRole" file-path="bookingBPEL.bpel" interface-name="ns2:BookingServicePortType" name="endpoint3" process-name="bookingBPEL" service-name="ns3:PartnerLink1"/>
-        <endpoint display-name="HotelServiceLink" endpoint-name="HotelWebServiceRole_partnerRole" file-path="bookingBPEL.bpel" interface-name="ns1:HotelWebService" name="endpoint4" process-name="bookingBPEL" service-name="ns3:HotelServiceLink"/>
+        <endpoint endpoint-name="AirlineWebServicePort" interface-name="ns1:AirlineWebService" name="endpoint3" service-name="ns1:AirlineWebService"/>
+        <endpoint display-name="PartnerLink1" endpoint-name="BookingServicePortTypeRole_myRole" file-path="bookingBPEL.bpel" interface-name="ns2:BookingServicePortType" name="endpoint4" process-name="bookingBPEL" service-name="ns3:PartnerLink1"/>
+        <endpoint display-name="HotelServiceLink" endpoint-name="HotelWebServiceRole_partnerRole" file-path="bookingBPEL.bpel" interface-name="ns1:HotelWebService" name="endpoint5" process-name="bookingBPEL" service-name="ns3:HotelServiceLink"/>
+        <endpoint display-name="AirlineServiceLink" endpoint-name="AirlineWebServiceRole_partnerRole" file-path="bookingBPEL.bpel" interface-name="ns1:AirlineWebService" name="endpoint6" process-name="bookingBPEL" service-name="ns3:AirlineServiceLink"/>
     </endpoints>
     <service-units>
-        <service-engine-service-unit artifacts-zip="BookingBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="BookingApp-BookingBPEL" unit-name="BookingBPEL" unknown="false" x="143" y="97">
-            <provides endpoint="endpoint3"/>
-            <consumes endpoint="endpoint4"/>
+        <service-engine-service-unit artifacts-zip="BookingBPEL.jar" component-name="sun-bpel-engine" defined="true" description="Represents this Service Unit" internal="true" name="BookingApp-BookingBPEL" unit-name="BookingBPEL" unknown="false" x="151" y="97">
+            <provides endpoint="endpoint4"/>
+            <consumes endpoint="endpoint5"/>
+            <consumes endpoint="endpoint6"/>
         </service-engine-service-unit>
         <binding-component-service-unit artifacts-zip="sun-http-binding.jar" component-name="sun-http-binding" description="Represents this Service Unit" name="BookingApp-sun-http-binding" unit-name="sun-http-binding">
             <ports>
-                <port x="67" y="37">
+                <port x="68" y="109">
                     <link xlink:href="../jbiServiceUnits/BookingBPEL/BookingService.wsdl#xpointer(/definitions/service[@name='service1']/port[@name='BookingServicePortTypeBindingPort'])" xlink:type="simple"/>
                     <consumes endpoint="endpoint2"/>
                     <provides endpoint="endpoint2"/>
                 </port>
-                <port x="67" y="117">
+                <port x="68" y="37">
+                    <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/AirlineService/AirlineWebService.wsdl#xpointer(/definitions/service[@name='AirlineWebService']/port[@name='AirlineWebServicePort'])" xlink:type="simple"/>
+                    <consumes endpoint="endpoint3"/>
+                    <provides endpoint="endpoint3"/>
+                </port>
+                <port x="68" y="181">
                     <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/HotelService/HotelWebService.wsdl#xpointer(/definitions/service[@name='HotelWebService']/port[@name='HotelWebServicePort'])" xlink:type="simple"/>
                     <consumes endpoint="endpoint1"/>
                     <provides endpoint="endpoint1"/>
@@ -27,19 +35,23 @@
         </binding-component-service-unit>
     </service-units>
     <connections>
-        <connection consumer="endpoint2" provider="endpoint3" state="unchanged"/>
-        <connection consumer="endpoint4" provider="endpoint1" state="unchanged"/>
+        <connection consumer="endpoint2" provider="endpoint4" state="unchanged"/>
+        <connection consumer="endpoint6" provider="endpoint3" state="unchanged"/>
+        <connection consumer="endpoint5" provider="endpoint1" state="unchanged"/>
     </connections>
     <porttypes>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/BookingService.wsdl#xpointer(/definitions/portType[@name='BookingServicePortType'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/AirlineService/AirlineWebService.wsdl#xpointer(/definitions/portType[@name='AirlineWebService'])" xlink:type="simple"/>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/HotelService/HotelWebService.wsdl#xpointer(/definitions/portType[@name='HotelWebService'])" xlink:type="simple"/>
     </porttypes>
     <bindings>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/BookingService.wsdl#xpointer(/definitions/binding[@name='BookingServicePortTypeBinding'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/AirlineService/AirlineWebService.wsdl#xpointer(/definitions/binding[@name='AirlineWebServicePortBinding'])" xlink:type="simple"/>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/HotelService/HotelWebService.wsdl#xpointer(/definitions/binding[@name='HotelWebServicePortBinding'])" xlink:type="simple"/>
     </bindings>
     <services>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/BookingService.wsdl#xpointer(/definitions/service[@name='service1'])" xlink:type="simple"/>
+        <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/AirlineService/AirlineWebService.wsdl#xpointer(/definitions/service[@name='AirlineWebService'])" xlink:type="simple"/>
         <link xlink:href="../jbiServiceUnits/BookingBPEL/localhost_8080/HotelService/HotelWebService.wsdl#xpointer(/definitions/service[@name='HotelWebService'])" xlink:type="simple"/>
     </services>
     <regions>

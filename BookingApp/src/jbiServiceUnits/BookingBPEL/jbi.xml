@@ -11,5 +11,10 @@
             <ns3:process-name>bookingBPEL</ns3:process-name>
             <ns3:file-path>bookingBPEL.bpel</ns3:file-path>
         </consumes>
+        <consumes endpoint-name="AirlineWebServiceRole_partnerRole" interface-name="ns2:AirlineWebService" service-name="ns0:AirlineServiceLink">
+            <ns3:display-name>AirlineServiceLink</ns3:display-name>
+            <ns3:process-name>bookingBPEL</ns3:process-name>
+            <ns3:file-path>bookingBPEL.bpel</ns3:file-path>
+        </consumes>
     </services>
 </jbi>
