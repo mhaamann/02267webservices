@@ -30,9 +30,9 @@ public class HotelWebService {
     private HotelsDB hotelsDB = new HotelsDB();
 
     @WebMethod(operationName = "getHotels")
-    public ArrayList<Hotel> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException {
+    public ArrayList<Booking> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate, @WebParam(name = "itineraryId") String itineraryId) throws ParseException {
+        // Parse the dates
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        // TODO: Return booking number on each hotel.
         return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
     }
 
@@ -42,16 +42,14 @@ public class HotelWebService {
             @WebParam(name = "year") int year,
             @WebParam(name = "month") int month,
             @WebParam(name = "number") int number,
-            @WebParam(name = "name") String name
-    ) throws Exception {
-        // TODO: When booking a hotel, save the credit card information to be able to refund the money
-        return true;
+            @WebParam(name = "name") String name) throws Exception {
+        return hotelsDB.bookHotel(bookingNumber, year, month, number, name);
         // throw new Exception("Not enough money");
     }
 
     @WebMethod(operationName = "cancelHotel")
-    public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber) {
-        return true;
+    public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber) throws Exception {
+        return hotelsDB.cancelHotel(bookingNumber);
     }
 
     private boolean chargeCreditCard(int group, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCardInfo, int amount, dk.dtu.imm.fastmoney.types.AccountType account) throws CreditCardFaultMessage {
