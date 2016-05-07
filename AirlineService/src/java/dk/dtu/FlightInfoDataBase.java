@@ -69,7 +69,7 @@ public class FlightInfoDataBase {
         flightList.add(flight_5);
     }
     
-    public ArrayList<FlightInfo> getFlights(String origin, String destination, XMLGregorianCalendar startDate) {
+    public ArrayList<FlightInfo> getFlights(String origin, String destination, String startDate) {
         ArrayList<FlightInfo> flightListToReturn = new ArrayList<FlightInfo>();
 
         for (FlightInfo flight : flightList) {
