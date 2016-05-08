@@ -5,8 +5,8 @@
             <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/AirlineService/AirlineWebService?xsd=1"/>
         </xsd:schema>
     <xsd:schema targetNamespace="http://bookingservice.ws">
-            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://User-Pc:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
-            <xsd:import namespace="http://bookingserviceSchema.ws" schemaLocation="http://User-Pc:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
+            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+            <xsd:import namespace="http://bookingserviceSchema.ws" schemaLocation="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
             <xsd:complexType name="hotelList">
                 <xsd:complexContent>
                     <xsd:extension xmlns:ns="http://bookingserviceSchema.ws" base="ns1:hotelListType">
@@ -245,7 +245,7 @@
   </binding>
   <service name="service1">
     <port binding="tns:BookingServicePortTypeBinding" name="BookingServicePortTypeBindingPort">
-      <soap:address location="http://User-Pc:9080/service"/>
+      <soap:address location="http://192.168.1.5:9080/service"/>
     </port>
   </service>
     <plnk:partnerLinkType name="BookingService">
