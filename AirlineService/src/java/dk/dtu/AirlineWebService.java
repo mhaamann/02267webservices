@@ -57,7 +57,7 @@ public class AirlineWebService {
         dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
         creditCard.setExpirationDate(expDate);
         creditCard.setName(name);
-        creditCard.setNumber("number");
+        creditCard.setNumber(String.valueOf(number));
         
         
         for (FlightInfo flight : flightDB.flightList) {

@@ -22,38 +22,7 @@ import static org.junit.Assert.*;
  * @author DFS
  */
 public class AirlineClientTest {
-    /*
-    static class CreditCardInfoType{
-        String name;
-        String number;
-        ExpirationDate ed;
-        
-        public void setName(String name){
-            this.name = name;
-        }
-        public void setNumber(String num){
-            this.number = num;
-        }
-        
-        public void setExpirationDate(ExpirationDate exD){
-            this.ed.setMonth(exD.getMonth());
-            this.ed.setYear(exD.getYear());
-        }
-        
-    }
     
-    static class AccountType{
-        String name;
-        String number;
-        
-        public void setName(String name){
-            this.name = name;
-        }
-        public void setNumber(String num){
-            this.number = num;
-        }
-    }
-    */
     public static final dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
     static{
         //Creditcard has credit of 1000
@@ -64,14 +33,7 @@ public class AirlineClientTest {
         exDate.setYear(10);
         creditCard.setExpirationDate(exDate);
         
-    }
-    /*
-    private static final dk.dtu.imm.fastmoney.types.AccountType account = new dk.dtu.imm.fastmoney.types.AccountType();
-    static{
-        account.setName("CheapBird");
-        account.setNumber("50208813");
-    }
-  */  
+    }  
     
     String startDate = "2016-01-01";
     @Test
