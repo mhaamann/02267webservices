@@ -77,11 +77,11 @@ public class BookingAppClient {
         
         
         System.out.println("Listing..");
-        HotelList list = BookingServiceBPEL.listItinerary(itineraryId);
+        /* HotelList list = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
-        }
+        }*/
         
         System.out.println("Booking..");
         HotelList hotelListBooked = BookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
@@ -91,11 +91,11 @@ public class BookingAppClient {
         }
         
         System.out.println("Listing..");
-        HotelList list2 = BookingServiceBPEL.listItinerary(itineraryId);
+        /* HotelList list2 = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list2.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
-        }
+        }*/
         
         System.out.println("Cancelling..");
         HotelList list3 = BookingServiceBPEL.cancelItinerary(itineraryId);
@@ -105,11 +105,11 @@ public class BookingAppClient {
         }
         
         System.out.println("Listing..");
-        HotelList list4 = BookingServiceBPEL.listItinerary(itineraryId);
+        /* HotelList list4 = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list4.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
-        }
+        }*/
         
         
         

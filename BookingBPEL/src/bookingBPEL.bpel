@@ -100,7 +100,11 @@
                                     <assign name="Assign22">
                                         <copy>
                                             <from variable="hotelList"/>
-                                            <to variable="ListItineraryOut" part="status"/>
+                                            <to>$ListItineraryOut.status/ns1:hotels</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="flightList"/>
+                                            <to>$ListItineraryOut.status/ns1:flights</to>
                                         </copy>
                                     </assign>
                                     <reply name="Reply4" partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryOut"/>
