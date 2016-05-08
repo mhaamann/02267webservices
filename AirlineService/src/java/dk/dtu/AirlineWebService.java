@@ -8,7 +8,6 @@ package dk.dtu;
 
 import dk.dtu.BankService.BankService;
 import dk.dtu.BankService.CreditCardFaultMessage;
-import dk.dtu.BankService.CreditCardInfoType;
 import java.text.ParseException;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -44,30 +43,17 @@ public class AirlineWebService {
     public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
             @WebParam(name = "month") int month,
-            @WebParam(name = "number") String number,
+            @WebParam(name = "number") int number,
             @WebParam(name = "name") String name) {
-        
-        dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
-        account.setName("LameDuck");
-        account.setNumber("50208812");
-        
-        dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
-        expDate.setMonth(month);
-        expDate.setYear(year);
-        
-        dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
-        creditCard.setExpirationDate(expDate);
-        creditCard.setName(name);
-        creditCard.setNumber(number);
-        
         for (FlightInfo flight : flightDB.flightList) {
             if (flight.bookingNumber.equals(bookingNumber)) {
                 //try to charge creditcard if the flight was found
-                try {
-                    chargeCreditCard(1, creditCard, flight.price, account);
+            //    try {
+             //       dk.dtu.imm.fastmoney.types.CreditCardInfoType card = null;
+            //        chargeCreditCard(01, card, flight.price, account);
                     return true;
-                }catch (CreditCardFaultMessage e) {
-                }//end try/catch
+            //    } catch (CreditCardFaultMessage e) {
+            //    }//end try/catch
                 //if flight was booked successfully
                 //which means that the flight was found and
                 //there were sufficient funds on the creditcard
