@@ -39,34 +39,37 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "24";
-        String createItinerary = BookingService.createItinerary(itineraryId);
+
+        String itineraryId = "16";
+        String createItinerary = BookingServiceBPEL.createItinerary(itineraryId);
+
 
         System.out.println(createItinerary);
         
         System.out.println("Finding hotels..");
-        GetHotelsResponse hotels = BookingService.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
+        GetHotelsResponse hotels = BookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
         for (Booking booking : hotels.getReturn()) {
             System.out.println(booking.getCity());
             System.out.println(booking.getTotalPrice());
         }
         
         System.out.println("Finding Flights..");
-        GetFlightsResponse flights = BookingService.getFlights("Copenhagen", "Berlin", "2016-01-01", itineraryId);
+        GetFlightsResponse flights = BookingServiceBPEL.getFlights("Copenhagen", "Berlin", "2016-01-01", itineraryId);
         for (FlightInfo flight : flights.getReturn()) {
             System.out.println(flight.getOrigin() + " - " + flight.getPrice() + "Booking ID: " + flight.getBookingNumber());
         }
         
         System.out.println("Adding hotel..");
-        BookingService.addHotel("7", itineraryId);
-        HotelList hotelList = BookingService.addHotel("12", itineraryId);
+        BookingServiceBPEL.addHotel("7", itineraryId);
+        HotelList hotelList = BookingServiceBPEL.addHotel("12", itineraryId);
+
         for (HotelReservation reservation : hotelList.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
         
         System.out.println("Adding flight..");
-        FlightList flightList = BookingService.addFlight("B12341", itineraryId);
+        FlightList flightList = BookingServiceBPEL.addFlight("B12341", itineraryId);
         for (FlightReservation reservation : flightList.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
@@ -74,35 +77,35 @@ public class BookingAppClient {
         
         
         System.out.println("Listing..");
-        HotelList list = BookingService.listItinerary(itineraryId);
+        HotelList list = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
         
         System.out.println("Booking..");
-        HotelList hotelListBooked = BookingService.bookItinerary(itineraryId, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
+        HotelList hotelListBooked = BookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
         for (HotelReservation reservation : hotelListBooked.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
         
         System.out.println("Listing..");
-        HotelList list2 = BookingService.listItinerary(itineraryId);
+        HotelList list2 = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list2.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
         
         System.out.println("Cancelling..");
-        HotelList list3 = BookingService.cancelItinerary(itineraryId);
+        HotelList list3 = BookingServiceBPEL.cancelItinerary(itineraryId);
         for (HotelReservation reservation : list3.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
         
         System.out.println("Listing..");
-        HotelList list4 = BookingService.listItinerary(itineraryId);
+        HotelList list4 = BookingServiceBPEL.listItinerary(itineraryId);
         for (HotelReservation reservation : list4.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
