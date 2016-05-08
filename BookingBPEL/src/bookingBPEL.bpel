@@ -247,6 +247,61 @@
                                             </sequence>
                                         </scope>
                                     </forEach>
+                                    <forEach name="ForEach4" parallel="no" counterName="ForEach4Counter">
+                                        <startCounterValue>1</startCounterValue>
+                                        <finalCounterValue>$numberOfFlights</finalCounterValue>
+                                        <scope name="Scope42">
+                                            <variables>
+                                                <variable name="BookFlightOut" xmlns:tns="http://dtu.dk/" messageType="tns:bookFlightResponse"/>
+                                                <variable name="BookFlightIn" xmlns:tns="http://dtu.dk/" messageType="tns:bookFlight"/>
+                                            </variables>
+                                            <faultHandlers>
+                                                <catchAll>
+                                                    <assign name="Assign44">
+                                                        <copy>
+                                                            <from>'cancelled'</from>
+                                                            <to>$flightList/ns1:reservation[$ForEach4Counter]/ns1:status</to>
+                                                        </copy>
+                                                    </assign>
+                                                </catchAll>
+                                            </faultHandlers>
+                                            <sequence name="Sequence4">
+                                                <assign name="Assign47">
+                                                    <copy>
+                                                        <from>$flightList/ns1:reservation[$ForEach4Counter]/ns1:bookingNumber
+                                                            <sxed:editor>
+                                                                <sxed:predicate path="$flightList/ns1:reservation[$ForEach4Counter]" source="from"/>
+                                                            </sxed:editor>
+                                                        </from>
+                                                        <to>$BookFlightIn.parameters/bookingNumber</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="name"/>
+                                                        <to>$BookFlightIn.parameters/name</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="number"/>
+                                                        <to>$BookFlightIn.parameters/number</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="month"/>
+                                                        <to>$BookFlightIn.parameters/month</to>
+                                                    </copy>
+                                                    <copy>
+                                                        <from variable="BookItineraryIn" part="year"/>
+                                                        <to>$BookFlightIn.parameters/year</to>
+                                                    </copy>
+                                                </assign>
+                                                <invoke name="InvokeBookFlight" partnerLink="AirlineServiceLink" operation="bookFlight" xmlns:tns="http://dtu.dk/" portType="tns:AirlineWebService" inputVariable="BookFlightIn" outputVariable="BookFlightOut"/>
+                                                <assign name="Assign48">
+                                                    <copy>
+                                                        <from>'confirmed'</from>
+                                                        <to>$flightList/ns1:reservation[$ForEach4Counter]/ns1:status</to>
+                                                    </copy>
+                                                </assign>
+                                            </sequence>
+                                        </scope>
+                                    </forEach>
                                     <assign name="Assign9">
                                         <copy>
                                             <from variable="hotelList"/>
