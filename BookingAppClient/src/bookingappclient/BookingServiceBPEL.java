@@ -13,7 +13,7 @@ import ExternalBookingService.HotelList;
  *
  * @author mhaamann
  */
-public class BookingService {
+public class BookingServiceBPEL {
     
     
     // Itinerary operations - Start

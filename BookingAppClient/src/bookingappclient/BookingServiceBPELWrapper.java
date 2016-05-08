@@ -5,11 +5,13 @@
  */
 package bookingappclient;
 
+import bookingappclient.bookingserviceinterface.BookingServiceInterface;
+
 /**
  *
  * @author jens
  */
-public class BookingServiceSimple extends BookingService{
+public class BookingServiceBPELWrapper extends BookingServiceBPEL implements BookingServiceInterface{
     
     
     

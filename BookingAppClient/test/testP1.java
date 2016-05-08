@@ -5,10 +5,9 @@
  */
 
 import ExternalBookingService.GetHotelsResponse;
-import ExternalBookingService.Hotel;
 import ExternalBookingService.HotelList;
 import ExternalBookingService.HotelReservation;
-import bookingappclient.BookingService;
+import bookingappclient.BookingServiceBPEL;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -28,27 +27,27 @@ public class testP1 {
     @Test
     public void testP1() {
         //Create itinerary
-        BookingService.createItinerary(null);
+        BookingServiceBPEL.createItinerary(null);
         //TODO:Get list of flights
         //TODO:Add flight to itinerary
         
         //Get list of hotels
-        GetHotelsResponse hotels = BookingService.getHotels(city1, fromDate1 , toDate1, itinerary1);
-        List<Hotel> hotelList = hotels.getReturn();
+        GetHotelsResponse hotels = BookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
+        //List<Hotel> hotelList = hotels.getReturn();
         
         //Add hotel to itinerary
-        HotelList hotelListReceipt = BookingService.addHotel(bookingNumber1, itinerary1);
+        HotelList hotelListReceipt = BookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
         
         //TODO:Add a second flight to itinerary
         
         //TODO:Add a third flight to itinerary
         
         //Add a second hotel to itinerary
-        hotelListReceipt = BookingService.addHotel(bookingNumber1, itinerary1);
+        hotelListReceipt = BookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
         List<HotelReservation> hotelReservationReceipt = hotelListReceipt.getReservation();
         
         //Get itinerary
-        hotelListReceipt = BookingService.listItinerary(null);
+        hotelListReceipt = BookingServiceBPEL.listItinerary(null);
         
         //TODO:Assert all flights added
         
