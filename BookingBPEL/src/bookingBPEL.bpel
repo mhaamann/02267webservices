@@ -401,6 +401,8 @@
                                             <correlation set="CorrelationSet2" initiate="no"/>
                                         </correlations>
                                         <sequence name="Sequence5">
+                                            
+                                            
                                             <forEach name="ForEach3" parallel="no" counterName="ForEach3Counter" xmlns:tns="http://dtu.dk/">
                                                 <startCounterValue>1</startCounterValue>
                                                 <finalCounterValue>$numberOfHotels</finalCounterValue>
@@ -419,7 +421,7 @@
                                                             <copy>
                                                                 <from>$hotelList/ns1:reservation[$ForEach3Counter]/ns1:bookingNumber
                                                                     <sxed:editor>
-                                                                        <sxed:predicate path="$hotelList/ns1:reservation[$ForEach1Counter]" source="from"/>
+                                                                        <sxed:predicate path="$hotelList/ns1:reservation[$ForEach3Counter]" source="from"/>
                                                                     </sxed:editor>
                                                                 </from>
                                                                 <to>$CancelHotelIn.parameters/bookingNumber</to>
@@ -435,6 +437,43 @@
                                                     </sequence>
                                                 </scope>
                                             </forEach>
+                                            
+                                            <forEach name="ForEach5" parallel="no" counterName="ForEach5Counter" xmlns:tns="http://dtu.dk/">
+                                                <startCounterValue>1</startCounterValue>
+                                                <finalCounterValue>$numberOfFlights</finalCounterValue>
+                                                <scope name="Scope52">
+                                                    <variables>
+                                                        <variable name="CancelFlightOut" messageType="tns:cancelFlightResponse"/>
+                                                        <variable name="CancelFlightIn" messageType="tns:cancelFlight"/>
+                                                    </variables>
+                                                    <faultHandlers>
+                                                        <catchAll>
+                                                            <empty name="Empty51"/>
+                                                        </catchAll>
+                                                    </faultHandlers>
+                                                    <sequence name="Sequence54">
+                                                        <assign name="Assign57">
+                                                            <copy>
+                                                                <from>$flightList/ns1:reservation[$ForEach5Counter]/ns1:bookingNumber
+                                                                    <sxed:editor>
+                                                                        <sxed:predicate path="$flightList/ns1:reservation[$ForEach5Counter]" source="from"/>
+                                                                    </sxed:editor>
+                                                                </from>
+                                                                <to>$CancelFlightIn.parameters/bookingNumber</to>
+                                                            </copy>
+                                                        </assign>
+                                                        <invoke name="InvokeBookFlight" partnerLink="AirlineServiceLink" operation="cancelFlight" xmlns:tns="http://dtu.dk/" portType="tns:AirlineWebService" inputVariable="CancelFlightIn" outputVariable="CancelFlightOut"/>
+                                                        <assign name="Assign58">
+                                                            <copy>
+                                                                <from>'cancelled'</from>
+                                                                <to>$flightList/ns1:reservation[$ForEach5Counter]/ns1:status</to>
+                                                            </copy>
+                                                        </assign>
+                                                    </sequence>
+                                                </scope>
+                                            </forEach>
+                                            
+                                            
                                             <assign name="Assign9">
                                                 <copy>
                                                     <from variable="hotelList"/>
