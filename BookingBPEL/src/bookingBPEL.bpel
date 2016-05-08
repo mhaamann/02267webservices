@@ -100,7 +100,11 @@
                                     <assign name="Assign22">
                                         <copy>
                                             <from variable="hotelList"/>
-                                            <to variable="ListItineraryOut" part="status"/>
+                                            <to>$ListItineraryOut.status/ns1:hotels</to>
+                                        </copy>
+                                        <copy>
+                                            <from variable="flightList"/>
+                                            <to>$ListItineraryOut.status/ns1:flights</to>
                                         </copy>
                                     </assign>
                                     <reply name="Reply4" partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryOut"/>
@@ -136,8 +140,8 @@
                                     <invoke name="Invoke1" partnerLink="HotelServiceLink" operation="getHotels" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="GetHotelsIn1" outputVariable="GetHotelsOut1"/>
                                     <assign name="Assign2">
                                         <copy>
-                                            <from>$GetHotelsOut1.parameters/return</from>
-                                            <to>$GetHotelsOut3.hotelList/return</to>
+                                            <from variable="GetHotelsOut1" part="parameters"/>
+                                            <to variable="GetHotelsOut3" part="hotelList"/>
                                         </copy>
                                     </assign>
                                     <reply name="Reply1" partnerLink="PartnerLink1" operation="GetHotels" xmlns:tns="http://bookingservice.ws" portType="tns:BookingServicePortType" variable="GetHotelsOut3"/>
@@ -279,8 +283,8 @@
                                     <invoke name="Invoke2" partnerLink="AirlineServiceLink" operation="getFlights" xmlns:tns="http://dtu.dk/" portType="tns:AirlineWebService" inputVariable="GetFlightsIn1" outputVariable="GetFlightsOut"/>
                                     <assign name="Assign24">
                                         <copy>
-                                            <from>$GetFlightsOut.parameters/return</from>
-                                            <to>$GetFlightsOut1.flightList/return</to>
+                                            <from variable="GetFlightsOut" part="parameters"/>
+                                            <to variable="GetFlightsOut1" part="flightList"/>
                                         </copy>
                                     </assign>
                                     <reply name="Reply5" partnerLink="PartnerLink1" operation="GetFlights" portType="tns:BookingServicePortType" variable="GetFlightsOut1"/>

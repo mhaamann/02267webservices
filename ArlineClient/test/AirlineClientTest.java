@@ -63,6 +63,7 @@ public class AirlineClientTest {
         exDate.setMonth(9);
         exDate.setYear(10);
         creditCard.setExpirationDate(exDate);
+        
     }
     /*
     private static final dk.dtu.imm.fastmoney.types.AccountType account = new dk.dtu.imm.fastmoney.types.AccountType();
@@ -71,10 +72,10 @@ public class AirlineClientTest {
         account.setNumber("50208813");
     }
   */  
+    
+    String startDate = "2016-01-01";
     @Test
     public void AirlineClientTest1() throws DatatypeConfigurationException {
-        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
-        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
         List<FlightInfo> result;
         List<FlightInfo> expectedResult = new ArrayList<>();
         
@@ -85,10 +86,7 @@ public class AirlineClientTest {
     
     @Test
     public void AirlineClientTest2() throws DatatypeConfigurationException {
-        GregorianCalendar sd = new GregorianCalendar(2014, 10, 8);
-        XMLGregorianCalendar startDate = DatatypeFactory.newInstance().newXMLGregorianCalendar(sd);
         List<FlightInfo> result;
-        
         result = getFlights("Copenhagen", "Berlin", startDate);
         FlightInfo flight = (FlightInfo)result.get(0);
         
@@ -98,16 +96,11 @@ public class AirlineClientTest {
         assertEquals(true, isBooked);
     }
 
- /*   
-
     @Test
     public void AirlineClientTest3() {
-        CreditCard cc =  new CreditCard();
-        boolean result = cancelFlight("Blah", 1234, cc);
+        boolean result = cancelFlight("B12341", 50, creditCard);
         assertEquals(true, result);
-    }
-
-   */    
+    }  
 
     public AirlineClientTest() {
     }

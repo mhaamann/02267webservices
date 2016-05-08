@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package bookingappclient;
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightList;
+import ExternalBookingService.FlightReservation;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
@@ -39,10 +36,10 @@ public class BookingAppClient {
         System.out.println("Starting");
         String itineraryId = "17";
         BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
-        String createItinerary = bookingServiceBPEL.createItinerary(itineraryId);
+
 
         System.out.println(createItinerary);
-        
+       
         System.out.println("Finding hotels..");
         GetHotelsResponse hotels = bookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
         for (Booking booking : hotels.getReturn()) {
@@ -53,7 +50,7 @@ public class BookingAppClient {
         System.out.println("Finding Flights..");
         GetFlightsResponse flights = bookingServiceBPEL.getFlights("Copenhagen", "Berlin", "2016-01-01", itineraryId);
         for (FlightInfo flight : flights.getReturn()) {
-            System.out.println(flight.getOrigin() + " - " + flight.getPrice());
+            System.out.println(flight.getOrigin() + " - " + flight.getPrice() + "Booking ID: " + flight.getBookingNumber());
         }
         
         System.out.println("Adding..");
@@ -63,6 +60,14 @@ public class BookingAppClient {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
+        
+        System.out.println("Adding flight..");
+        FlightList flightList = BookingServiceBPEL.addFlight("B12341", itineraryId);
+        for (FlightReservation reservation : flightList.getReservation()) {
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
+        
         
         System.out.println("Listing..");
         HotelList list = bookingServiceBPEL.listItinerary(itineraryId);
@@ -97,14 +102,6 @@ public class BookingAppClient {
         for (HotelReservation reservation : list4.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
-        }
-        
-        
-        
-    }
-
-   
-    
-
-    
+        }   
+    }   
 }

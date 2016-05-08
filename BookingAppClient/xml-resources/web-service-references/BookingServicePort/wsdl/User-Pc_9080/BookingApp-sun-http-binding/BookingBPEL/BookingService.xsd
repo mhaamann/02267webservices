@@ -5,15 +5,7 @@
     </xsd:simpleType>
     <xsd:element name="hotelList" nillable="true" type="ns:hotelListType"/>
     <xsd:element name="flightList" nillable="true" type="ns:flightListType"/>
-    <xsd:element name="itinery" nillable="true" type="ns:itineryType"/>
     
-    
-    <xsd:complexType name="itineryType">
-        <xsd:sequence maxOccurs="unbounded" minOccurs="0">
-            <xsd:element name="flights" type="ns:flightListType"/>
-            <xsd:element name="hotels" type="ns:hotelListType"/>
-        </xsd:sequence>
-    </xsd:complexType>
     <xsd:complexType name="hotelListType">
         <xsd:sequence maxOccurs="unbounded" minOccurs="0">
             <xsd:element name="reservation" type="ns:hotelReservation"/>
