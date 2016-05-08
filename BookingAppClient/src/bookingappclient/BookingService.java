@@ -8,6 +8,7 @@ package bookingappclient;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
+import ExternalBookingService.ItineryList;
 
 /**
  *
@@ -29,17 +30,17 @@ public class BookingService {
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.createItinerary(itineraryId);
     }
-    
-    public static HotelList listItinerary(java.lang.String itineraryId) {
-        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
-        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.listItinerary(itineraryId);
-    }
 
     public static HotelList cancelItinerary(java.lang.String itineraryId) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.cancelItinerary(itineraryId);
+    }
+    
+    private static ItineryList listItinerary(java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.listItinerary(itineraryId);
     }
     
     // Itinerary operations - End
@@ -70,7 +71,4 @@ public class BookingService {
     
     // Flight operations - End
 
-    
-
-   
 }

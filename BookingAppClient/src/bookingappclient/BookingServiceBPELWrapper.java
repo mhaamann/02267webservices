@@ -2,10 +2,14 @@ package bookingappclient;
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightListType;
+import ExternalBookingService.FlightReservation;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
+import ExternalBookingService.HotelListType;
 import ExternalBookingService.HotelReservation;
+import ExternalBookingService.ItineryList;
 import bookingappclient.bookingserviceinterface.BookingServiceInterface;
 import java.util.List;
 
@@ -29,12 +33,31 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     }
 
     @Override
-    public List<HotelReservation> listItinerary(String itineraryId) {
-        HotelList hotelList = bookingServiceBPEL.listItinerary(itineraryId);
-        List<HotelReservation> hotelReservationList = hotelList.getReservation();
-        return hotelReservationList;
+    public List<Object> listItinerary(String itineraryId) {
+        ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
+        List<Object> objectList = itineryList.getFlightsAndHotels();
+        
+        return objectList;
     }
-
+    
+    @Override
+    public List<HotelReservation> getHotelItineraryList(String itineraryId){
+        ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
+        List<Object> objectList = itineryList.getFlightsAndHotels();
+        HotelListType hList = (HotelListType) objectList.get(1);
+        List<HotelReservation> hReservationList = hList.getReservation();
+        return hReservationList;
+    }
+    
+    @Override
+    public List<FlightReservation> getFlightItineraryList(String itineraryId){
+        ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
+        List<Object> objectList = itineryList.getFlightsAndHotels();
+        FlightListType fList = (FlightListType) objectList.get(0);
+        List<FlightReservation> fReservationList = fList.getReservation();
+        return fReservationList;
+    }
+    
     @Override
     public List<HotelReservation> cancelItinerary(String itineraryId) {
         HotelList hotelList = bookingServiceBPEL.cancelItinerary(itineraryId);

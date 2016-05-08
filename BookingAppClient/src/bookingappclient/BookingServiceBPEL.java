@@ -39,7 +39,7 @@ public class BookingServiceBPEL {
         return port.cancelItinerary(itineraryId);
     }
     
-    private static ItineryList listItinerary(java.lang.String itineraryId) {
+    public ItineryList listItinerary(java.lang.String itineraryId) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.listItinerary(itineraryId);

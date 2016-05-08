@@ -54,7 +54,7 @@ public class testP1 {
         hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber2, itinerary1);
         
         //Get itinerary
-        hotelReservationList = bookingServiceBPEL.listItinerary(itinerary1);
+        List<Object> itineryList = bookingServiceBPEL.listItinerary(itinerary1);
         
         //TODO:Assert all flights added
         

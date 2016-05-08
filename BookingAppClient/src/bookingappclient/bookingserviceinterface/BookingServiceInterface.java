@@ -2,6 +2,7 @@ package bookingappclient.bookingserviceinterface;
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightReservation;
 import ExternalBookingService.HotelReservation;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
@@ -19,9 +20,13 @@ public interface BookingServiceInterface {
 
     public String createItinerary(java.lang.String itineraryId);
     
-    public List<HotelReservation>  listItinerary(java.lang.String itineraryId);
+    public List<Object> listItinerary(java.lang.String itineraryId);
+    
+    public List<HotelReservation> getHotelItineraryList(String itineraryId);
+    
+    public List<FlightReservation> getFlightItineraryList(String itineraryId);
 
-    public List<HotelReservation>  cancelItinerary(java.lang.String itineraryId);
+    public List<HotelReservation> cancelItinerary(java.lang.String itineraryId);
     
     // Itinerary operations - End
     
