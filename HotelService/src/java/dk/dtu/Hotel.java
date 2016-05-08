@@ -18,12 +18,14 @@ class Hotel {
     public String hotel;
     public int pricePerDay;
     ArrayList<Booking> bookings = new ArrayList<Booking>();
+    public Boolean creditcardGuarantee;
     
     
     public Hotel(String city, String hotel, int pricePerDay) {
         this.city = city;
         this.hotel = hotel;
         this.pricePerDay = pricePerDay;
+        this.creditcardGuarantee = true;
     }
     
 }

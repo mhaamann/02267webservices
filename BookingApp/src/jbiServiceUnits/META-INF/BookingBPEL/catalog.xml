@@ -2,7 +2,8 @@
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
     <system systemId="http://localhost:8080/HotelService/HotelWebService?wsdl" uri="../localhost_8080/HotelService/HotelWebService.wsdl"/>
     <system systemId="http://localhost:8080/HotelService/HotelWebService?xsd=1" uri="../localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
-    <system systemId="file:/Users/mhaamann/Sites/02267webservices/BookingBPEL/src/localhost_8080/HotelService/HotelWebService.xsd_1.xsd" uri="../localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/AirlineService/AirlineWebService?wsdl" uri="../localhost_8080/AirlineService/AirlineWebService.wsdl"/>
+    <system systemId="http://localhost:8080/AirlineService/AirlineWebService?xsd=1" uri="../localhost_8080/AirlineService/AirlineWebService.xsd_1.xsd"/>
     <system systemId="http://dtu.dk/" uri="src/_references/_relative/nbproject/private/retriever/www.dtu.dk/index"/>
     <system systemId="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions" uri="src/_references/_relative/nbproject/private/retriever/www.oracle.com/sun/index.html"/>
     <system systemId="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2" uri="src/_references/_relative/nbproject/private/retriever/www.oracle.com/sun/index.html"/>
@@ -12,4 +13,6 @@
     <system systemId="http://bookingserviceSchema.ws" uri="src/_references/_relative/nbproject/private/retriever/bookingserviceSchema.ws"/>
     <system systemId="http://docs.oasis-open.org/wsbpel/2.0/varprop" uri="src/_references/_relative/nbproject/private/retriever/docs.oasis-open.org/wsbpel/2.0/varprop"/>
     <system systemId="http://bookingservice.schema.ws" uri="src/_references/_relative/nbproject/private/retriever/www.schemadesign.com"/>
+    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=2" uri="src/_references/_relative/nbproject/private/retriever/fastmoney.imm.dtu.dk_8080/BankService.xsd_2.xsd"/>
+    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=1" uri="src/_references/_relative/nbproject/private/retriever/fastmoney.imm.dtu.dk_8080/BankService.xsd_1.xsd"/>
 </catalog>
