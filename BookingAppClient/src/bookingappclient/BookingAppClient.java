@@ -77,7 +77,7 @@ public class BookingAppClient {
         HotelList list = BookingService.listItinerary(itineraryId);
         for (HotelReservation reservation : list.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
-            System.out.print(reservation.getStatus());
+            System.out.println(reservation.getStatus());
         }
         
         System.out.println("Booking..");
