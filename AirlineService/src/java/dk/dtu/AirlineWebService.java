@@ -60,12 +60,7 @@ public class AirlineWebService {
     }//end method bookFlight
 
     @WebMethod(operationName = "cancelFlight")
-    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber,
-            @WebParam(name = "price") int price,
-            @WebParam(name = "year") int year,
-            @WebParam(name = "month") int month,
-            @WebParam(name = "number") int number,
-            @WebParam(name = "name") String name) {
+    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) {
         for (FlightInfo flight : flightDB.flightList) {
             if (flight.bookingNumber.equals(bookingNumber)) {
                 
