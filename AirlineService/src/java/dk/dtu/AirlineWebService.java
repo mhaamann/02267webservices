@@ -45,15 +45,29 @@ public class AirlineWebService {
             @WebParam(name = "month") int month,
             @WebParam(name = "number") int number,
             @WebParam(name = "name") String name) {
+        
+        dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
+        account.setName("LameDuck");
+        account.setNumber("50208812");
+        
+        dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
+        expDate.setMonth(month);
+        expDate.setYear(year);
+        
+        dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
+        creditCard.setExpirationDate(expDate);
+        creditCard.setName(name);
+        creditCard.setNumber("number");
+        
+        
         for (FlightInfo flight : flightDB.flightList) {
             if (flight.bookingNumber.equals(bookingNumber)) {
                 //try to charge creditcard if the flight was found
-            //    try {
-             //       dk.dtu.imm.fastmoney.types.CreditCardInfoType card = null;
-            //        chargeCreditCard(01, card, flight.price, account);
+                try {
+                    chargeCreditCard(1, creditCard, flight.price, account);
                     return true;
-            //    } catch (CreditCardFaultMessage e) {
-            //    }//end try/catch
+                } catch (CreditCardFaultMessage e) {
+                }//end try/catch
                 //if flight was booked successfully
                 //which means that the flight was found and
                 //there were sufficient funds on the creditcard
@@ -61,8 +75,8 @@ public class AirlineWebService {
                 return false;
             }//end if/else
         }//end for
-        //return false;
-        return true;
+        return false;
+        //return true;
     }//end method bookFlight
 
     @WebMethod(operationName = "cancelFlight")

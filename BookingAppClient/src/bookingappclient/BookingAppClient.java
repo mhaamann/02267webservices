@@ -35,12 +35,12 @@ public class BookingAppClient {
         // TODO code application logic here
         System.out.println("Starting");
 
-        String itineraryId = "20";
+        String itineraryId = "22";
         String createItinerary = BookingServiceBPEL.createItinerary(itineraryId);
 
 
         System.out.println(createItinerary);
-        
+       
         System.out.println("Finding hotels..");
         GetHotelsResponse hotels = BookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
         for (Booking booking : hotels.getReturn()) {
