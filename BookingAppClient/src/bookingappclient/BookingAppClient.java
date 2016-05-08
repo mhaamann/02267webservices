@@ -37,7 +37,7 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "17";
+        String itineraryId = "19";
         String createItinerary = BookingService.createItinerary(itineraryId);
 
         System.out.println(createItinerary);
