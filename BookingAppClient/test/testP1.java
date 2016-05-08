@@ -4,11 +4,13 @@
  * and open the template in the editor.
  */
 
+import ExternalBookingService.Booking;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
 import ExternalBookingService.HotelReservation;
-import bookingappclient.BookingServiceBPEL;
+import bookingappclient.BookingServiceBPELWrapper;
 import java.util.List;
+import java.util.ListIterator;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,42 +20,48 @@ import static org.junit.Assert.*;
  */
 public class testP1 {
     
+    BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
     String city1 = "Copenhagen";
     String fromDate1 = "2016-01-01";
     String toDate1 = "2016-01-30";
     String itinerary1 = "1";
     String bookingNumber1 = "1";
+    String bookingNumber2 = "2";
     
     @Test
     public void testP1() {
         //Create itinerary
-        BookingServiceBPEL.createItinerary(null);
+        bookingServiceBPEL.createItinerary(itinerary1);
         //TODO:Get list of flights
         //TODO:Add flight to itinerary
         
         //Get list of hotels
-        GetHotelsResponse hotels = BookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
-        //List<Hotel> hotelList = hotels.getReturn();
+        List<Booking> hotelBookingList= bookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
         
         //Add hotel to itinerary
-        HotelList hotelListReceipt = BookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
+        //Get bookingnumber from returned hotels
+        List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
+        HotelReservation hotelReservation = hotelReservationList.get(0);
+        assertEquals(1, hotelReservation.getBookingNumber());
+        assertEquals("unconfirmed", hotelReservation.getStatus());
+        
         
         //TODO:Add a second flight to itinerary
         
         //TODO:Add a third flight to itinerary
         
         //Add a second hotel to itinerary
-        hotelListReceipt = BookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
-        List<HotelReservation> hotelReservationReceipt = hotelListReceipt.getReservation();
+        hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber2, itinerary1);
         
         //Get itinerary
-        hotelListReceipt = BookingServiceBPEL.listItinerary(null);
+        hotelReservationList = bookingServiceBPEL.listItinerary(itinerary1);
         
         //TODO:Assert all flights added
         
         //Assert all hotels added
-        hotelListReceipt.getReservation();
-        //hotelListReceipt.
+        ListIterator<HotelReservation> hotelReservationIterator = hotelReservationList.listIterator();
+        
+        
         
         //Assert all flights and hotels are unconfirmed
         
