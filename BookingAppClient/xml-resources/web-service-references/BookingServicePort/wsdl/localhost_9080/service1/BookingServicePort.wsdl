@@ -5,8 +5,8 @@
             <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/AirlineService/AirlineWebService?xsd=1"/>
         </xsd:schema>
     <xsd:schema targetNamespace="http://bookingservice.ws">
-            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
-            <xsd:import namespace="http://bookingserviceSchema.ws" schemaLocation="http://192.168.1.5:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
+            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://User-Pc:9080/BookingApp-sun-http-binding/BookingBPEL/localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
+            <xsd:import namespace="http://bookingserviceSchema.ws" schemaLocation="http://User-Pc:9080/BookingApp-sun-http-binding/BookingBPEL/BookingService.xsd"/>
             <xsd:complexType name="hotelList">
                 <xsd:complexContent>
                     <xsd:extension xmlns:ns="http://bookingserviceSchema.ws" base="ns1:hotelListType">
@@ -23,6 +23,12 @@
             </xsd:complexType>
         </xsd:schema>
   </types>
+  <message name="AddFlightRequest">
+    <part name="bookingNumber" type="xsd:string">
+    </part>
+    <part name="itineraryId" type="xsd:string">
+    </part>
+  </message>
   <message name="GetFlightsRequest">
     <part name="origin" type="xsd:string">
     </part>
@@ -67,6 +73,10 @@
   </message>
   <message name="GetFlightsResponse">
     <part name="flightList" type="ns0:getFlightsResponse">
+    </part>
+  </message>
+  <message name="AddFlightResponse">
+    <part name="status" type="tns:flightList">
     </part>
   </message>
   <message name="ListItineraryResponse">
@@ -124,6 +134,12 @@
       <input message="tns:AddHotelRequest" name="AddHotelRequest">
     </input>
       <output message="tns:AddHotelResponse" name="AddHotelResponse">
+    </output>
+    </operation>
+    <operation name="AddFlight">
+      <input message="tns:AddFlightRequest" name="AddFlightRequest">
+    </input>
+      <output message="tns:AddFlightResponse" name="AddFlightResponse">
     </output>
     </operation>
     <operation name="CancelItinerary">
@@ -192,6 +208,15 @@
         <soap:body namespace="http://bookingservice.ws" use="literal"/>
       </output>
     </operation>
+    <operation name="AddFlight">
+      <soap:operation/>
+      <input name="AddFlightRequest">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </input>
+      <output name="AddFlightResponse">
+        <soap:body namespace="http://bookingservice.ws" use="literal"/>
+      </output>
+    </operation>
     <operation name="ListItinerary">
       <soap:operation/>
       <input name="ListItineraryRequest">
@@ -213,7 +238,7 @@
   </binding>
   <service name="service1">
     <port binding="tns:BookingServicePortTypeBinding" name="BookingServicePortTypeBindingPort">
-      <soap:address location="http://192.168.1.5:9080/service"/>
+      <soap:address location="http://User-Pc:9080/service"/>
     </port>
   </service>
     <plnk:partnerLinkType name="BookingService">
@@ -226,6 +251,7 @@ A partner link type characterizes the conversational relationship between two se
     <vprop:propertyAlias messageType="tns:CreateItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:GetHotelsRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:AddHotelRequest" part="itineraryId" propertyName="tns:itineraryId"/>
+    <vprop:propertyAlias messageType="tns:AddFlightRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:BookItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:ListItineraryRequest" part="itineraryId" propertyName="tns:itineraryId"/>
     <vprop:propertyAlias messageType="tns:GetFlightsRequest" part="itineraryId" propertyName="tns:itineraryId"/>
