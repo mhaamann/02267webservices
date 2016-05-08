@@ -5,6 +5,7 @@
  */
 package bookingappclient;
 
+import ExternalBookingService.FlightList;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
@@ -68,7 +69,15 @@ public class BookingService {
         return port.getFlights(origin, destination, startDate, itineraryId);
     }
     
+    public static FlightList addFlight(java.lang.String bookingNumber, java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.addFlight(bookingNumber, itineraryId);
+    }
+    
     // Flight operations - End
+
+    
 
     
 
