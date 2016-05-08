@@ -21,6 +21,13 @@
                     </xsd:extension>
                 </xsd:complexContent>
             </xsd:complexType>
+            <xsd:complexType name="itineryList">
+                <xsd:complexContent>
+                    <xsd:extension xmlns:ns="http://bookingserviceSchema.ws" base="ns1:itineryType">
+                        <xsd:sequence/>
+                    </xsd:extension>
+                </xsd:complexContent>
+            </xsd:complexType>
         </xsd:schema>
   </types>
   <message name="AddFlightRequest">
@@ -80,7 +87,7 @@
     </part>
   </message>
   <message name="ListItineraryResponse">
-    <part name="status" type="tns:hotelList">
+    <part name="status" type="tns:itineryList">
     </part>
   </message>
   <message name="AddHotelResponse">
