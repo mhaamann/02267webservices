@@ -3,25 +3,14 @@ package bookingappclient;
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
 import ExternalBookingService.FlightList;
-import ExternalBookingService.FlightListType;
 import ExternalBookingService.FlightReservation;
 import ExternalBookingService.GetFlightsResponse;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
-import ExternalBookingService.HotelListType;
 import ExternalBookingService.HotelReservation;
-import ExternalBookingService.ItineryList;
-import java.util.Arrays;
-import javax.xml.namespace.QName;
-import javax.xml.transform.Source;
-import javax.xml.ws.Dispatch;
-import javax.xml.transform.stream.StreamSource;
-import javax.xml.ws.Service;
-import java.io.StringReader;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Objects;
 
 /**
  *
@@ -40,7 +29,7 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "35";
+        String itineraryId = "38";
         BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
         BookingServiceBPELWrapper bsWrapper = new BookingServiceBPELWrapper();
 
@@ -78,20 +67,19 @@ public class BookingAppClient {
         
         System.out.println("Listing..");
         
-        List<HotelReservation> hReservationList = bsWrapper.getHotelItineraryList(itineraryId);       
-        ListIterator<HotelReservation> hIterator = hReservationList.listIterator();
-        while(hIterator.hasNext()){
-            HotelReservation hReservation = hIterator.next();
-            System.out.print(hReservation.getBookingNumber() + " - Status:");
-            System.out.println(hReservation.getStatus());
+        List<HotelReservation> hReservationList = bsWrapper.getHotelItineraryList(itineraryId);
+        for(HotelReservation reservation : hReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
         }
+        
         
         List<FlightReservation> fReservationList = bsWrapper.getFlightItineraryList(itineraryId);
         ListIterator<FlightReservation> fIterator = fReservationList.listIterator();
-        while(fIterator.hasNext()){
-            FlightReservation fReservation = fIterator.next();
-            System.out.print(fReservation.getBookingNumber() + " - Status:");
-            System.out.println(fReservation.getStatus());
+        
+        for (FlightReservation reservation : fReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
         }
        
         System.out.println("Booking..");
@@ -104,13 +92,11 @@ public class BookingAppClient {
         System.out.println("Listing..");
         
         hReservationList = bsWrapper.getHotelItineraryList(itineraryId);       
-        hIterator = hReservationList.listIterator();
-        while(hIterator.hasNext()){
-            HotelReservation hReservation = hIterator.next();
-            System.out.print(hReservation.getBookingNumber() + " - Status:");
-            System.out.println(hReservation.getStatus());
+        for (HotelReservation reservation : hReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
         }
-        
+             
         fReservationList = bsWrapper.getFlightItineraryList(itineraryId);
         fIterator = fReservationList.listIterator();
         while(fIterator.hasNext()){
@@ -128,19 +114,15 @@ public class BookingAppClient {
         
         System.out.println("Listing..");
         hReservationList = bsWrapper.getHotelItineraryList(itineraryId);       
-        hIterator = hReservationList.listIterator();
-        while(hIterator.hasNext()){
-            HotelReservation hReservation = hIterator.next();
-            System.out.print(hReservation.getBookingNumber() + " - Status:");
-            System.out.println(hReservation.getStatus());
+        for (HotelReservation reservation : hReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
         }
         
         fReservationList = bsWrapper.getFlightItineraryList(itineraryId);
-        fIterator = fReservationList.listIterator();
-        while(fIterator.hasNext()){
-            FlightReservation fReservation = fIterator.next();
-            System.out.print(fReservation.getBookingNumber() + " - Status:");
-            System.out.println(fReservation.getStatus());
+        for(FlightReservation reservation : fReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
         }
     }   
 }

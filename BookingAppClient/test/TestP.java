@@ -19,7 +19,7 @@ import static org.junit.Assert.*;
  *
  * @author jens
  */
-public class testP1 {
+public class TestP {
     
     BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
     String city1 = "Copenhagen";
@@ -27,7 +27,7 @@ public class testP1 {
     String fromDate1 = "2016-01-01";
     String toDate1 = "2016-01-30";
     String toDateFlight1 = "2016-01-10";
-    String itinerary1 = "37";
+    String itinerary1 = "40";
     String bookingNumber1 = "1";
     String bookingNumber2 = "2";
     String flightBooking1 = "B12341";
@@ -36,6 +36,7 @@ public class testP1 {
     
     @Test
     public void testP1() {
+        
         //Create itinerary
         System.out.println("Create Itinerary");
         bookingServiceBPEL.createItinerary(itinerary1);
@@ -68,7 +69,7 @@ public class testP1 {
         //TODO:Add a third flight to itinerary
         
         //Add a second hotel to itinerary
-        System.out.println("Add another hotels..");
+        System.out.println("Add another hotel..");
         hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber2, itinerary1);
         
         //Get itinerary
@@ -88,6 +89,27 @@ public class testP1 {
         //Book itinerary
         
         //Assert all statues are confirmed
+        
+    }
+    
+    @Test
+    public void testP2() {
+        //Create itinerary
+        System.out.println("Create Itinerary");
+        bookingServiceBPEL.createItinerary(itinerary1);
+
+        //Get list of flights
+        System.out.println("Finding flights..");
+        List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
+
+        //Add flight to itinerary
+        System.out.println("Add flight..");
+        bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
+
+        //Cancel Planning
+        bookingServiceBPEL.cancelItinerary(itinerary1);
+
+        //Assert that stuff is correct...
         
     }
 
