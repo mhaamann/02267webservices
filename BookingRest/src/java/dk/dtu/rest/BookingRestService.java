@@ -20,7 +20,7 @@ import javax.ws.rs.PUT;
  * @author User
  */
 @Path("TG")
-public class TravelGoodRestService {
+public class BookingRestService {
 
     @Context
     private UriInfo context;
@@ -28,7 +28,7 @@ public class TravelGoodRestService {
     /**
      * Creates a new instance of TravelGoodRestService
      */
-    public TravelGoodRestService() {
+    public BookingRestService() {
     }
 
     /**
