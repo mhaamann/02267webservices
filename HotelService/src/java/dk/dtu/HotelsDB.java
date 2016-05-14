@@ -21,6 +21,7 @@ public class HotelsDB {
     private ArrayList<Hotel> rooms;
     private Integer currentBookingNumber;
     private BankServiceWrapper bank = new BankServiceWrapper();
+    private static int hotelBankGroupId = 50308815;
     
     public void resetData() {
         this.rooms = new ArrayList<Hotel>();
@@ -99,23 +100,28 @@ public class HotelsDB {
                     // Booking exists. 
                     // Charge the creditcard
                     
-                    // Init the credit card.
-                    CreditCardInfoType card = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
-                    card.setName(name);
-                    card.setNumber(number);
-                    CreditCardInfoType.ExpirationDate date = new ExpirationDate();
-                    date.setMonth(month);
-                    date.setYear(year);
-                    card.setExpirationDate(date);
-                    
                     if (hotel.creditcardGuarantee) {
-                        if (bank.validateCreditCard(2, card, 200))
-                        // TODO: With creditcard guarantee.
+                        
+                        // Init the credit card.
+                        CreditCardInfoType card = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
+                        card.setName(name);
+                        card.setNumber(number);
+                        CreditCardInfoType.ExpirationDate date = new ExpirationDate();
+                        date.setMonth(month);
+                        date.setYear(year);
+                        card.setExpirationDate(date);
+                        
+                        if (bank.validateCreditCard(hotelBankGroupId, card, booking.totalPrice.intValue())) {
+                            // Creditcard validated, confirming the hotel.
+                            booking.status = "confirmed";
+                            return true;
+                        } else {
+                            throw new Exception("Could not be validated");
+                        }
+                    } else {
+                        // No creditcard guarantee, go ahead and confirm the hotel.
                         booking.status = "confirmed";
                         return true;
-                    } else {
-                        // TODO: No creditcard guarantee.
-                        throw new Exception("Bank error");
                     }
                 }
             }
