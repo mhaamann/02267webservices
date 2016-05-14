@@ -29,6 +29,7 @@ public class ApplicationConfig extends Application {
      * If required, comment out calling this method in getClasses().
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
+        resources.add(dk.dtu.rest.AirlineRestService.class);
         resources.add(dk.dtu.rest.BookingRestService.class);
         resources.add(dk.dtu.rest.HotelRestService.class);
         resources.add(dk.dtu.rest.ItineraryRestService.class);

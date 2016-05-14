@@ -5,7 +5,9 @@
  */
 package dk.dtu.xml;
 
-import dk.dtu.airline.FlightInfo;
+import dk.dtu.Booking;
+import dk.dtu.db.Itinerary;
+import java.util.ArrayList;
 import java.util.List;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -14,12 +16,12 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author mhaamann
  */
 @XmlRootElement
-public class FlightContainer {
+public class ItineraryContainer {
 
-    public List<FlightInfo> flight;
+    public Itinerary itinerary;
 
-    public void set(List<FlightInfo> flightList) {
-        this.flight = flightList;
+    public void set(Itinerary itinerary) {
+        this.itinerary = itinerary;
     }
 
 }

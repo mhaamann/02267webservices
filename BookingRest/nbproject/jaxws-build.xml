@@ -44,7 +44,7 @@
     </target>
     <target name="wsimport-client-AirlineWebService" depends="wsimport-init">
         <mkdir dir="${build.generated.dir}/jax-wsCache/AirlineWebService"/>
-        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AirlineWebService" destdir="${build.generated.dir}/jax-wsCache/AirlineWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AirlineWebService/wsdl/localhost_8080/AirlineService/AirlineWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/AirlineService/AirlineWebService?wsdl" xnocompile="true" xendorsed="true">
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/AirlineWebService" destdir="${build.generated.dir}/jax-wsCache/AirlineWebService" wsdl="${basedir}/${conf-dir}xml-resources/web-service-references/AirlineWebService/wsdl/localhost_8080/AirlineService/AirlineWebService.wsdl" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/AirlineService/AirlineWebService?wsdl" xnocompile="true" xendorsed="true" package="dk.dtu.airline">
             <depends file="${basedir}/${conf-dir}xml-resources/web-service-references/AirlineWebService/wsdl/localhost_8080/AirlineService/AirlineWebService.wsdl"/>
             <produces dir="${build.generated.dir}/jax-wsCache/AirlineWebService"/>
         </wsimport>
@@ -55,7 +55,7 @@
         </copy>
     </target>
     <target name="wsimport-client-clean-AirlineWebService" depends="-init-project">
-        <delete dir="${build.generated.sources.dir}/jax-ws/dk/dtu"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/dk/dtu/airline"/>
         <delete dir="${build.generated.dir}/jax-wsCache/AirlineWebService"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-HotelWebService, wsimport-client-AirlineWebService"/>

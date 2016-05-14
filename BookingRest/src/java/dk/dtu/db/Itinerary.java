@@ -6,6 +6,7 @@
 package dk.dtu.db;
 
 import java.util.ArrayList;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
@@ -13,8 +14,8 @@ import java.util.ArrayList;
  */
 public class Itinerary {
     
-    ArrayList<Flight> flights = new ArrayList<Flight>();
-    ArrayList<Hotel> hotels = new ArrayList<Hotel>();
+    public ArrayList<Flight> flights = new ArrayList<Flight>();
+    public ArrayList<Hotel> hotels = new ArrayList<Hotel>();
     
     public int itineraryId;
             

@@ -36,6 +36,13 @@ public class ItineraryDB {
         return null;
     }
     
+    public void addFlight(String bookingNumber, String itineraryId) {
+        getItinerary(itineraryId).flights.add(new Flight(bookingNumber));
+    }
+    public void addHotel(String bookingNumber, String itineraryId) {
+        getItinerary(itineraryId).hotels.add(new Hotel(bookingNumber));
+    }
+    
     public String createItinerary() {
         lastItineraryId++;
         itineraries.add(new Itinerary(lastItineraryId));

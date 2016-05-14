@@ -10,5 +10,11 @@ package dk.dtu.db;
  * @author mhaamann
  */
 class Hotel {
+    public String bookingNumber;
+    public String status;
     
+    public Hotel (String bookingNumber) {
+        this.bookingNumber = bookingNumber;
+        this.status = "unconfirmed";
+    }
 }

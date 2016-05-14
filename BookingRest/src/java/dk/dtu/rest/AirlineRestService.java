@@ -7,9 +7,12 @@ package dk.dtu.rest;
 
 import dk.dtu.Booking;
 import dk.dtu.ParseException_Exception;
+import dk.dtu.airline.FlightInfo;
 import dk.dtu.db.ItineraryDB;
+import dk.dtu.external.AirlineService;
 import dk.dtu.external.HotelService;
 import dk.dtu.xml.BookingContainer;
+import dk.dtu.xml.FlightContainer;
 import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
@@ -26,31 +29,31 @@ import javax.xml.bind.annotation.XmlElementWrapper;
  *
  * @author mhaamann
  */
-@Path("hotels")
-public class HotelRestService {
+@Path("flights")
+public class AirlineRestService {
     
-    static BookingContainer bookingContainer = new BookingContainer();
+    static FlightContainer flightContainer = new FlightContainer();
 
     @POST
     @Produces("application/xml")
-    public Response addHotel(
+    public Response addFlight(
         @QueryParam("bookingNumber") String bookingNumber,
         @QueryParam("itineraryId") String itineraryId) {
-        ItineraryDB.getItineraryDB().addHotel(bookingNumber, itineraryId);
+        ItineraryDB.getItineraryDB().addFlight(bookingNumber, itineraryId);
         return Response.ok().build();
     }
 
     @GET
     @Produces("application/xml")
-    public Response getHotels(
-            @QueryParam("city") String city,
-            @QueryParam("arrivalDate") String arrivalDate,
-            @QueryParam("departureDate") String departureDate) throws ParseException_Exception {
-        List<Booking> hotels = HotelService.getHotels(city, arrivalDate, departureDate);
+    public Response getFlights(
+            @QueryParam("city") String origin,
+            @QueryParam("destination") String destination,
+            @QueryParam("departureDate") String departureDate) throws ParseException_Exception, dk.dtu.airline.ParseException_Exception {
+        List<FlightInfo> flights = AirlineService.getFlights(origin, destination, departureDate);
         
-        // Assign the hotels to a container object that can be serialized to xml.
-        bookingContainer.set(hotels);
-	return  Response.status(Response.Status.OK).entity(bookingContainer).build();
+        // Assign the flights to a container object that can be serialized to xml.
+        flightContainer.set(flights);
+	return Response.status(Response.Status.OK).entity(flightContainer).build();
     }
 
 }

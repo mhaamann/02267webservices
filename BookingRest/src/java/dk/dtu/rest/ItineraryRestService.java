@@ -5,11 +5,18 @@
  */
 package dk.dtu.rest;
 
+import dk.dtu.db.Itinerary;
 import dk.dtu.db.ItineraryDB;
+import static dk.dtu.rest.AirlineRestService.flightContainer;
+import dk.dtu.xml.FlightContainer;
+import dk.dtu.xml.ItineraryContainer;
+import static java.util.Collections.list;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.Response;
 
 
 
@@ -20,18 +27,21 @@ import javax.ws.rs.PathParam;
 @Path("itinerary")
 public class ItineraryRestService {
     
+    static ItineraryContainer itineraryContainer = new ItineraryContainer();
 
     @GET @Path("/{itineraryId}")
-    //@Produces("application/xml")
-    public String listItinerary(@PathParam("itineraryId") String itineraryId) {
+    @Produces("application/xml")
+    public Response listItinerary(@PathParam("itineraryId") String itineraryId) {
         if (itineraryId.isEmpty()) {
-            return "No itineraryId was specified";
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Integer.toString(ItineraryDB.getItineraryDB().getItinerary(itineraryId).itineraryId);
+        Itinerary list = ItineraryDB.getItineraryDB().getItinerary(itineraryId);
+        itineraryContainer.set(list);
+        return Response.status(Response.Status.OK).entity(itineraryContainer).build();
     }
     
     @POST
-    //@Produces("application/xml")
+    @Produces("application/xml")
     public String createItinerary() {
         return ItineraryDB.getItineraryDB().createItinerary();
     }
