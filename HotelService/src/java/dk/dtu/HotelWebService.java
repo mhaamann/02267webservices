@@ -46,6 +46,11 @@ public class HotelWebService {
         return hotelsDB.bookHotel(bookingNumber, year, month, number, name);
         // throw new Exception("Not enough money");
     }
+    
+    @WebMethod(operationName = "resetHotel")
+    public boolean resetHotel() {
+        return true;
+    }
 
     @WebMethod(operationName = "cancelHotel")
     public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber) throws Exception {

@@ -38,7 +38,12 @@ public class AirlineWebService {
             @WebParam(name = "startDate") String startDate) throws ParseException {
         return flightDB.getFlights(origin, destination, startDate);
     }//end method getFlights
-
+    
+    @WebMethod(operationName = "resetAirline")
+    public boolean resetAirline() {
+        return true;
+    }
+    
     @WebMethod(operationName = "bookFlight")
     public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
