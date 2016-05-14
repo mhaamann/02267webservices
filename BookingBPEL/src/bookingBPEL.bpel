@@ -96,7 +96,8 @@
                     <while name="While2">
                         <condition>true()</condition>
                         <pick name="Pick2" createInstance="no">
-                            <onMessage partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryIn"> 
+                            <onMessage partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryIn">
+                                <documentation>List itinerary</documentation>
                                 <correlations>
                                     <correlation set="CorrelationSet2" initiate="no"/>
                                 </correlations>

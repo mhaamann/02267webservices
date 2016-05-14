@@ -15,7 +15,7 @@ import java.util.Date;
  */
 public class Booking {
     public String city;
-    public String hotel;
+    private String hotel;
     public String arrivalDate;
     public String departureDate;
     public String status;
