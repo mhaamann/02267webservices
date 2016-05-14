@@ -41,7 +41,7 @@ public class HotelWebService {
             @WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
             @WebParam(name = "month") int month,
-            @WebParam(name = "number") int number,
+            @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) throws Exception {
         return hotelsDB.bookHotel(bookingNumber, year, month, number, name);
         // throw new Exception("Not enough money");
