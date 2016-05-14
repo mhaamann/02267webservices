@@ -71,6 +71,10 @@
         
         <scope name="Scope1">
             <variables>
+                <variable name="ResetHotelOut" xmlns:tns="http://dtu.dk/" messageType="tns:resetHotelResponse"/>
+                <variable name="ResetHotelIn" xmlns:tns="http://dtu.dk/" messageType="tns:resetHotel"/>
+                <variable name="ResetOut" messageType="ns0:ResetResponse"/>
+                <variable name="ResetIn" messageType="ns0:ResetRequest"/>
                 <variable name="AddFlightOut" messageType="ns0:AddFlightResponse"/>
                 <variable name="AddFlightIn" messageType="ns0:AddFlightRequest"/>
                 <variable name="GetFlightsOut1" messageType="ns0:GetFlightsResponse"/>
@@ -108,6 +112,15 @@
                                         </copy>
                                     </assign>
                                     <reply name="Reply4" partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryOut"/>
+                                </sequence>
+                            </onMessage>
+                            <onMessage partnerLink="PartnerLink1" operation="Reset" portType="ns0:BookingServicePortType" variable="ResetIn">
+                                <correlations>
+                                    <correlation set="CorrelationSet2" initiate="no"/>
+                                </correlations>
+                                <sequence name="Sequence55">
+                                    <invoke name="Invoke3" partnerLink="HotelServiceLink" operation="resetHotel" xmlns:tns="http://dtu.dk/" portType="tns:HotelWebService" inputVariable="ResetHotelIn" outputVariable="ResetHotelOut"/>
+                                    <reply name="Reply7" partnerLink="PartnerLink1" operation="Reset" portType="ns0:BookingServicePortType" variable="ResetOut"/>
                                 </sequence>
                             </onMessage>
                         </pick>
