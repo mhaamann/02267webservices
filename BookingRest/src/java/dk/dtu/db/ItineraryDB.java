@@ -5,6 +5,7 @@
  */
 package dk.dtu.db;
 
+import dk.dtu.airline.FlightInfo;
 import java.util.ArrayList;
 
 /**
@@ -37,10 +38,17 @@ public class ItineraryDB {
     }
     
     public void addFlight(String bookingNumber, String itineraryId) {
-        getItinerary(itineraryId).flights.add(new Flight(bookingNumber));
+        Itinerary itinerary = getItinerary(itineraryId);
+        if (itinerary.getState() == Itinerary.PlanningState) {
+            getItinerary(itineraryId).flights.add(new Flight(bookingNumber));
+        }
+        
     }
     public void addHotel(String bookingNumber, String itineraryId) {
-        getItinerary(itineraryId).hotels.add(new Hotel(bookingNumber));
+        Itinerary itinerary = getItinerary(itineraryId);
+        if (itinerary.getState() == Itinerary.PlanningState) {
+            getItinerary(itineraryId).hotels.add(new Hotel(bookingNumber));
+        }
     }
     
     public String createItinerary() {
@@ -48,4 +56,19 @@ public class ItineraryDB {
         itineraries.add(new Itinerary(lastItineraryId));
         return Integer.toString(lastItineraryId);
     }
+
+    public void bookItinerary(String itineraryId) {
+        Itinerary itinerary = getItinerary(itineraryId);
+        if (itinerary.getState() == Itinerary.PlanningState) {
+            // TODO: Book itinerary
+            for (Flight flight : itinerary.flights) {
+                
+            }
+            for (Hotel hotel : itinerary.hotels) {
+                
+            }
+            itinerary.setState(Itinerary.BookedCompleteState);
+        }
+    }
+
 }

@@ -18,9 +18,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class BookingContainer {
 
     public List<Booking> hotel;
+    public List<String> actions;
+    public String lol = "lol";
 
     public void set(List<Booking> hotelList) {
         this.hotel = hotelList;
+        
+        this.actions.add("/itinerary/1005");
+        this.actions.add("/hotels");
     }
 
 }

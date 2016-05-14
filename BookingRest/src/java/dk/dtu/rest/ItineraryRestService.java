@@ -13,6 +13,7 @@ import dk.dtu.xml.ItineraryContainer;
 import static java.util.Collections.list;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -44,5 +45,12 @@ public class ItineraryRestService {
     @Produces("application/xml")
     public String createItinerary() {
         return ItineraryDB.getItineraryDB().createItinerary();
+    }
+    
+    @PUT
+    @Produces("application/xml")
+    public Response bookItinerary(@PathParam("itineraryId") String itineraryId) {
+        ItineraryDB.getItineraryDB().bookItinerary(itineraryId);
+        return Response.status(Response.Status.OK).build();
     }
 }

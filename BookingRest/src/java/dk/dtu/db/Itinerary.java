@@ -13,19 +13,31 @@ import javax.xml.bind.annotation.XmlRootElement;
  * @author mhaamann
  */
 public class Itinerary {
-    
+    static int PlanningState = 0;
+    static int BookedCompleteState = 1;
+
     public ArrayList<Flight> flights = new ArrayList<Flight>();
     public ArrayList<Hotel> hotels = new ArrayList<Hotel>();
-    
+    private int state;
+
     public int itineraryId;
-            
+
     public Itinerary(int itineraryId) {
-       this.itineraryId = itineraryId;
+        this.state = 0;
+        this.itineraryId = itineraryId;
     }
-    
+
     @Override
-    public boolean equals(Object o) { 
+    public boolean equals(Object o) {
         return this.itineraryId == ((Itinerary) o).itineraryId;
     }
-    
+
+    protected int getState() {
+        return this.state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+
 }
