@@ -4,12 +4,6 @@
 <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/AirlineService/AirlineWebService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="bookFlight">
-<part name="parameters" element="tns:bookFlight"/>
-</message>
-<message name="bookFlightResponse">
-<part name="parameters" element="tns:bookFlightResponse"/>
-</message>
 <message name="resetAirline">
 <part name="parameters" element="tns:resetAirline"/>
 </message>
@@ -25,6 +19,12 @@
 <message name="ParseException">
 <part name="fault" element="tns:ParseException"/>
 </message>
+<message name="bookFlight">
+<part name="parameters" element="tns:bookFlight"/>
+</message>
+<message name="bookFlightResponse">
+<part name="parameters" element="tns:bookFlightResponse"/>
+</message>
 <message name="cancelFlight">
 <part name="parameters" element="tns:cancelFlight"/>
 </message>
@@ -32,10 +32,6 @@
 <part name="parameters" element="tns:cancelFlightResponse"/>
 </message>
 <portType name="AirlineWebService">
-<operation name="bookFlight">
-<input wsam:Action="http://dtu.dk/AirlineWebService/bookFlightRequest" message="tns:bookFlight"/>
-<output wsam:Action="http://dtu.dk/AirlineWebService/bookFlightResponse" message="tns:bookFlightResponse"/>
-</operation>
 <operation name="resetAirline">
 <input wsam:Action="http://dtu.dk/AirlineWebService/resetAirlineRequest" message="tns:resetAirline"/>
 <output wsam:Action="http://dtu.dk/AirlineWebService/resetAirlineResponse" message="tns:resetAirlineResponse"/>
@@ -45,6 +41,10 @@
 <output wsam:Action="http://dtu.dk/AirlineWebService/getFlightsResponse" message="tns:getFlightsResponse"/>
 <fault message="tns:ParseException" name="ParseException" wsam:Action="http://dtu.dk/AirlineWebService/getFlights/Fault/ParseException"/>
 </operation>
+<operation name="bookFlight">
+<input wsam:Action="http://dtu.dk/AirlineWebService/bookFlightRequest" message="tns:bookFlight"/>
+<output wsam:Action="http://dtu.dk/AirlineWebService/bookFlightResponse" message="tns:bookFlightResponse"/>
+</operation>
 <operation name="cancelFlight">
 <input wsam:Action="http://dtu.dk/AirlineWebService/cancelFlightRequest" message="tns:cancelFlight"/>
 <output wsam:Action="http://dtu.dk/AirlineWebService/cancelFlightResponse" message="tns:cancelFlightResponse"/>
@@ -52,15 +52,6 @@
 </portType>
 <binding name="AirlineWebServicePortBinding" type="tns:AirlineWebService">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="bookFlight">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="resetAirline">
 <soap:operation soapAction=""/>
 <input>
@@ -81,6 +72,15 @@
 <fault name="ParseException">
 <soap:fault name="ParseException" use="literal"/>
 </fault>
+</operation>
+<operation name="bookFlight">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="cancelFlight">
 <soap:operation soapAction=""/>
