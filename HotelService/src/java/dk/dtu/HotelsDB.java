@@ -5,6 +5,8 @@
  */
 package dk.dtu;
 
+import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
+import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -18,6 +20,7 @@ public class HotelsDB {
 
     ArrayList<Hotel> rooms = new ArrayList<Hotel>();
     private Integer currentBookingNumber = 1;
+    private BankServiceWrapper bank = new BankServiceWrapper();
 
     public HotelsDB() {
 
@@ -82,13 +85,24 @@ public class HotelsDB {
         return reservedBookings;
     }
 
-    boolean bookHotel(String bookingNumber, int year, int month, String number, String name) throws Exception {
+    public boolean bookHotel(String bookingNumber, int year, int month, String number, String name) throws Exception {
         for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {
                 if (booking.bookingNumber.equals(bookingNumber)) {
                     // Booking exists. 
                     // Charge the creditcard
+                    
+                    // Init the credit card.
+                    CreditCardInfoType card = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
+                    card.setName(name);
+                    card.setNumber(number);
+                    CreditCardInfoType.ExpirationDate date = new ExpirationDate();
+                    date.setMonth(month);
+                    date.setYear(year);
+                    card.setExpirationDate(date);
+                    
                     if (hotel.creditcardGuarantee) {
+                        if (bank.validateCreditCard(2, card, 200))
                         // TODO: With creditcard guarantee.
                         booking.status = "confirmed";
                         return true;
@@ -102,7 +116,7 @@ public class HotelsDB {
         throw new Exception("Booking did not exists");
     }
 
-    boolean cancelHotel(String bookingNumber) throws Exception {
+    public boolean cancelHotel(String bookingNumber) throws Exception {
        for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {
                 if (booking.bookingNumber.equals(bookingNumber)) {
