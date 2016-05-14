@@ -6,10 +6,13 @@
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightList;
+import ExternalBookingService.FlightReservation;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
 import ExternalBookingService.HotelReservation;
 import bookingappclient.BookingServiceBPELWrapper;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.ListIterator;
 import org.junit.Test;
@@ -51,51 +54,61 @@ public class TestP {
         //bookingServiceBPEL.reset(itinerary1);
         
         //Get list of flights
-        //System.out.println("Finding flights..");
-        //List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
+        System.out.println("Finding flights..");
+        List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
         
         //Add flight to itinerary
-        //System.out.println("Add flight..");
-        //bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
+        System.out.println("Adding first flight..");
+        bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
         
         //Get list of hotels
         System.out.println("Finding hotels..");
-        //List<Booking> hotelBookingList = bookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
-        List<Booking> hotelBookingList = bookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itinerary1);
-        System.out.println(hotelBookingList);
+        List<Booking> hotelBookingList = bookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
         
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
-        System.out.println("Adding hotel..");
+        System.out.println("Adding first hotel..");
         List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
-        HotelReservation hotelReservation = hotelReservationList.get(0);
         //assertEquals(1, hotelReservation.getBookingNumber());
         //assertEquals("unconfirmed", hotelReservation.getStatus());
         
         
         //TODO:Add a second flight to itinerary
+        bookingServiceBPEL.addFlight("B12342", itinerary1);
         
         //TODO:Add a third flight to itinerary
+        bookingServiceBPEL.addFlight("B12343", itinerary1);
         
         //Add a second hotel to itinerary
-        System.out.println("Add another hotel..");
-        hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber2, itinerary1);
+        System.out.println("Add second hotel..");
+        hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo2, itinerary1);
+        
+        
         
         //Get itinerary
         System.out.println("Getting Itinerary..");
-        List<Object> itineryList = bookingServiceBPEL.listItinerary(itinerary1);
+        
+        List<HotelReservation> hReservationList = bookingServiceBPEL.getHotelItineraryList(itinerary1);        
+        for(HotelReservation reservation : hReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
+        
+        List<FlightReservation> fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        for (FlightReservation reservation : fReservationList){
+            System.out.print(reservation.getBookingNumber() + " - Status:");
+            System.out.println(reservation.getStatus());
+        }
         
         //TODO:Assert all flights added
         
         //Assert all hotels added
         System.out.println("Asserting hotels..");
-        ListIterator<HotelReservation> hotelReservationIterator = hotelReservationList.listIterator();
-        
-        
         
         //Assert all flights and hotels are unconfirmed
         
         //Book itinerary
+        bookingServiceBPEL.bookItinerary(itinerary1, city1, city1, BigInteger.ZERO, BigInteger.ZERO);
         
         //Assert all statues are confirmed
         

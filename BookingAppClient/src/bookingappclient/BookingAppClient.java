@@ -54,7 +54,7 @@ public class BookingAppClient {
             System.out.println(flight.getOrigin() + " - " + flight.getPrice() + "Booking ID: " + flight.getBookingNumber());
         }
         
-        System.out.println("Adding..");
+        System.out.println("Adding Hotel..");
         bookingServiceBPEL.addHotel("7", itineraryId);
         HotelList hotelList = bookingServiceBPEL.addHotel("12", itineraryId);
         for (HotelReservation reservation : hotelList.getReservation()) {

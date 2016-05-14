@@ -12,6 +12,7 @@ import ExternalBookingService.HotelListType;
 import ExternalBookingService.HotelReservation;
 import ExternalBookingService.ItineryList;
 import bookingappclient.bookingserviceinterface.BookingServiceInterface;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,8 +37,8 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     @Override
     public List<Object> listItinerary(String itineraryId) {
         ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
-        List<Object> objectList = itineryList.getFlightsAndHotels();
         
+        List<Object> objectList = itineryList.getFlightsAndHotels();
         return objectList;
     }
     
@@ -45,8 +46,14 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     public List<HotelReservation> getHotelItineraryList(String itineraryId){
         ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
         List<Object> objectList = itineryList.getFlightsAndHotels();
-        HotelListType hList = (HotelListType) objectList.get(1);
-        List<HotelReservation> hReservationList = hList.getReservation();
+        List<HotelReservation> hReservationList = new ArrayList<>();
+        HotelListType hList;
+        for(Object object : objectList){
+            if(HotelListType.class.isInstance(object)){
+                hList = (HotelListType) object;
+                hReservationList = hList.getReservation();
+            }           
+        }
         return hReservationList;
     }
     
@@ -54,8 +61,14 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     public List<FlightReservation> getFlightItineraryList(String itineraryId){
         ItineryList itineryList = bookingServiceBPEL.listItinerary(itineraryId);
         List<Object> objectList = itineryList.getFlightsAndHotels();
-        FlightListType fList = (FlightListType) objectList.get(0);
-        List<FlightReservation> fReservationList = fList.getReservation();
+        List<FlightReservation> fReservationList = new ArrayList<>();
+        FlightListType fList;
+        for(Object object : objectList){
+            if(FlightListType.class.isInstance(object)){
+                fList = (FlightListType) object;
+                fReservationList = fList.getReservation();
+            }           
+        }
         return fReservationList;
     }
     
@@ -75,8 +88,7 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
 
     @Override
     public List<HotelReservation> addHotel(String bookingNumber, String itineraryId) {
-        bookingServiceBPEL.addHotel(bookingNumber, itineraryId);
-        HotelList hotelList = bookingServiceBPEL.cancelItinerary(itineraryId);
+        HotelList hotelList = bookingServiceBPEL.addHotel(bookingNumber, itineraryId);
         List<HotelReservation> hotelReservationList = hotelList.getReservation();
         return hotelReservationList;
     }
