@@ -22,11 +22,11 @@ public class HotelsDB {
     private Integer currentBookingNumber;
     private BankServiceWrapper bank = new BankServiceWrapper();
     private static int hotelBankGroupId = 50308815;
-    
+
     public void resetData() {
         this.rooms = new ArrayList<Hotel>();
         this.currentBookingNumber = 1;
-        
+
         // Each hotel represents a Room. The second parameter represents the hotel name.
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
@@ -48,13 +48,15 @@ public class HotelsDB {
         resetData();
 
     }
-    
+
     /**
-     * Creates a unconfirmed booking reservation and saves it on the hotel object.
+     * Creates a unconfirmed booking reservation and saves it on the hotel
+     * object.
+     *
      * @param hotel
      * @param startDate
      * @param endDate
-     * @return 
+     * @return
      */
     private Booking addReservation(Hotel hotel, Date startDate, Date endDate) {
         // Adds an unconfirmed booking.
@@ -63,13 +65,15 @@ public class HotelsDB {
         this.currentBookingNumber++;
         return booking;
     }
-    
+
     /**
-     * Returns a list of rooms that does not have a booking that conflicts with the given date.
+     * Returns a list of rooms that does not have a booking that conflicts with
+     * the given date.
+     *
      * @param city The city where the hotel is located.
      * @param arrivalDate
      * @param departureDate
-     * @return 
+     * @return
      */
     public ArrayList<Booking> getHotels(String city, Date arrivalDate, Date departureDate) throws ParseException {
         ArrayList<Booking> reservedBookings = new ArrayList<Booking>();
@@ -99,9 +103,9 @@ public class HotelsDB {
                 if (booking.bookingNumber.equals(bookingNumber)) {
                     // Booking exists. 
                     // Charge the creditcard
-                    
+
                     if (hotel.creditcardGuarantee) {
-                        
+
                         // Init the credit card.
                         CreditCardInfoType card = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
                         card.setName(name);
@@ -110,7 +114,7 @@ public class HotelsDB {
                         date.setMonth(month);
                         date.setYear(year);
                         card.setExpirationDate(date);
-                        
+
                         if (bank.validateCreditCard(hotelBankGroupId, card, booking.totalPrice.intValue())) {
                             // Creditcard validated, confirming the hotel.
                             booking.status = "confirmed";
@@ -130,18 +134,23 @@ public class HotelsDB {
     }
 
     public boolean cancelHotel(String bookingNumber) throws Exception {
-       for (Hotel hotel : rooms) {
+        for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {
                 if (booking.bookingNumber.equals(bookingNumber)) {
                     // Booking exists. 
-                    // Cancel hotel.
-                    booking.status = "cancelled";
-                    // Remove booking from system.
-                    hotel.bookings.remove(booking);
-                    return true;
+                    if (booking.creditcardGuarantee) {
+                        // Decline cancellation
+                        throw new Exception("Cancellation not allowed when credit card guarantee is required");
+                    } else {
+                        // Cancel hotel.
+                        booking.status = "cancelled";
+                        // Remove booking from system.
+                        hotel.bookings.remove(booking);
+                        return true;
+                    }
                 }
             }
         }
-       throw new Exception("Cancellation failed");
+        throw new Exception("Booking not found");
     }
 }
