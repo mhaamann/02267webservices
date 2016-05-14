@@ -14,6 +14,20 @@
 
 <xs:element name="getFlightsResponse" type="tns:getFlightsResponse"/>
 
+<xs:element name="resetAirline" type="tns:resetAirline"/>
+
+<xs:element name="resetAirlineResponse" type="tns:resetAirlineResponse"/>
+
+<xs:complexType name="resetAirline">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="resetAirlineResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
 <xs:complexType name="getFlights">
 <xs:sequence>
 <xs:element name="origin" type="xs:string" minOccurs="0"/>

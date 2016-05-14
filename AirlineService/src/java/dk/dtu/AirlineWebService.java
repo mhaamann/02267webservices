@@ -5,7 +5,6 @@
  */
 package dk.dtu;
 
-
 import dk.dtu.BankService.BankService;
 import dk.dtu.BankService.CreditCardFaultMessage;
 import java.text.ParseException;
