@@ -30,6 +30,8 @@ public class ApplicationConfig extends Application {
      */
     private void addRestResourceClasses(Set<Class<?>> resources) {
         resources.add(dk.dtu.rest.BookingRestService.class);
+        resources.add(dk.dtu.rest.HotelRestService.class);
+        resources.add(dk.dtu.rest.ItineraryRestService.class);
     }
     
 }
