@@ -13,7 +13,7 @@ import java.util.Date;
  *
  * @author mhaamann
  */
-class Booking {
+public class Booking {
     public String city;
     public String hotel;
     public String arrivalDate;
@@ -45,6 +45,11 @@ class Booking {
      */
     private int daysBetween(Date d1, Date d2){
         return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+
+    @Override
+    public boolean equals(Object o) { 
+        return this.bookingNumber.equals(((Booking) o).bookingNumber);
     }
     
 }

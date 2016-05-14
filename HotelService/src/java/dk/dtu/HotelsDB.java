@@ -136,6 +136,8 @@ public class HotelsDB {
                     // Booking exists. 
                     // Cancel hotel.
                     booking.status = "cancelled";
+                    // Remove booking from system.
+                    hotel.bookings.remove(booking);
                     return true;
                 }
             }

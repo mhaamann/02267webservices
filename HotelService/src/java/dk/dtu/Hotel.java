@@ -12,7 +12,7 @@ import java.util.Date;
  *
  * @author mhaamann
  */
-class Hotel {
+public class Hotel {
     
     public String city;
     public String hotel;
