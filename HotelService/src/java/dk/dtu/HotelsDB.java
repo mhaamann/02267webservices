@@ -22,6 +22,7 @@ public class HotelsDB {
     private Integer currentBookingNumber;
     private BankServiceWrapper bank = new BankServiceWrapper();
     private static int hotelBankGroupId = 50308815;
+    private boolean reserveHotels = false; // TODO: for debug purposes.
 
     public void resetData() {
         this.rooms = new ArrayList<Hotel>();
@@ -80,6 +81,10 @@ public class HotelsDB {
 
         for (Hotel hotel : rooms) {
             if (hotel.city.toLowerCase().equals(city.toLowerCase())) {
+                if (!this.reserveHotels) {
+                   reservedBookings.add(addReservation(hotel, arrivalDate, departureDate));
+                    continue; 
+                }
                 if (hotel.bookings.isEmpty()) {
                     reservedBookings.add(addReservation(hotel, arrivalDate, departureDate));
                     continue;

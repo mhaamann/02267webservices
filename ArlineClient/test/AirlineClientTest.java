@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
 public class AirlineClientTest {
     
     String startDate = "2016-01-01";
-    String bookingNumberA = "";
+    String bookingNumberA = "B12341";
     
     @Test
     public void AirlineClientTest1() throws DatatypeConfigurationException, ParseException_Exception {

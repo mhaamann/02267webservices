@@ -43,6 +43,11 @@ public class AirlineWebService {
         return true;
     }
     
+    
+    dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
+    dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
+    dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
+    
     @WebMethod(operationName = "bookFlight")
     public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
@@ -50,15 +55,15 @@ public class AirlineWebService {
             @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) {
         
-        dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
+        //dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
         account.setName("LameDuck");
         account.setNumber("50208812");
         
-        dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
+        //dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
         expDate.setMonth(month);
         expDate.setYear(year);
         
-        dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
+       // dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
         creditCard.setExpirationDate(expDate);
         creditCard.setName(name);
         creditCard.setNumber(String.valueOf(number));
@@ -74,23 +79,19 @@ public class AirlineWebService {
                 //if flight was booked successfully
                 //which means that the flight was found and
                 //there were sufficient funds on the creditcard
-            } else {
-                return false;
-            }//end if/else
+            }
         }//end for
         return false;
         //return true;
     }//end method bookFlight
 
     @WebMethod(operationName = "cancelFlight")
-    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) {
+    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) throws CreditCardFaultMessage {
         for (FlightInfo flight : flightDB.flightList) {
             if (flight.bookingNumber.equals(bookingNumber)) {
-                // refundCreditCard(1, creditCard, flight.price, account);
+                refundCreditCard(1, creditCard, flight.price, account);
                 return true;      
-            } else {
-                return false;
-            }//end if/else
+            }
         }//end for
         return false;
     }
@@ -100,5 +101,12 @@ public class AirlineWebService {
         // If the calling of port operations may lead to race condition some synchronization is required.
         dk.dtu.BankService.BankPortType port = service.getBankPort();
         return port.chargeCreditCard(group, creditCardInfo, amount, account);
+    }
+
+    private boolean refundCreditCard(int group, dk.dtu.BankService.CreditCardInfoType creditCardInfo, int amount, dk.dtu.BankService.AccountType account) throws CreditCardFaultMessage {
+        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
+        // If the calling of port operations may lead to race condition some synchronization is required.
+        dk.dtu.BankService.BankPortType port = service.getBankPort();
+        return port.refundCreditCard(group, creditCardInfo, amount, account);
     }
 }

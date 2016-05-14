@@ -4,6 +4,9 @@
  * and open the template in the editor.
  */
 
+import dk.dtu.Booking;
+import hotelclient.HotelClientWrapper;
+import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -18,18 +21,16 @@ public class HotelClientTest {
     
     @Test
     public void sayHi(){
-        String result = hello("Me");
-        assertEquals("Hello Me ! from Hotel", result);
+        try {
+            System.out.println("Getting hotels");
+            List<Booking> hotels = HotelClientWrapper.getHotels("Copenhagen", "2016-01-01", "2016-01-30");
+            for (Booking booking : hotels) {
+                System.out.println(booking.getCity());
+                System.out.println(booking.getTotalPrice());
+            }
+        } catch (Exception e) {
+            
+        }
     }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 
-    private static String hello(java.lang.String name) {
-        dk.dtu.HotelWebService_Service service = new dk.dtu.HotelWebService_Service();
-        dk.dtu.HotelWebService port = service.getHotelWebServicePort();
-        return port.hello(name);
-    }
 }
