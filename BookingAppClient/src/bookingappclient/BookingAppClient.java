@@ -11,6 +11,7 @@ import ExternalBookingService.HotelReservation;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Random;
 
 /**
  *
@@ -33,7 +34,11 @@ public class BookingAppClient {
         BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
         BookingServiceBPELWrapper bsWrapper = new BookingServiceBPELWrapper();
 
-        System.out.println("Generating Itinierary..");
+        Random randomGenerator = new Random();
+        int random = randomGenerator.nextInt(10000);
+        itineraryId = Integer.toString(random);
+        
+        System.out.println("Create Itinerary number " + itineraryId);
         System.out.println(bsWrapper.createItinerary(itineraryId));
        
         System.out.println("Finding hotels..");
