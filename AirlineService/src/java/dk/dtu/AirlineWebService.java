@@ -64,7 +64,6 @@ public class AirlineWebService {
         creditCard.setName(name);
         creditCard.setNumber(String.valueOf(number));
         
-        
         for (FlightInfo flight : flightDB.flightList) {
             if (flight.bookingNumber.equals(bookingNumber)) {
                 //try to charge creditcard if the flight was found

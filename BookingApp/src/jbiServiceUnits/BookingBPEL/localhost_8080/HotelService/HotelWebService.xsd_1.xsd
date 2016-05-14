@@ -9,6 +9,10 @@
 
 <xs:element name="cancelHotelResponse" type="tns:cancelHotelResponse"/>
 
+<xs:element name="resetHotel" type="tns:resetHotel"/>
+
+<xs:element name="resetHotelResponse" type="tns:resetHotelResponse"/>
+
 <xs:element name="getHotels" type="tns:getHotels"/>
 
 <xs:element name="getHotelsResponse" type="tns:getHotelsResponse"/>
@@ -40,6 +44,16 @@
 <xs:element name="return" type="xs:boolean"/>
 </xs:sequence>
 </xs:complexType>
+
+<xs:complexType name="resetHotel">
+</xs:complexType>
+
+<xs:complexType name="resetHotelResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
 
 <xs:complexType name="getHotels">
 <xs:sequence>

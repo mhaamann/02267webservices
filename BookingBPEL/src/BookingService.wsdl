@@ -195,6 +195,15 @@
                 <soap:body use="literal" namespace="http://bookingservice.ws"/>
             </output>
         </operation>
+        <operation name="ListItinerary">
+            <soap:operation/>
+            <input name="ListItineraryRequest">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </input>
+            <output name="ListItineraryResponse">
+                <soap:body use="literal" namespace="http://bookingservice.ws"/>
+            </output>
+        </operation>
         <operation name="Reset">
             <soap:operation/>
             <input name="ResetRequest">

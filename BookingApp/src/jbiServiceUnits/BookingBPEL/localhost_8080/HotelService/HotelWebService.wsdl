@@ -22,6 +22,11 @@
 <message name="cancelHotelResponse">
 <part name="parameters" element="tns:cancelHotelResponse"/>
 </message>
+<message name="resetHotel">
+</message>
+<message name="resetHotelResponse">
+<part name="parameters" element="tns:resetHotelResponse"/>
+</message>
 <portType name="HotelWebService">
 <operation name="getHotels">
 <input wsam:Action="http://dtu.dk/HotelWebService/getHotelsRequest" message="tns:getHotels"/>
@@ -34,6 +39,10 @@
 <operation name="cancelHotel">
 <input wsam:Action="http://dtu.dk/HotelWebService/cancelHotelRequest" message="tns:cancelHotel"/>
 <output wsam:Action="http://dtu.dk/HotelWebService/cancelHotelResponse" message="tns:cancelHotelResponse"/>
+</operation>
+<operation name="resetHotel">
+<input wsam:Action="http://dtu.dk/HotelWebService/resetHotelRequest" message="tns:resetHotel"/>
+<output wsam:Action="http://dtu.dk/HotelWebService/resetHotelResponse" message="tns:resetHotelResponse"/>
 </operation>
 </portType>
 <binding name="HotelWebServicePortBinding" type="tns:HotelWebService">
@@ -57,6 +66,15 @@
 </output>
 </operation>
 <operation name="cancelHotel">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="resetHotel">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
