@@ -83,7 +83,7 @@ public class BookingAppClient {
         }
        
         System.out.println("Booking..");
-        HotelList hotelListBooked = bookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", BigInteger.valueOf(50408816), BigInteger.valueOf(5), BigInteger.valueOf(9));
+        HotelList hotelListBooked = bookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", "50408816", BigInteger.valueOf(5), BigInteger.valueOf(9));
         for (HotelReservation reservation : hotelListBooked.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());

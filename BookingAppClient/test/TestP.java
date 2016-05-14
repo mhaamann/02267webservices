@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.ListIterator;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import java.util.Random;
 
 /**
  *
@@ -27,7 +28,7 @@ public class TestP {
     String fromDate1 = "2016-01-01";
     String toDate1 = "2016-01-30";
     String toDateFlight1 = "2016-01-10";
-    String itinerary1 = "40";
+    String itinerary1 = "42";
     String bookingNumber1 = "1";
     String bookingNumber2 = "2";
     String flightBooking1 = "B12341";
@@ -37,9 +38,18 @@ public class TestP {
     @Test
     public void testP1() {
         
+        Random randomGenerator = new Random();
+        int random = randomGenerator.nextInt(100);
+        itinerary1 = new Integer(random).toString();
+        
+        bookingServiceBPEL.reset(itinerary1);
+        
         //Create itinerary
         System.out.println("Create Itinerary");
         bookingServiceBPEL.createItinerary(itinerary1);
+        
+        //Reset hotels and flights for jUnit test.
+        bookingServiceBPEL.reset(itinerary1);
         
         //Get list of flights
         System.out.println("Finding flights..");

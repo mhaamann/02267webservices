@@ -20,11 +20,7 @@ public class BookingServiceBPEL {
     
     // Itinerary operations - Start
     
-    public HotelList bookItinerary(java.lang.String itineraryId, java.lang.String name, java.math.BigInteger number, java.math.BigInteger month, java.math.BigInteger year) {
-        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
-        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
-        return port.bookItinerary(itineraryId, name, number, month, year);
-    }
+ 
 
     public String createItinerary(java.lang.String itineraryId) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
@@ -43,6 +39,12 @@ public class BookingServiceBPEL {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.listItinerary(itineraryId);
+    }
+    
+    public HotelList bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.bookItinerary(itineraryId, name, number, month, year);
     }
     
     
@@ -80,11 +82,13 @@ public class BookingServiceBPEL {
     
     // Flight operations - End
 
-    
+    //Reset operation start
+    public boolean reset(java.lang.String itineraryId) {
+        ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
+        ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
+        return port.reset(itineraryId);
+    }
+    //Reset operation end
 
     
-
-    
-
-   
 }

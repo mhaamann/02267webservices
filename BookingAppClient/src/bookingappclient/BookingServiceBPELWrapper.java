@@ -22,7 +22,7 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
     
     @Override
-    public List<HotelReservation> bookItinerary(java.lang.String itineraryId, java.lang.String name, java.math.BigInteger number, java.math.BigInteger month, java.math.BigInteger year) {
+    public List<HotelReservation> bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year) {
         HotelList hotelList = bookingServiceBPEL.bookItinerary(itineraryId, name, number, month, year);
         List<HotelReservation> hotelReservationList = hotelList.getReservation();
         return hotelReservationList;
@@ -95,4 +95,8 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
         return flightReservation;
     }
     
+    @Override
+    public boolean reset(java.lang.String itineraryId){
+        return bookingServiceBPEL.reset(itineraryId);
+    }
 }
