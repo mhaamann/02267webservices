@@ -87,7 +87,7 @@
     <message name="BookItineraryRequest">
         <part name="itineraryId" type="xsd:string"/>
         <part name="name" type="xsd:string"/>
-        <part name="number" type="xsd:integer"/>
+        <part name="number" type="xsd:string"/>
         <part name="month" type="xsd:integer"/>
         <part name="year" type="xsd:integer"/>
     </message>

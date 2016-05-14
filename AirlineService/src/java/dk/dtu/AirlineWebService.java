@@ -43,7 +43,7 @@ public class AirlineWebService {
     public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
             @WebParam(name = "month") int month,
-            @WebParam(name = "number") int number,
+            @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) {
         
         dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();

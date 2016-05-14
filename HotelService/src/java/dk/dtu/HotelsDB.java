@@ -82,7 +82,7 @@ public class HotelsDB {
         return reservedBookings;
     }
 
-    boolean bookHotel(String bookingNumber, int year, int month, int number, String name) throws Exception {
+    boolean bookHotel(String bookingNumber, int year, int month, String number, String name) throws Exception {
         for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {
                 if (booking.bookingNumber.equals(bookingNumber)) {
