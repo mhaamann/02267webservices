@@ -39,25 +39,23 @@ public class TestP {
     public void testP1() {
         
         Random randomGenerator = new Random();
-        int random = randomGenerator.nextInt(100);
-        itinerary1 = new Integer(random).toString();
-        
-        bookingServiceBPEL.reset(itinerary1);
+        int random = randomGenerator.nextInt(10000);
+        itinerary1 = Integer.toString(random);
         
         //Create itinerary
-        System.out.println("Create Itinerary");
+        System.out.println("Create Itinerary number " + itinerary1);
         bookingServiceBPEL.createItinerary(itinerary1);
         
         //Reset hotels and flights for jUnit test.
         bookingServiceBPEL.reset(itinerary1);
         
         //Get list of flights
-        System.out.println("Finding flights..");
-        List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
+        //System.out.println("Finding flights..");
+        //List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
         
         //Add flight to itinerary
-        System.out.println("Add flight..");
-        bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
+        //System.out.println("Add flight..");
+        //bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
         
         //Get list of hotels
         System.out.println("Finding hotels..");
@@ -105,19 +103,23 @@ public class TestP {
     @Test
     public void testP2() {
         //Create itinerary
-        System.out.println("Create Itinerary");
+        Random randomGenerator = new Random();
+        int random = randomGenerator.nextInt(10000);
+        itinerary1 = Integer.toString(random);
+        
+        System.out.println("Create Itinerary number " + itinerary1);
         bookingServiceBPEL.createItinerary(itinerary1);
 
         //Get list of flights
-        System.out.println("Finding flights..");
-        List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
+        //System.out.println("Finding flights..");
+        //List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
 
         //Add flight to itinerary
-        System.out.println("Add flight..");
-        bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
+        //System.out.println("Add flight..");
+        //bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
 
         //Cancel Planning
-        bookingServiceBPEL.cancelItinerary(itinerary1);
+        //bookingServiceBPEL.cancelItinerary(itinerary1);
 
         //Assert that stuff is correct...
         
