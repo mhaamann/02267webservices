@@ -107,7 +107,7 @@ public class HotelsDB {
                     if (hotel.creditcardGuarantee) {
 
                         // Init the credit card.
-                        CreditCardInfoType card = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
+                        CreditCardInfoType card = new CreditCardInfoType();
                         card.setName(name);
                         card.setNumber(number);
                         CreditCardInfoType.ExpirationDate date = new ExpirationDate();

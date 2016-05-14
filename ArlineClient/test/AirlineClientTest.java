@@ -6,7 +6,7 @@
 
 //import dk.dtu.imm.fastmoney.types.AccountType;
 //import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
-import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
+import arlineclient.AirlineServiceWrapper;
 import dk.dtu.FlightInfo;
 import dk.dtu.ParseException_Exception;
 import java.util.ArrayList;
@@ -24,25 +24,15 @@ import static org.junit.Assert.*;
  */
 public class AirlineClientTest {
     
-    public static final dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard = new dk.dtu.imm.fastmoney.types.CreditCardInfoType();
-    static{
-        //Creditcard has credit of 1000
-        creditCard.setName("Tobiasen Inge");
-        creditCard.setNumber("50408823");
-        ExpirationDate exDate = new ExpirationDate();
-        exDate.setMonth(9);
-        exDate.setYear(10);
-        creditCard.setExpirationDate(exDate);
-        
-    }  
-    
     String startDate = "2016-01-01";
+    String bookingNumberA = "";
+    
     @Test
     public void AirlineClientTest1() throws DatatypeConfigurationException, ParseException_Exception {
         List<FlightInfo> result;
         List<FlightInfo> expectedResult = new ArrayList<>();
         
-        result = getFlights("Copenhagen", "Berlin", startDate);
+        result = AirlineServiceWrapper.getFlights("Copenhagen", "Berlin", startDate);
         FlightInfo flight = result.get(0);
         assertNotNull(flight);
     }
@@ -50,51 +40,23 @@ public class AirlineClientTest {
     @Test
     public void AirlineClientTest2() throws DatatypeConfigurationException, ParseException_Exception {
         List<FlightInfo> result;
-        result = getFlights("Copenhagen", "Berlin", startDate);
+        result = AirlineServiceWrapper.getFlights("Copenhagen", "Berlin", startDate);
         FlightInfo flight = (FlightInfo)result.get(0);
-        
+        bookingNumberA = flight.getBookingNumber();
         boolean isBooked;
         
-        isBooked = bookFlight("B12341", creditCard.getExpirationDate().getYear(),
-                creditCard.getExpirationDate().getMonth(), creditCard.getNumber(),
-                creditCard.getName());
+        isBooked = AirlineServiceWrapper.bookFlight(bookingNumberA, 10, 9, "50408823", "Tobiasen Inge");
         assertEquals(true, isBooked);
     }
 
     @Test
     public void AirlineClientTest3() {
-        boolean result = cancelFlight("B12341", 50, creditCard);
+        boolean result = AirlineServiceWrapper.cancelFlight(bookingNumberA);
         assertEquals(true, result);
     }  
 
     public AirlineClientTest() {
     }
-    private static boolean bookFlight(java.lang.String bookingNumber, 
-            int year, int month, String number, String name) {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
-        
-        //return true;
-        return port.bookFlight(bookingNumber, year, month, number, name);
-    }
-    /*
-    private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
-        
-        //return true;
-        return port.bookFlight(bookingNumber, creditCard);
-    }*/
 
-    private static boolean cancelFlight(java.lang.String bookingNumber, java.lang.Integer price, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
-        return port.cancelFlight(bookingNumber, price, creditCard);
-    }
 
-    private static java.util.List<dk.dtu.FlightInfo> getFlights(java.lang.String origin, java.lang.String destination, java.lang.String startDate) throws ParseException_Exception {
-        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
-        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
-        return port.getFlights(origin, destination, startDate);
-    }
 }
