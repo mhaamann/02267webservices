@@ -8,6 +8,7 @@
 //import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType.ExpirationDate;
 import dk.dtu.FlightInfo;
+import dk.dtu.ParseException_Exception;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -37,7 +38,7 @@ public class AirlineClientTest {
     
     String startDate = "2016-01-01";
     @Test
-    public void AirlineClientTest1() throws DatatypeConfigurationException {
+    public void AirlineClientTest1() throws DatatypeConfigurationException, ParseException_Exception {
         List<FlightInfo> result;
         List<FlightInfo> expectedResult = new ArrayList<>();
         
@@ -47,14 +48,16 @@ public class AirlineClientTest {
     }
     
     @Test
-    public void AirlineClientTest2() throws DatatypeConfigurationException {
+    public void AirlineClientTest2() throws DatatypeConfigurationException, ParseException_Exception {
         List<FlightInfo> result;
         result = getFlights("Copenhagen", "Berlin", startDate);
         FlightInfo flight = (FlightInfo)result.get(0);
         
         boolean isBooked;
         
-        isBooked = bookFlight("B12341", creditCard);
+        isBooked = bookFlight("B12341", creditCard.getExpirationDate().getYear(),
+                creditCard.getExpirationDate().getMonth(), creditCard.getNumber(),
+                creditCard.getName());
         assertEquals(true, isBooked);
     }
 
@@ -66,13 +69,22 @@ public class AirlineClientTest {
 
     public AirlineClientTest() {
     }
+    private static boolean bookFlight(java.lang.String bookingNumber, 
+            int year, int month, String number, String name) {
+        dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
+        dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
+        
+        //return true;
+        return port.bookFlight(bookingNumber, year, month, number, name);
+    }
+    /*
     private static boolean bookFlight(java.lang.String bookingNumber, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
         
         //return true;
         return port.bookFlight(bookingNumber, creditCard);
-    }
+    }*/
 
     private static boolean cancelFlight(java.lang.String bookingNumber, java.lang.Integer price, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCard) {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
@@ -80,7 +92,7 @@ public class AirlineClientTest {
         return port.cancelFlight(bookingNumber, price, creditCard);
     }
 
-    private static java.util.List<dk.dtu.FlightInfo> getFlights(java.lang.String origin, java.lang.String destination, java.lang.Object startDate) {
+    private static java.util.List<dk.dtu.FlightInfo> getFlights(java.lang.String origin, java.lang.String destination, java.lang.String startDate) throws ParseException_Exception {
         dk.dtu.AirlineWebService_Service service = new dk.dtu.AirlineWebService_Service();
         dk.dtu.AirlineWebService port = service.getAirlineWebServicePort();
         return port.getFlights(origin, destination, startDate);
