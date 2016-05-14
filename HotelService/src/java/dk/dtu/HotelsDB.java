@@ -18,26 +18,33 @@ import java.util.Date;
  */
 public class HotelsDB {
 
-    ArrayList<Hotel> rooms = new ArrayList<Hotel>();
-    private Integer currentBookingNumber = 1;
+    private ArrayList<Hotel> rooms;
+    private Integer currentBookingNumber;
     private BankServiceWrapper bank = new BankServiceWrapper();
+    
+    public void resetData() {
+        this.rooms = new ArrayList<Hotel>();
+        this.currentBookingNumber = 1;
+        
+        // Each hotel represents a Room. The second parameter represents the hotel name.
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
+
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
+
+        this.rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 40000));
+    }
 
     public HotelsDB() {
 
-        // Each hotel represents a Room. The second parameter represents the hotel name.
-        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
-        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
-        rooms.add(new Hotel("Copenhagen", "CabIn", 60000));
-
-        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
-        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
-        rooms.add(new Hotel("Amsterdam", "CabIn", 55000));
-
-        rooms.add(new Hotel("Berlin", "CabIn", 40000));
-        rooms.add(new Hotel("Berlin", "CabIn", 40000));
-        rooms.add(new Hotel("Berlin", "CabIn", 40000));
-        rooms.add(new Hotel("Berlin", "CabIn", 40000));
-        rooms.add(new Hotel("Berlin", "CabIn", 40000));
+        resetData();
 
     }
     

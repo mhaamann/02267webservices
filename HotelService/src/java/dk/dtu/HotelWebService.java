@@ -49,6 +49,7 @@ public class HotelWebService {
     
     @WebMethod(operationName = "resetHotel")
     public boolean resetHotel() {
+        hotelsDB.resetData();
         return true;
     }
 
