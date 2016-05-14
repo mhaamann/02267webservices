@@ -5,6 +5,7 @@
  */
 
 import ExternalBookingService.Booking;
+import ExternalBookingService.FlightInfo;
 import ExternalBookingService.GetHotelsResponse;
 import ExternalBookingService.HotelList;
 import ExternalBookingService.HotelReservation;
@@ -22,25 +23,41 @@ public class testP1 {
     
     BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
     String city1 = "Copenhagen";
+    String city2 = "Berlin";
     String fromDate1 = "2016-01-01";
     String toDate1 = "2016-01-30";
-    String itinerary1 = "1";
+    String toDateFlight1 = "2016-01-10";
+    String itinerary1 = "37";
     String bookingNumber1 = "1";
     String bookingNumber2 = "2";
+    String flightBooking1 = "B12341";
+    String hotelBookingNo1 = "7";
+    String hotelBookingNo2 = "12";
     
     @Test
     public void testP1() {
         //Create itinerary
+        System.out.println("Create Itinerary");
         bookingServiceBPEL.createItinerary(itinerary1);
-        //TODO:Get list of flights
-        //TODO:Add flight to itinerary
+        
+        //Get list of flights
+        System.out.println("Finding flights..");
+        List<FlightInfo> flightList = bookingServiceBPEL.getFlights(city1, city2, toDateFlight1, itinerary1);
+        
+        //Add flight to itinerary
+        System.out.println("Add flight..");
+        bookingServiceBPEL.addFlight(flightBooking1, itinerary1);
         
         //Get list of hotels
-        List<Booking> hotelBookingList= bookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
+        System.out.println("Finding hotels..");
+        //List<Booking> hotelBookingList = bookingServiceBPEL.getHotels(city1, fromDate1 , toDate1, itinerary1);
+        List<Booking> hotelBookingList = bookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itinerary1);
+        System.out.println(hotelBookingList);
         
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
-        List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber1, itinerary1);
+        System.out.println("Adding hotel..");
+        List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
         HotelReservation hotelReservation = hotelReservationList.get(0);
         assertEquals(1, hotelReservation.getBookingNumber());
         assertEquals("unconfirmed", hotelReservation.getStatus());
@@ -51,14 +68,17 @@ public class testP1 {
         //TODO:Add a third flight to itinerary
         
         //Add a second hotel to itinerary
+        System.out.println("Add another hotels..");
         hotelReservationList = bookingServiceBPEL.addHotel(bookingNumber2, itinerary1);
         
         //Get itinerary
+        System.out.println("Getting Itinerary..");
         List<Object> itineryList = bookingServiceBPEL.listItinerary(itinerary1);
         
         //TODO:Assert all flights added
         
         //Assert all hotels added
+        System.out.println("Asserting hotels..");
         ListIterator<HotelReservation> hotelReservationIterator = hotelReservationList.listIterator();
         
         

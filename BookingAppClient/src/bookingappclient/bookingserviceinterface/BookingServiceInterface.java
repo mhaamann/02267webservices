@@ -2,6 +2,7 @@ package bookingappclient.bookingserviceinterface;
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightList;
 import ExternalBookingService.FlightReservation;
 import ExternalBookingService.HotelReservation;
 import ExternalBookingService.GetFlightsResponse;
@@ -41,6 +42,8 @@ public interface BookingServiceInterface {
     // Flight operations - Start
 
     public List<FlightInfo> getFlights(java.lang.String origin, java.lang.String destination, java.lang.String startDate, java.lang.String itineraryId);
+    
+    public List<FlightReservation> addFlight(java.lang.String bookingNumber, java.lang.String itineraryId);
     
     // Flight operations - End
 }

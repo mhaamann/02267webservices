@@ -40,12 +40,12 @@ public class BookingAppClient {
     public static void main(String[] args) {
         // TODO code application logic here
         System.out.println("Starting");
-        String itineraryId = "13";
+        String itineraryId = "35";
         BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
         BookingServiceBPELWrapper bsWrapper = new BookingServiceBPELWrapper();
 
-
-        System.out.println(BookingService.createItinerary(itineraryId));
+        System.out.println("Generating Itinierary..");
+        System.out.println(bsWrapper.createItinerary(itineraryId));
        
         System.out.println("Finding hotels..");
         GetHotelsResponse hotels = bookingServiceBPEL.getHotels("Copenhagen", "2016-01-01", "2016-01-30", itineraryId);
@@ -69,7 +69,7 @@ public class BookingAppClient {
         }
         
         System.out.println("Adding flight..");
-        FlightList flightList = BookingServiceBPEL.addFlight("B12341", itineraryId);
+        FlightList flightList = bookingServiceBPEL.addFlight("B12341", itineraryId);
         for (FlightReservation reservation : flightList.getReservation()) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());

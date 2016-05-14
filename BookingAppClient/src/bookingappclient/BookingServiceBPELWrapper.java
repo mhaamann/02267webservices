@@ -2,6 +2,7 @@ package bookingappclient;
 
 import ExternalBookingService.Booking;
 import ExternalBookingService.FlightInfo;
+import ExternalBookingService.FlightList;
 import ExternalBookingService.FlightListType;
 import ExternalBookingService.FlightReservation;
 import ExternalBookingService.GetFlightsResponse;
@@ -85,6 +86,13 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
         GetFlightsResponse getFlightsResponse = bookingServiceBPEL.getFlights(origin, destination, startDate, itineraryId);
         List<FlightInfo> flightInfoList = getFlightsResponse.getReturn();
         return flightInfoList;
+    }
+    
+    @Override
+    public List<FlightReservation> addFlight(java.lang.String bookingNumber, java.lang.String itineraryId){
+        FlightList flightList = bookingServiceBPEL.addFlight(bookingNumber, itineraryId);
+        List<FlightReservation> flightReservation = flightList.getReservation();
+        return flightReservation;
     }
     
 }

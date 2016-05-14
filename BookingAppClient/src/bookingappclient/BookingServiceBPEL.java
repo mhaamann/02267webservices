@@ -72,7 +72,7 @@ public class BookingServiceBPEL {
         return port.getFlights(origin, destination, startDate, itineraryId);
     }
     
-    public static FlightList addFlight(java.lang.String bookingNumber, java.lang.String itineraryId) {
+    public FlightList addFlight(java.lang.String bookingNumber, java.lang.String itineraryId) {
         ExternalBookingService.Service1 service = new ExternalBookingService.Service1();
         ExternalBookingService.BookingServicePortType port = service.getBookingServicePortTypeBindingPort();
         return port.addFlight(bookingNumber, itineraryId);
