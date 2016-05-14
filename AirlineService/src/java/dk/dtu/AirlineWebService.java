@@ -48,12 +48,18 @@ public class AirlineWebService {
     dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
     dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
     
+    ArrayList<String> parameterList = new ArrayList<>();
+    String parameters = "";
     @WebMethod(operationName = "bookFlight")
     public boolean bookFlight(@WebParam(name = "bookingNumber") String bookingNumber,
             @WebParam(name = "year") int year,
             @WebParam(name = "month") int month,
             @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) {
+        
+        parameters = bookingNumber + "#!" + String.valueOf(year) +
+                "#!" + String.valueOf(month) + "#!" + number + "#!" + name;
+        parameterList.add(parameters);
         
         //dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
         account.setName("LameDuck");
@@ -87,7 +93,21 @@ public class AirlineWebService {
 
     @WebMethod(operationName = "cancelFlight")
     public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) throws CreditCardFaultMessage {
-        for (FlightInfo flight : flightDB.flightList) {
+        
+        String[] params = new String[5];
+            for(String s : parameterList){
+                params = s.split("#!");
+                if(params[0].equals(bookingNumber)){
+                    break;
+                }
+            }
+        expDate.setMonth(Integer.valueOf(params[2]));
+        expDate.setYear(Integer.valueOf(params[1]));
+        creditCard.setExpirationDate(expDate);
+        creditCard.setName(params[4]);
+        creditCard.setNumber(params[3]);
+       
+        for (FlightInfo flight : flightDB.flightList) {    
             if (flight.bookingNumber.equals(bookingNumber)) {
                 refundCreditCard(1, creditCard, flight.price, account);
                 return true;      
