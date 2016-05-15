@@ -6,7 +6,7 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://bookingservice.ws" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:ns0="http://dtu.dk/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://bookingserviceSchema.ws" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop">
     <types>
         <xsd:schema>
-            <xsd:import namespace="http://dtu.dk/" schemaLocation="http://localhost:8080/AirlineService/AirlineWebService?xsd=1"/>
+            <xsd:import namespace="http://dtu.dk/" schemaLocation="localhost_8080/AirlineService/AirlineWebService.xsd_2.xsd"/>
         </xsd:schema>
         <xsd:schema targetNamespace="http://bookingservice.ws" xmlns:tns="http://bookingservice.ws">
             <xsd:import namespace="http://dtu.dk/" schemaLocation="localhost_8080/HotelService/HotelWebService.xsd_1.xsd"/>
