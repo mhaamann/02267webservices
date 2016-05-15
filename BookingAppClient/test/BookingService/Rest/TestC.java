@@ -16,7 +16,7 @@ import static org.junit.Assert.*;
  *
  * @author DFS
  */
-public class BookingServiceRESTtest {
+public class TestC {
     
     String city1 = "Copenhagen";
     String city2 = "Berlin";
@@ -37,7 +37,7 @@ public class BookingServiceRESTtest {
         
     
     
-    public BookingServiceRESTtest() {
+    public TestC() {
     }
 
     @Test
@@ -65,6 +65,17 @@ public class BookingServiceRESTtest {
     public void testB() {
         String result = res.get(String.class);
         assertEquals(result, "DTU");
-    }/*
+    }
     
+    @Test
+    public void testC1() {
+        String result = res.get(String.class);
+        assertEquals(result, "DTU");
+    }
+    
+    @Test
+    public void testC2() {
+        String result = res.get(String.class);
+        assertEquals(result, "DTU");
+    }*/
 }
