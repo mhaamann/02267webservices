@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package BookingService.Rest;
 
 import ExternalBookingService.Booking;
@@ -17,31 +12,16 @@ import dk.dtu.xml.Flight;
 import dk.dtu.xml.FlightContainer;
 import dk.dtu.xml.ItineraryContainer;
 import dk.dtu.xml.Hotel;
-import java.util.ArrayList;
-import java.util.List;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import org.junit.Before;
 
 /**
  *
- * @author DFS
+ * @author Matthias Haamann
  */
 public class TestC {
-    
-    String city1 = "Copenhagen";
-    String city2 = "Berlin";
-    String fromDate1 = "2016-01-01";
-    String toDate1 = "2016-01-30";
-    String toDateFlight1 = "2016-01-10";
-    String itinerary1 = "";
-    String bookingNumber1 = "1";
-    String bookingNumber2 = "2";
-    String flightBooking1 = "B12341";
-    String hotelBookingNo1 = "7";
-    String hotelBookingNo2 = "12";
     
     Client client = Client.create();
     WebResource itineraryResource = client.resource("http://localhost:8080/BookingRestService/webresources/itinerary");
@@ -109,7 +89,7 @@ public class TestC {
         
         // Book.
         MultivaluedMap formData = new MultivaluedMapImpl();
-        formData.add("name", "Anne Strandberg");
+        formData.add("name", "Anne Strandberg"); // Person with unlimited funds
         formData.add("number", "50408816");
         formData.add("year", "9");
         formData.add("month", "5");
@@ -199,7 +179,7 @@ public class TestC {
         
         // Book.
         MultivaluedMap formData = new MultivaluedMapImpl();
-        formData.add("name", "Anne Strandberg");
+        formData.add("name", "Anne Strandberg"); // Person with unlimited funds
         formData.add("number", "50408816");
         formData.add("year", "9");
         formData.add("month", "5");
@@ -223,7 +203,7 @@ public class TestC {
         // Fetch list itinerary.
         list = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
         
-        
+        // The second hotel booking has creditcard qurantee check required which fails cancellation.
         assertEquals("cancelled", list.itinerary.hotels.get(0).status);
         assertEquals("confirmed", list.itinerary.hotels.get(1).status);
         assertEquals("cancelled", list.itinerary.flights.get(0).status);
