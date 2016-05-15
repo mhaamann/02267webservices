@@ -5,8 +5,11 @@
  */
 package dk.dtu;
 
+import dk.dtu.BankService.AccountType;
 import dk.dtu.BankService.BankService;
 import dk.dtu.BankService.CreditCardFaultMessage;
+import dk.dtu.BankService.CreditCardInfoType;
+import dk.dtu.BankService.CreditCardInfoType.ExpirationDate;
 import java.text.ParseException;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
@@ -23,6 +26,9 @@ import javax.xml.ws.WebServiceRef;
 @WebService(serviceName = "AirlineWebService")
 public class AirlineWebService {
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
+    
+    ArrayList<Payment> payments = new ArrayList<Payment>();
+    
     private BankService service;
 
     FlightInfoDataBase flightDB;
@@ -44,9 +50,9 @@ public class AirlineWebService {
     }
     
     
-    dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
-    dk.dtu.BankService.CreditCardInfoType.ExpirationDate expDate = new dk.dtu.BankService.CreditCardInfoType.ExpirationDate();
-    dk.dtu.BankService.CreditCardInfoType creditCard = new dk.dtu.BankService.CreditCardInfoType();
+    AccountType account = new AccountType();
+    ExpirationDate expDate = new CreditCardInfoType.ExpirationDate();
+    CreditCardInfoType creditCard = new CreditCardInfoType();
     
     ArrayList<String> parameterList = new ArrayList<>();
     String parameters = "";
@@ -57,9 +63,10 @@ public class AirlineWebService {
             @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) {
         
-        parameters = bookingNumber + "#!" + String.valueOf(year) +
-                "#!" + String.valueOf(month) + "#!" + number + "#!" + name;
-        parameterList.add(parameters);
+        payments.add(new Payment(bookingNumber, year, month, number, name));
+        //parameters = bookingNumber + "#!" + String.valueOf(year) +
+        //        "#!" + String.valueOf(month) + "#!" + number + "#!" + name;
+        //parameterList.add(parameters);
         
         //dk.dtu.BankService.AccountType account = new dk.dtu.BankService.AccountType();
         account.setName("LameDuck");
@@ -92,20 +99,31 @@ public class AirlineWebService {
     }//end method bookFlight
 
     @WebMethod(operationName = "cancelFlight")
-    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) throws CreditCardFaultMessage {
+    public boolean cancelFlight(@WebParam(name = "bookingNumber") String bookingNumber) throws CreditCardFaultMessage, Exception {
         
-        String[] params = new String[5];
+        Payment foundPayment = null;
+        for (Payment payment : payments) {
+            if (payment.bookingNumber.equals(bookingNumber)) {
+                foundPayment = payment;
+                break;
+            }
+        }
+        
+        if (foundPayment == null) {
+            throw new Exception("Payment could not be found, abort!");
+        }
+        /*String[] params = new String[5];
             for(String s : parameterList){
                 params = s.split("#!");
                 if(params[0].equals(bookingNumber)){
                     break;
                 }
-            }
-        expDate.setMonth(Integer.valueOf(params[2]));
-        expDate.setYear(Integer.valueOf(params[1]));
+            }*/
+        expDate.setMonth(Integer.valueOf(foundPayment.month));
+        expDate.setYear(Integer.valueOf(foundPayment.year));
         creditCard.setExpirationDate(expDate);
-        creditCard.setName(params[4]);
-        creditCard.setNumber(params[3]);
+        creditCard.setName(foundPayment.name);
+        creditCard.setNumber(foundPayment.number);
        
         for (FlightInfo flight : flightDB.flightList) {    
             if (flight.bookingNumber.equals(bookingNumber)) {
