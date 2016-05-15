@@ -120,7 +120,7 @@ public class HotelsDB {
                         date.setYear(year);
                         card.setExpirationDate(date);
 
-                        if (bank.validateCreditCard(hotelBankGroupId, card, booking.totalPrice.intValue())) {
+                        if (bank.validateCreditCard(1, card, booking.totalPrice.intValue())) {
                             // Creditcard validated, confirming the hotel.
                             booking.status = "confirmed";
                             return true;

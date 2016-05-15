@@ -5,7 +5,10 @@
  */
 package dk.dtu.db;
 
+import dk.dtu.Exception_Exception;
 import dk.dtu.airline.FlightInfo;
+import dk.dtu.external.AirlineService;
+import dk.dtu.external.HotelService;
 import java.util.ArrayList;
 
 /**
@@ -57,15 +60,17 @@ public class ItineraryDB {
         return Integer.toString(lastItineraryId);
     }
 
-    public void bookItinerary(String itineraryId) {
+    public void bookItinerary(String itineraryId, int year, int month, String number, String name) throws Exception_Exception {
         Itinerary itinerary = getItinerary(itineraryId);
         if (itinerary.getState() == Itinerary.PlanningState) {
             // TODO: Book itinerary
             for (Flight flight : itinerary.flights) {
-                
+                boolean responseF = AirlineService.bookFlight(flight.bookingNumber, year, month, number, name);
+                System.out.println(responseF);
             }
             for (Hotel hotel : itinerary.hotels) {
-                
+                boolean responseH = HotelService.bookHotel(hotel.bookingNumber, year, month, number, name);
+                System.out.println(responseH);
             }
             itinerary.setState(Itinerary.BookedCompleteState);
         }

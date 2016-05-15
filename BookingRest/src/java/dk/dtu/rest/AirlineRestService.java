@@ -46,7 +46,7 @@ public class AirlineRestService {
     @GET
     @Produces("application/xml")
     public Response getFlights(
-            @QueryParam("city") String origin,
+            @QueryParam("origin") String origin,
             @QueryParam("destination") String destination,
             @QueryParam("departureDate") String departureDate) throws ParseException_Exception, dk.dtu.airline.ParseException_Exception {
         List<FlightInfo> flights = AirlineService.getFlights(origin, destination, departureDate);

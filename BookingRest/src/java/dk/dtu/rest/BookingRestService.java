@@ -19,7 +19,7 @@ import javax.ws.rs.PUT;
  *
  * @author User
  */
-@Path("/")
+@Path("")
 public class BookingRestService {
 
     @GET
