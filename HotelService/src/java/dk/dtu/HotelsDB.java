@@ -33,8 +33,8 @@ public class HotelsDB {
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 1000, false));
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 3000, false));
 
-        this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, true));
         this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, false));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, true));
 
         this.rooms.add(new Hotel("Berlin", "CabIn", 1500, true));
         this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));

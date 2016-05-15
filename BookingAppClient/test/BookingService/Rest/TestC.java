@@ -153,26 +153,24 @@ public class TestC {
         
         // Prepare Get hotels query params.
         MultivaluedMap<String, String> hotelQueryParams = new MultivaluedMapImpl();
-        hotelQueryParams.add("city", "Copenhagen");
+        hotelQueryParams.add("city", "Amsterdam");
         hotelQueryParams.add("arrivalDate", "2016-01-01");
         hotelQueryParams.add("departureDate", "2016-01-5");
         BookingContainer hotels = hotelsResource.queryParams(hotelQueryParams).get(new GenericType<BookingContainer>() {});
         
         for (Booking booking : hotels.hotel) {
-            if (!booking.isCreditcardGuarantee()) {
-               // Prepare Add hotel query params.
-                MultivaluedMap queryParamsAddHotel = new MultivaluedMapImpl();
-                queryParamsAddHotel.add("itineraryId", itineraryId);
-                queryParamsAddHotel.add("bookingNumber", booking.getBookingNumber());
-                // Add hotel.
-                ClientResponse response = hotelsResource.queryParams(queryParamsAddHotel).post(ClientResponse.class);
-            }
+            // Prepare Add hotel query params.
+            MultivaluedMap queryParamsAddHotel = new MultivaluedMapImpl();
+            queryParamsAddHotel.add("itineraryId", itineraryId);
+            queryParamsAddHotel.add("bookingNumber", booking.getBookingNumber());
+            // Add hotel.
+            ClientResponse response = hotelsResource.queryParams(queryParamsAddHotel).post(ClientResponse.class);
         }
   
         // Prepare Get flights query params.
         MultivaluedMap<String, String> queryParamsFlights = new MultivaluedMapImpl();
-        queryParamsFlights.add("origin", "Copenhagen");
-        queryParamsFlights.add("destination", "Berlin");
+        queryParamsFlights.add("origin", "Berlin");
+        queryParamsFlights.add("destination", "Amsterdam");
         queryParamsFlights.add("departureDate", "2016-01-01");
         FlightContainer flights = flightsResource.queryParams(queryParamsFlights).get(new GenericType<FlightContainer>() {});
 
@@ -225,12 +223,11 @@ public class TestC {
         // Fetch list itinerary.
         list = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
         
-        for (Hotel hotel : list.itinerary.hotels) {
-            assertEquals("cancelled", hotel.status);
-        }
-        for (Flight flight : list.itinerary.flights) {
-            assertEquals("cancelled", flight.status);
-        }
+        
+        assertEquals("cancelled", list.itinerary.hotels.get(0).status);
+        assertEquals("confirmed", list.itinerary.hotels.get(1).status);
+        assertEquals("cancelled", list.itinerary.flights.get(0).status);
+
         assertEquals(1, list.itinerary.flights.size());
         assertEquals(2, list.itinerary.hotels.size());
     }
