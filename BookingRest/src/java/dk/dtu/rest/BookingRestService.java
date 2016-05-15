@@ -19,36 +19,12 @@ import javax.ws.rs.PUT;
  *
  * @author User
  */
-@Path("BRS")
+@Path("/")
 public class BookingRestService {
 
-    @Context
-    private UriInfo context;
-
-    /**
-     * Creates a new instance of TravelGoodRestService
-     */
-    public BookingRestService() {
-    }
-
-    /**
-     * Retrieves representation of an instance of dk.dtu.rest.TravelGoodRestService
-     * @return an instance of java.lang.String
-     */
     @GET
     //@Produces("application/xml")
-    public String getXml() {
-        //TODO return proper representation object
-        return "DTU";
+    public String getHealthCheck() {
+        return "Working";
     }
-
-    /**
-     * PUT method for updating or creating an instance of TravelGoodRestService
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-//     */
-//    @PUT
-//    @Consumes("application/xml")
-//    public void putXml(String content) {
-    //}
 }
