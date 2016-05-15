@@ -18,8 +18,5 @@ public class FlightContainer {
 
     public List<FlightInfo> flight;
 
-    public void set(List<FlightInfo> flightList) {
-        this.flight = flightList;
-    }
 
 }
