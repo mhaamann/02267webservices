@@ -9,6 +9,7 @@ import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import dk.dtu.xml.BookingContainer;
 import dk.dtu.xml.FlightContainer;
 import javax.ws.rs.core.MultivaluedMap;
 import org.junit.Test;
@@ -47,7 +48,7 @@ public class BookingServiceRESTtest {
         itinerary1 = itineraryResource.post(String.class);
         int itineraryId = Integer.parseInt(itinerary1);
         assertTrue(itineraryId > 0);
-        
+        System.err.println(itinerary1);
         MultivaluedMap<String, String> params = new MultivaluedMapImpl();
         params.add("origin", city1);
         params.add("destination", city2);
@@ -63,11 +64,11 @@ public class BookingServiceRESTtest {
         params5.add("city", city1);
         params5.add("arrivalDate", fromDate1);
         params5.add("departureDate", toDate1);
-        String bookingContainer = hotelsResource.queryParams(params5).get(String.class);
+        BookingContainer bookingContainer = hotelsResource.queryParams(params5).get(new GenericType<BookingContainer>() {});
         
         MultivaluedMap<String,String> qParams4 = new MultivaluedMapImpl();
-        qParams.add("bookintNumber", bookingContainer);
-        qParams.add("itineraryId", itinerary1);
+        qParams4.add("bookintNumber", bookingContainer.hotel.get(0).getBookingNumber());
+        qParams4.add("itineraryId", itinerary1);
         hotelsResource.queryParams(qParams4).post();
         
         MultivaluedMap<String, String> params4 = new MultivaluedMapImpl();
@@ -96,7 +97,12 @@ public class BookingServiceRESTtest {
         params6.add("city", city1);
         params6.add("arrivalDate", fromDate1);
         params6.add("departureDate", toDate1);
-        String bookingContainer2 = hotelsResource.queryParams(params6).get(String.class);
+        BookingContainer bookingContainer2 = hotelsResource.queryParams(params6).get(new GenericType<BookingContainer>() {});
+        
+        MultivaluedMap<String,String> qParams7 = new MultivaluedMapImpl();
+        qParams7.add("bookintNumber", bookingContainer2.hotel.get(0).getBookingNumber());
+        qParams7.add("itineraryId", itinerary1);
+        hotelsResource.queryParams(qParams7).post();
     }
     /*
     @Test
