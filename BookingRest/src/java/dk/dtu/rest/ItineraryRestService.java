@@ -51,7 +51,7 @@ public class ItineraryRestService {
     @PUT @Path("/{itineraryId}")
     @Produces(MediaType.APPLICATION_XML)
     @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
-    public Response bookItinerary(
+    public String bookItinerary(
             @PathParam("itineraryId") String itineraryId,
             @FormParam("year") int year,
             @FormParam("month") int month,
@@ -60,7 +60,7 @@ public class ItineraryRestService {
         
         boolean booking = ItineraryDB.getItineraryDB().bookItinerary(itineraryId, year, month, number, name);
 
-        return Response.status(Response.Status.OK).entity(booking).build();
+        return Boolean.toString(booking);
     }
     
     @DELETE @Path("/{itineraryId}")

@@ -67,7 +67,7 @@ public class ItineraryDB {
 
     public boolean bookItinerary(String itineraryId, int year, int month, String number, String name) {
 
-        boolean itineraryFailed = false;
+        boolean itinerarySuccess = true;
 
         Itinerary itinerary = getItinerary(itineraryId);
         if (itinerary.getState() == Itinerary.PlanningState) {
@@ -88,23 +88,25 @@ public class ItineraryDB {
                         hotel.status = "confirmed";
                     }
                 } catch (Exception_Exception ex) {
-                    Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, null, ex);
-                    itineraryFailed = true;
+                    Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking exception", ex);
+                    itinerarySuccess = false;
                 }
             }
             itinerary.setState(Itinerary.BookedCompleteState);
         }
 
         // Itinerary failed, cancel all the confimed bookings.
-        if (itineraryFailed) {
+        if (!itinerarySuccess) {
+            Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking failed");
             cancelItinerary(itineraryId);
-            return false;
+            return itinerarySuccess;
         }
-        return true;
+        Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking complete");
+        return itinerarySuccess;
     }
 
     public void cancelFlight(Flight flight) {
-        if (flight.status.equals("Confirmed")) {
+        if (!flight.status.equals("confirmed")) {
             return;
         }
         boolean responseF;
@@ -120,7 +122,7 @@ public class ItineraryDB {
     }
 
     public void cancelHotel(Hotel hotel) {
-        if (hotel.status.equals("Confirmed")) {
+        if (!hotel.status.equals("confirmed")) {
             return;
         }
         boolean responseH;
