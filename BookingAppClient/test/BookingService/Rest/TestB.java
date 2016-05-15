@@ -40,7 +40,7 @@ public class TestB {
 
         // Prepare Get hotels query params.
         MultivaluedMap<String, String> hotelQueryParams = new MultivaluedMapImpl();
-        hotelQueryParams.add("city", "Berlin");
+        hotelQueryParams.add("city", "Amsterdam");
         hotelQueryParams.add("arrivalDate", "2016-01-01");
         hotelQueryParams.add("departureDate", "2016-01-5");
         BookingContainer hotels = hotelsResource.queryParams(hotelQueryParams).get(new GenericType<BookingContainer>() {
@@ -104,28 +104,8 @@ public class TestB {
         list = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {
         });
 
-        for (Hotel hotel : list.itinerary.hotels) {
-            assertEquals("confirmed", hotel.status);
-        }
-        for (Flight flight : list.itinerary.flights) {
-            assertEquals("confirmed", flight.status);
-        }
-        assertEquals(1, list.itinerary.flights.size());
-        assertEquals(2, list.itinerary.hotels.size());
-
-        // Cancel.
-        response = itineraryResource.path(itineraryId).delete(String.class);
-
-        // Fetch list itinerary.
-        list = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {
-        });
-
-        // The second hotel booking has creditcard qurantee check required which fails cancellation.
         assertEquals("cancelled", list.itinerary.hotels.get(0).status);
         assertEquals("unconfirmed", list.itinerary.hotels.get(1).status);
         assertEquals("unconfirmed", list.itinerary.flights.get(0).status);
-
-        assertEquals(1, list.itinerary.flights.size());
-        assertEquals(2, list.itinerary.hotels.size());
     }
 }
