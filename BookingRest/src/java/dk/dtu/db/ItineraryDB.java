@@ -70,30 +70,29 @@ public class ItineraryDB {
         boolean itinerarySuccess = true;
 
         Itinerary itinerary = getItinerary(itineraryId);
-        if (itinerary.getState() == Itinerary.PlanningState) {
-            Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking...");
-            for (Flight flight : itinerary.flights) {
-                boolean responseF = AirlineService.bookFlight(flight.bookingNumber, year, month, number, name);
-                Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Attempted booking on " + flight.bookingNumber, responseF);
-                if (responseF) {
-                    flight.status = "confirmed";
-                }
-            }
-            for (Hotel hotel : itinerary.hotels) {
-                boolean responseH;
-                try {
-                    responseH = HotelService.bookHotel(hotel.bookingNumber, year, month, number, name);
+        try {
+            if (itinerary.getState() == Itinerary.PlanningState) {
+                Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking...");
+                for (Hotel hotel : itinerary.hotels) {
+                    boolean responseH = HotelService.bookHotel(hotel.bookingNumber, year, month, number, name);
                     Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Attempted booking on " + hotel.bookingNumber, responseH);
                     if (responseH) {
                         hotel.status = "confirmed";
                     }
-                } catch (Exception_Exception ex) {
-                    Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking exception", ex);
-                    itinerarySuccess = false;
+                }
+                for (Flight flight : itinerary.flights) {
+                    boolean responseF = AirlineService.bookFlight(flight.bookingNumber, year, month, number, name);
+                    Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Attempted booking on " + flight.bookingNumber, responseF);
+                    if (responseF) {
+                        flight.status = "confirmed";
+                    }
                 }
             }
-            itinerary.setState(Itinerary.BookedCompleteState);
+        } catch (Exception ex) {
+            Logger.getLogger(ItineraryDB.class.getName()).log(Level.SEVERE, "Booking exception", ex);
+            itinerarySuccess = false;
         }
+        itinerary.setState(Itinerary.BookedCompleteState);
 
         // Itinerary failed, cancel all the confimed bookings.
         if (!itinerarySuccess) {
