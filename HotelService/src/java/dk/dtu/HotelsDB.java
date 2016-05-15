@@ -31,7 +31,7 @@ public class HotelsDB {
         // Each hotel represents a Room. The second parameter represents the hotel name.
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, true));
         this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, false));
-        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, true));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, false));
 
         this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000, true));
         this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000, false));
