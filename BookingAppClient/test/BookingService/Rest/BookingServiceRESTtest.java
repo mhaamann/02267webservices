@@ -65,10 +65,10 @@ public class BookingServiceRESTtest {
         params5.add("departureDate", toDate1);
         String bookingContainer = hotelsResource.queryParams(params5).get(String.class);
         
-       // MultivaluedMap<String,String> qParams2 = new MultivaluedMapImpl();
-       // qParams.add("bookintNumber", bookingContainer.get(0).getBookingNumber());
-       // qParams.add("itineraryId", itinerary1);
-       // hotelsResource.queryParams(qParams2).post();
+        MultivaluedMap<String,String> qParams4 = new MultivaluedMapImpl();
+        qParams.add("bookintNumber", bookingContainer);
+        qParams.add("itineraryId", itinerary1);
+        hotelsResource.queryParams(qParams4).post();
         
         MultivaluedMap<String, String> params4 = new MultivaluedMapImpl();
         params4.add("origin", city1);
