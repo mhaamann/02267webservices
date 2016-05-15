@@ -5,6 +5,9 @@
  */
 package dk.dtu.rest;
 
+import dk.dtu.db.ItineraryDB;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -25,6 +28,7 @@ public class BookingRestService {
     @GET
     //@Produces("application/xml")
     public String getHealthCheck() {
+        Logger.getLogger(BookingRestService.class.getName()).log(Level.SEVERE, "HealthCheck");
         return "Working";
     }
 }

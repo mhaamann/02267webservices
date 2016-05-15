@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class Itinerary {
     static int PlanningState = 0;
     static int BookedCompleteState = 1;
+    static int CanceledState = 2;
 
     public ArrayList<Flight> flights = new ArrayList<Flight>();
     public ArrayList<Hotel> hotels = new ArrayList<Hotel>();

@@ -5,16 +5,11 @@
  */
 package dk.dtu.rest;
 
-import dk.dtu.Exception_Exception;
 import dk.dtu.db.Itinerary;
 import dk.dtu.db.ItineraryDB;
-import static dk.dtu.rest.AirlineRestService.flightContainer;
-import dk.dtu.xml.FlightContainer;
 import dk.dtu.xml.ItineraryContainer;
-import static java.util.Collections.list;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -62,11 +57,20 @@ public class ItineraryRestService {
             @FormParam("month") int month,
             @FormParam("number") String number,
             @FormParam("name") String name) {
-        try {
-            ItineraryDB.getItineraryDB().bookItinerary(itineraryId, year, month, number, name);
-        } catch (Exception_Exception ex) {
-            return Response.status(Response.Status.BAD_REQUEST).build();
-        }
+        
+        boolean booking = ItineraryDB.getItineraryDB().bookItinerary(itineraryId, year, month, number, name);
+
+        return Response.status(Response.Status.OK).entity(booking).build();
+    }
+    
+    @DELETE @Path("/{itineraryId}")
+    @Produces(MediaType.APPLICATION_XML)
+    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
+    public Response cancelItinerary(
+            @PathParam("itineraryId") String itineraryId) {
+
+        ItineraryDB.getItineraryDB().cancelItinerary(itineraryId);
+
         return Response.status(Response.Status.OK).build();
     }
 }
