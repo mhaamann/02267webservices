@@ -167,15 +167,15 @@ public class TestB {
         
         FlightReservation fReservation1 = (FlightReservation) hm.get(flightBookingNo1);
         assertNotNull(fReservation1);
-        assertEquals(statusCancelled, fReservation1.getStatus());
+        assertEquals(statusConfirmed, fReservation1.getStatus());
         
         FlightReservation fReservation2 = (FlightReservation) hm.get(flightBookingNo2);
         assertNotNull(fReservation2);
-        assertEquals(statusUnconfirmed,fReservation2.getStatus());
+        assertEquals(statusConfirmed,fReservation2.getStatus());
         
         HotelReservation hReservation1 = (HotelReservation) hm.get(hotelBookingNo1);
         assertNotNull(hReservation1);
-        assertEquals(statusUnconfirmed, hReservation1.getStatus());
+        assertEquals(statusCancelled, hReservation1.getStatus());
         
         
     }
