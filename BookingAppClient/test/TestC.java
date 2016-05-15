@@ -31,14 +31,14 @@ public class TestC {
     String itinerary1 = "42";
     String flightBookingNo1 = "B12341";
     String flightBookingNo2 = "B12342";
-    String hotelBookingNo1 = "7";
-    String statusUnconfirmed = "unconfirmed";
+    String hotelBookingNo1;
     String CreditCardName1 = "Anne Strandberg";
     String CreditCardNumber1 = "50408816";
     BigInteger CreditCardMonth1 = BigInteger.valueOf(5);
     BigInteger CreditCardYear1 = BigInteger.valueOf(9);
     String statusConfirmed = "confirmed";
     String statusCancelled = "cancelled";
+    String statusUnconfirmed = "unconfirmed";
     
     /*C1 (cancel booking) Create an itinerary with three bookings (mixed flights and hotels) and book it.
     Get the itinerary and make sure that the booking status is confirmed for each entry. Cancel the
@@ -81,6 +81,7 @@ public class TestC {
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
         System.out.println("Adding first hotel..");
+        hotelBookingNo1 = hotelBookingList.get(0).getBookingNumber();
         List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
         assertNotNull(hotelReservationList);
         assertEquals(1, hotelReservationList.size());
@@ -217,6 +218,12 @@ public class TestC {
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
         System.out.println("Adding first hotel..");
+        for (Booking booking : hotelBookingList){
+            if (booking.isCreditcardGuarantee() == true ){
+                hotelBookingNo1 = booking.getBookingNumber();
+                break;
+            }
+        }
         List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
         assertNotNull(hotelReservationList);
         assertEquals(1, hotelReservationList.size());
@@ -326,12 +333,12 @@ public class TestC {
         assertNotNull(fReservation1);
         assertEquals(statusCancelled, fReservation1.getStatus());
         
-        FlightReservation fReservation2 = (FlightReservation) hm.get(flightBookingNo2);
-        assertNotNull(fReservation2);
-        assertEquals(statusConfirmed,fReservation2.getStatus());
-        
         HotelReservation hReservation1 = (HotelReservation) hm.get(hotelBookingNo1);
         assertNotNull(hReservation1);
-        assertEquals(statusCancelled, hReservation1.getStatus());
+        assertEquals(statusConfirmed, hReservation1.getStatus());
+        
+        FlightReservation fReservation2 = (FlightReservation) hm.get(flightBookingNo2);
+        assertNotNull(fReservation2);
+        assertEquals(statusCancelled,fReservation2.getStatus());
     }
 }

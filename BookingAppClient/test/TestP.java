@@ -29,19 +29,19 @@ public class TestP {
     String toDateHotel1 = "2016-01-30";
     String fromDateFlight1 = "2016-01-01";
     String toDateFlight1 = "2016-01-10";
-    String itinerary1 = "42";
+    String itinerary1;
     String flightBookingNo1 = "B12341";
     String flightBookingNo2 = "B12342";
     String flightBookingNo3 = "B12343";
-    String hotelBookingNo1 = "7";
-    String hotelBookingNo2 = "12";
-    String statusUnconfirmed = "unconfirmed";
+    String hotelBookingNo1;
+    String hotelBookingNo2;
     String CreditCardName1 = "Anne Strandberg";
     String CreditCardNumber1 = "50408816";
     BigInteger CreditCardMonth1 = BigInteger.valueOf(5);
     BigInteger CreditCardYear1 = BigInteger.valueOf(9);
     String statusConfirmed = "confirmed";
     String statusCancelled = "cancelled";
+    String statusUnconfirmed = "unconfirmed";
     
     
     /*P1 (planning and booking) Plan a trip by first planning a flight (i.e. getting a list of flights and then
@@ -70,7 +70,6 @@ public class TestP {
         //Get list of flights
         System.out.println("Finding flights..");
         List<FlightInfo> flightBookingList = bookingServiceBPEL.getFlights(city1, city2, fromDateFlight1, itinerary1);
-        System.out.println(flightBookingList);
         assertFalse(flightBookingList.isEmpty() );
         
         //Add flight to itinerary
@@ -84,10 +83,15 @@ public class TestP {
         List<Booking> hotelBookingList = bookingServiceBPEL.getHotels(city1, fromDateHotel1 , toDateHotel1, itinerary1);
         assertNotNull(hotelBookingList);
         assertFalse(hotelBookingList.isEmpty() );
+        assertTrue(hotelBookingList.size() > 1 );
         
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
         System.out.println("Adding first hotel..");
+        
+        hotelBookingNo1 = hotelBookingList.get(0).getBookingNumber();
+        hotelBookingNo2 = hotelBookingList.get(1).getBookingNumber();
+        
         List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
         assertNotNull(hotelReservationList);
         assertEquals(1, hotelReservationList.size());
@@ -221,7 +225,7 @@ public class TestP {
 
         //Assert status of flight is cancelled...
         System.out.println("Asserting status of flight is cancelled..");
-        System.out.println("Asserting bokking number of flight is correct..");
+        System.out.println("Asserting booking number of flight is correct..");
         List<FlightReservation> fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
         assertNotNull(fReservationList);
         assertFalse(fReservationList.isEmpty());

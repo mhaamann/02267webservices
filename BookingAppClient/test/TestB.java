@@ -83,6 +83,12 @@ public class TestB {
         //Add hotel to itinerary
         //Get bookingnumber from returned hotels
         System.out.println("Adding first hotel..");
+        for (Booking booking : hotelBookingList){
+            if (booking.isCreditcardGuarantee() == true){
+                hotelBookingNo1 = booking.getBookingNumber();
+                break;
+            }
+        }
         List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
         assertNotNull(hotelReservationList);
         assertEquals(1, hotelReservationList.size());
