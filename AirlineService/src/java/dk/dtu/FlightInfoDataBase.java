@@ -28,8 +28,11 @@ public class FlightInfoDataBase {
     FlightInfo flight_4;
     FlightInfo flight_5;
     ArrayList<FlightInfo> flightList = new ArrayList<>();
+    public ArrayList<Payment> payments;
 
     public FlightInfoDataBase() throws DatatypeConfigurationException {
+        
+        this.payments = new ArrayList<>();
         
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Date startDate1 = new Date(), endDate1 = new Date();

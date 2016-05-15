@@ -25,5 +25,9 @@ class Payment {
         this.number = number;
         this.name = name;
     }
+
+    Payment(String bookingNumber) {
+       this.bookingNumber = bookingNumber;
+    }
     
 }
