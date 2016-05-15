@@ -21,11 +21,11 @@ public class Hotel {
     public Boolean creditcardGuarantee;
     
     
-    public Hotel(String city, String hotel, int pricePerDay) {
+    public Hotel(String city, String hotel, int pricePerDay, Boolean creditcardGuarantee) {
         this.city = city;
         this.hotel = hotel;
         this.pricePerDay = pricePerDay;
-        this.creditcardGuarantee = true;
+        this.creditcardGuarantee = creditcardGuarantee;
     }
     
 }
