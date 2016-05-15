@@ -6,11 +6,17 @@
 package BookingService.Rest;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
+import dk.dtu.xml.BookingContainer;
+import dk.dtu.xml.FlightContainer;
+import java.util.List;
 import javax.ws.rs.core.MultivaluedMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -31,51 +37,37 @@ public class TestC {
     String hotelBookingNo2 = "12";
     
     Client client = Client.create();
-        WebResource itineraryResource = client.resource("http://localhost:8080/BookingRestService/webresources/itinerary");
-        WebResource flightsResource = client.resource("http://localhost:8080/BookingRestService/webresources/flights");
-        WebResource hotelsResource = client.resource("http://localhost:8080/BookingRestService/webresources/hotels");
-        
-    
+    WebResource itineraryResource = client.resource("http://localhost:8080/BookingRestService/webresources/itinerary");
+    WebResource flightsResource = client.resource("http://localhost:8080/BookingRestService/webresources/flights");
+    WebResource hotelsResource = client.resource("http://localhost:8080/BookingRestService/webresources/hotels");
     
     public TestC() {
     }
 
-    @Test
-    public void testP1() {
-        itinerary1 = itineraryResource.post(String.class);
-        int itineraryId = Integer.parseInt(itinerary1);
-        assertTrue(itineraryId > 0);
-        
-        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-        params.add("origin", city1);
-        params.add("destination", city2);
-        params.add("departureDate", fromDate1);
-        
-        String flightContainer = flightsResource.queryParams(params).get(String.class);
-        
-    }
-    /*
-    @Test
-    public void testP2() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
-    }
-    
-    @Test
-    public void testB() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
-    }
     
     @Test
     public void testC1() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
+        
+        // Create itinerary Id.
+        String itineraryId = itineraryResource.post(String.class);
+        
+        // Prepare Get hotels query params.
+        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
+        params.add("origin", "Copenhagen");
+        params.add("destination", "Berlin");
+        params.add("departureDate", "2016-01-01");
+        
+        FlightContainer list = flightsResource.queryParams(params).get(new GenericType<FlightContainer>() {});
+
+        // Prepare Add hotel query params.
+        MultivaluedMap queryParams = new MultivaluedMapImpl();
+        queryParams.add("itineraryId", "val1");
+        queryParams.add("bookingNumber", "val2");
+
+        // Add hotel.
+        ClientResponse response = hotelsResource.queryParams(queryParams).post(ClientResponse.class);
+
     }
     
-    @Test
-    public void testC2() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
-    }*/
+    
 }
