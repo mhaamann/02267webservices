@@ -50,9 +50,36 @@ public class BookingServiceRESTtest {
         params.add("origin", city1);
         params.add("destination", city2);
         params.add("departureDate", fromDate1);
-        
         String flightContainer = flightsResource.queryParams(params).get(String.class);
+        flightsResource.post(flightContainer.bookingNumber, itinerary1);
         
+        MultivaluedMap<String, String> params5 = new MultivaluedMapImpl();
+        params.add("city", city1);
+        params.add("arrivalDate", fromDate1);
+        params.add("departureDate", toDate1);
+        String bookingContainer = hotelsResource.queryParams(params).get(String.class);
+        hotelsResource.post(bookingContainer.bookingNumber, itinerary1);
+        
+        MultivaluedMap<String, String> params4 = new MultivaluedMapImpl();
+        params.add("origin", city1);
+        params.add("destination", city2);
+        params.add("departureDate", fromDate1);
+        String flightContainer2 = flightsResource.queryParams(params4).get(String.class);
+        flightsResource.post(flightContainer2.bookingNumber, itinerary1);
+        
+        MultivaluedMap<String, String> params3 = new MultivaluedMapImpl();
+        params.add("origin", city1);
+        params.add("destination", city2);
+        params.add("departureDate", fromDate1);
+        String flightContainer3 = flightsResource.queryParams(params3).get(String.class);
+        flightsResource.post(flightContainer3.bookingNumber, itinerary1);
+        
+        MultivaluedMap<String, String> params6 = new MultivaluedMapImpl();
+        params.add("city", city1);
+        params.add("arrivalDate", fromDate1);
+        params.add("departureDate", toDate1);
+        String bookingContainer2 = hotelsResource.queryParams(params6).get(String.class);
+        hotelsResource.post(bookingContainer2.bookingNumber, itinerary1);
     }
     /*
     @Test
