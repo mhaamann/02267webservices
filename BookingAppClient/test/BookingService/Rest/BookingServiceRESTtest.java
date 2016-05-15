@@ -12,7 +12,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author User
+ * @author DFS
  */
 public class BookingServiceRESTtest {
     
