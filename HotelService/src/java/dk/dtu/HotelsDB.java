@@ -29,19 +29,19 @@ public class HotelsDB {
         this.currentBookingNumber = 1;
 
         // Each hotel represents a Room. The second parameter represents the hotel name.
-        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, true));
-        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, false));
-        this.rooms.add(new Hotel("Copenhagen", "CabIn", 60000, false));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 1000, true));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 1000, false));
+        this.rooms.add(new Hotel("Copenhagen", "CabIn", 3000, false));
 
-        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000, true));
-        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000, false));
-        this.rooms.add(new Hotel("Amsterdam", "CabIn", 55000, true));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, true));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, false));
+        this.rooms.add(new Hotel("Amsterdam", "CabIn", 500, true));
 
-        this.rooms.add(new Hotel("Berlin", "CabIn", 40000, true));
-        this.rooms.add(new Hotel("Berlin", "CabIn", 40000, false));
-        this.rooms.add(new Hotel("Berlin", "CabIn", 40000, false));
-        this.rooms.add(new Hotel("Berlin", "CabIn", 40000, false));
-        this.rooms.add(new Hotel("Berlin", "CabIn", 40000, false));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 1500, true));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));
+        this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));
     }
 
     public HotelsDB() {

@@ -21,6 +21,10 @@ public class Itinerary {
     private int state;
 
     public int itineraryId;
+    
+    public Itinerary() {
+        
+    }
 
     public Itinerary(int itineraryId) {
         this.state = 0;

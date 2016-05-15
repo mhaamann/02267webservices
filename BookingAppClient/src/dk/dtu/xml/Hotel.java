@@ -9,10 +9,13 @@ package dk.dtu.xml;
  *
  * @author mhaamann
  */
-class Hotel {
+public class Hotel {
     public String bookingNumber;
     public String status;
     
+    public Hotel () {
+        
+    }
     public Hotel (String bookingNumber) {
         this.bookingNumber = bookingNumber;
         this.status = "unconfirmed";

@@ -15,6 +15,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class ItineraryContainer {
 
     public Itinerary itinerary;
+    
+    public ItineraryContainer() {
+        
+    }
 
     public void set(Itinerary itinerary) {
         this.itinerary = itinerary;

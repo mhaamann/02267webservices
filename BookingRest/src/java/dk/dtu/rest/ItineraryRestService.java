@@ -65,7 +65,6 @@ public class ItineraryRestService {
     
     @DELETE @Path("/{itineraryId}")
     @Produces(MediaType.APPLICATION_XML)
-    @Consumes(MediaType.APPLICATION_FORM_URLENCODED)
     public Response cancelItinerary(
             @PathParam("itineraryId") String itineraryId) {
 

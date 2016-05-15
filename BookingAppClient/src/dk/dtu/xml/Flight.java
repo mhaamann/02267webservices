@@ -9,9 +9,13 @@ package dk.dtu.xml;
  *
  * @author mhaamann
  */
-class Flight {
+public class Flight {
     public String bookingNumber;
     public String status;
+    
+    public Flight() {
+        
+    }
     
     public Flight (String bookingNumber) {
         this.bookingNumber = bookingNumber;
