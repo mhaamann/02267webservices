@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package dk.dtu;
 
 import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
@@ -23,7 +18,14 @@ public class HotelsDB {
     private BankServiceWrapper bank = new BankServiceWrapper();
     private static int hotelBankGroupId = 50308815;
     private boolean reserveHotels = false; // TODO: for debug purposes.
+    
+    public HotelsDB() {
+        resetData();
+    }
 
+    /** 
+     * Function to reset the hotel data for testing purposes.
+     */
     public void resetData() {
         this.rooms = new ArrayList<Hotel>();
         this.currentBookingNumber = 1;
@@ -43,16 +45,10 @@ public class HotelsDB {
         this.rooms.add(new Hotel("Berlin", "CabIn", 1500, false));
     }
 
-    public HotelsDB() {
-
-        resetData();
-
-    }
-
     /**
      * Creates a unconfirmed booking reservation and saves it on the hotel
      * object.
-     *
+     * 
      * @param hotel
      * @param startDate
      * @param endDate
@@ -100,7 +96,20 @@ public class HotelsDB {
         }
         return reservedBookings;
     }
-
+    
+    /**
+     * Book the hotel identified by the booking number. If credit card guarantee 
+     * is required the credit card will be checked, if no guarantee is required
+     * the booking is confirmed right away.
+     * 
+     * @param bookingNumber The number for the booking.
+     * @param year The year of the credit card.
+     * @param month The month of the credit card.
+     * @param number The credit card number.
+     * @param name The name on the credit card.
+     * @return
+     * @throws Exception 
+     */
     public boolean bookHotel(String bookingNumber, int year, int month, String number, String name) throws Exception {
         for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {
@@ -136,7 +145,16 @@ public class HotelsDB {
         }
         throw new Exception("Booking did not exists");
     }
-
+    
+    /**
+     * Cancels the booking on the hotel identified by the booking number.
+     * For testing purposes the cancellation fails if the credit card guarantee
+     * is required on the booking.
+     * 
+     * @param bookingNumber The number for the booking.
+     * @return true if the cancellation succeeded.
+     * @throws Exception In case the cancellation could not be processed. 
+     */
     public boolean cancelHotel(String bookingNumber) throws Exception {
         for (Hotel hotel : rooms) {
             for (Booking booking : hotel.bookings) {

@@ -26,7 +26,6 @@ import javax.xml.ws.WebServiceRef;
 public class HotelWebService {
 
     @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
-    private BankService service;
     private HotelsDB hotelsDB = new HotelsDB();
 
     @WebMethod(operationName = "getHotels")
@@ -57,10 +56,4 @@ public class HotelWebService {
         return hotelsDB.cancelHotel(bookingNumber);
     }
 
-    private boolean chargeCreditCard(int group, dk.dtu.imm.fastmoney.types.CreditCardInfoType creditCardInfo, int amount, dk.dtu.imm.fastmoney.types.AccountType account) throws CreditCardFaultMessage {
-        // Note that the injected javax.xml.ws.Service reference as well as port objects are not thread safe.
-        // If the calling of port operations may lead to race condition some synchronization is required.
-        dk.dtu.imm.fastmoney.BankPortType port = service.getBankPort();
-        return port.chargeCreditCard(group, creditCardInfo, amount, account);
-    }
 }
