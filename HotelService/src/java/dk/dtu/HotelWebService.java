@@ -5,17 +5,12 @@
  */
 package dk.dtu;
 
-import dk.dtu.imm.fastmoney.BankService;
-import dk.dtu.imm.fastmoney.CreditCardFaultMessage;
-import dk.dtu.imm.fastmoney.types.CreditCardInfoType;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import javax.jws.WebService;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.xml.datatype.XMLGregorianCalendar;
 import javax.xml.ws.WebServiceRef;
 
 /**
