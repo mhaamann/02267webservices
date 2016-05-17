@@ -20,14 +20,15 @@ import javax.xml.ws.WebServiceRef;
 @WebService(serviceName = "HotelWebService")
 public class HotelWebService {
 
-    @WebServiceRef(wsdlLocation = "WEB-INF/wsdl/fastmoney.imm.dtu.dk_8080/BankService.wsdl")
-    private HotelsDB hotelsDB = new HotelsDB();
+    
+    public HotelWebService() {
+    }
 
     @WebMethod(operationName = "getHotels")
     public ArrayList<Booking> getHotels(@WebParam(name = "city") String city, @WebParam(name = "arrivalDate") String arrivalDate, @WebParam(name = "departureDate") String departureDate) throws ParseException {
         // Parse the dates
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        return hotelsDB.getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
+        return HotelsDB.getHotelsDB().getHotels(city, dateFormat.parse(arrivalDate), dateFormat.parse(departureDate));
     }
 
     @WebMethod(operationName = "bookHotel")
@@ -37,18 +38,18 @@ public class HotelWebService {
             @WebParam(name = "month") int month,
             @WebParam(name = "number") String number,
             @WebParam(name = "name") String name) throws Exception {
-        return hotelsDB.bookHotel(bookingNumber, year, month, number, name);
+        return HotelsDB.getHotelsDB().bookHotel(bookingNumber, year, month, number, name);
     }
     
     @WebMethod(operationName = "resetHotel")
     public boolean resetHotel() {
-        hotelsDB.resetData();
+        HotelsDB.getHotelsDB().resetData();
         return true;
     }
 
     @WebMethod(operationName = "cancelHotel")
     public boolean cancelHotel(@WebParam(name = "bookingNumber") String bookingNumber) throws Exception {
-        return hotelsDB.cancelHotel(bookingNumber);
+        return HotelsDB.getHotelsDB().cancelHotel(bookingNumber);
     }
 
 }
