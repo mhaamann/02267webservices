@@ -4,15 +4,8 @@
     <system systemId="http://localhost:8080/AirlineService/AirlineWebService?wsdl" uri="../BookingBPEL/localhost_8080/AirlineService/AirlineWebService.wsdl"/>
     <system systemId="http://localhost:8080/AirlineService/AirlineWebService?xsd=2" uri="../BookingBPEL/localhost_8080/AirlineService/AirlineWebService.xsd_2.xsd"/>
     <system systemId="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/XPathFunctions" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.oracle.com/sun/index.html"/>
+    <system systemId="http://bookingservice.ws" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/bookingservice.ws"/>
     <system systemId="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Editor2" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.oracle.com/sun/index.html"/>
     <system systemId="http://www.sun.com/wsbpel/2.0/process/executable/SUNExtension/Attachment" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.oracle.com/sun/index.html"/>
-    <system systemId="http://schemas.xmlsoap.org/wsdl/soap/" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/schemas.xmlsoap.org/wsdl/soap/index.xsd"/>
-    <system systemId="http://bookingserviceSchema.ws" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/bookingserviceSchema.ws"/>
-    <system systemId="http://docs.oasis-open.org/wsbpel/2.0/varprop" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/docs.oasis-open.org/wsbpel/2.0/varprop"/>
-    <system systemId="http://bookingservice.schema.ws" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.schemadesign.com"/>
-    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=2" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/fastmoney.imm.dtu.dk_8080/BankService.xsd_2.xsd"/>
-    <system systemId="http://fastmoney.imm.dtu.dk:8080/BankService?xsd=1" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/fastmoney.imm.dtu.dk_8080/BankService.xsd_1.xsd"/>
-    <system systemId="http://dtu.dk/" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/www.dtu.dk/index"/>
-    <system systemId="http://bookingservice.ws" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/bookingservice.ws"/>
     <system systemId="http://localhost:8080/AirlineService/AirlineWebService?xsd=1" uri="BookingBPEL/src/_references/_relative/nbproject/private/retriever/localhost_8080/AirlineService/AirlineWebService.xsd_1.xsd"/>
 </catalog>

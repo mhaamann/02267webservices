@@ -48,61 +48,62 @@ public class BookingServiceRESTtest {
         itinerary1 = itineraryResource.post(String.class);
         int itineraryId = Integer.parseInt(itinerary1);
         assertTrue(itineraryId > 0);
-        System.err.println(itinerary1);
-        MultivaluedMap<String, String> params = new MultivaluedMapImpl();
-        params.add("origin", city1);
-        params.add("destination", city2);
-        params.add("departureDate", fromDate1);
-        FlightContainer flightContainer = flightsResource.queryParams(params).get(new GenericType<FlightContainer>() {});
         
-        MultivaluedMap<String,String> qParams = new MultivaluedMapImpl();
-        qParams.add("bookintNumber", flightContainer.flight.get(0).getBookingNumber());
-        qParams.add("itineraryId", itinerary1);
-        flightsResource.queryParams(qParams).post();
+        MultivaluedMap<String, String> queryParametersForFlight_1 = new MultivaluedMapImpl();
+        queryParametersForFlight_1.add("origin", city1);
+        queryParametersForFlight_1.add("destination", city2);
+        queryParametersForFlight_1.add("departureDate", fromDate1);
+        FlightContainer flightContainer = flightsResource.queryParams(queryParametersForFlight_1).get(new GenericType<FlightContainer>() {});
         
-        MultivaluedMap<String, String> params5 = new MultivaluedMapImpl();
-        params5.add("city", city1);
-        params5.add("arrivalDate", fromDate1);
-        params5.add("departureDate", toDate1);
-        BookingContainer bookingContainer = hotelsResource.queryParams(params5).get(new GenericType<BookingContainer>() {});
+        MultivaluedMap<String,String> queryParametersForFlight_1_1 = new MultivaluedMapImpl();
+        queryParametersForFlight_1_1.add("bookintNumber", flightContainer.flight.get(0).getBookingNumber());
+        queryParametersForFlight_1_1.add("itineraryId", itinerary1);
+        flightsResource.queryParams(queryParametersForFlight_1_1).post();
+        /*
+        MultivaluedMap<String, String> queryParametersForHotel_1 = new MultivaluedMapImpl();
+        queryParametersForHotel_1.add("city", city1);
+        queryParametersForHotel_1.add("arrivalDate", fromDate1);
+        queryParametersForHotel_1.add("departureDate", toDate1);
+        BookingContainer bookingContainer = hotelsResource.queryParams(queryParametersForHotel_1).get(new GenericType<BookingContainer>() {});
         
-        MultivaluedMap<String,String> qParams4 = new MultivaluedMapImpl();
-        qParams4.add("bookintNumber", bookingContainer.hotel.get(0).getBookingNumber());
-        qParams4.add("itineraryId", itinerary1);
-        hotelsResource.queryParams(qParams4).post();
+        MultivaluedMap<String,String> queryParametersForHotel_1_1 = new MultivaluedMapImpl();
+        queryParametersForHotel_1_1.add("bookintNumber", bookingContainer.hotel.get(0).getBookingNumber());
+        queryParametersForHotel_1_1.add("itineraryId", itinerary1);
+        hotelsResource.queryParams(queryParametersForHotel_1_1).post();
+        */
+        MultivaluedMap<String, String> queryParametersForFlight_2 = new MultivaluedMapImpl();
+        queryParametersForFlight_2.add("origin", city1);
+        queryParametersForFlight_2.add("destination", city2);
+        queryParametersForFlight_2.add("departureDate", fromDate1);
+        FlightContainer flightContainer2 = flightsResource.queryParams(queryParametersForFlight_2).get(new GenericType<FlightContainer>() {});
         
-        MultivaluedMap<String, String> params4 = new MultivaluedMapImpl();
-        params4.add("origin", city1);
-        params4.add("destination", city2);
-        params4.add("departureDate", fromDate1);
-        FlightContainer flightContainer2 = flightsResource.queryParams(params4).get(new GenericType<FlightContainer>() {});
-        
-        MultivaluedMap<String,String> qParams2 = new MultivaluedMapImpl();
-        qParams2.add("bookintNumber", flightContainer2.flight.get(0).getBookingNumber());
-        qParams2.add("itineraryId", itinerary1);
-        flightsResource.queryParams(qParams2).post();
+        MultivaluedMap<String,String> queryParametersForFlight_2_1 = new MultivaluedMapImpl();
+        queryParametersForFlight_2_1.add("bookintNumber", flightContainer2.flight.get(0).getBookingNumber());
+        queryParametersForFlight_2_1.add("itineraryId", itinerary1);
+        flightsResource.queryParams(queryParametersForFlight_2_1).post();
        
-        MultivaluedMap<String, String> params3 = new MultivaluedMapImpl();
-        params3.add("origin", city1);
-        params3.add("destination", city2);
-        params3.add("departureDate", fromDate1);
-        FlightContainer flightContainer3 = flightsResource.queryParams(params3).get(new GenericType<FlightContainer>() {});
+        MultivaluedMap<String, String> queryParametersForFlight_3 = new MultivaluedMapImpl();
+        queryParametersForFlight_3.add("origin", city1);
+        queryParametersForFlight_3.add("destination", city2);
+        queryParametersForFlight_3.add("departureDate", fromDate1);
+        FlightContainer flightContainer3 = flightsResource.queryParams(queryParametersForFlight_3).get(new GenericType<FlightContainer>() {});
         
-        MultivaluedMap<String,String> qParams3 = new MultivaluedMapImpl();
-        qParams3.add("bookintNumber", flightContainer3.flight.get(0).getBookingNumber());
-        qParams3.add("itineraryId", itinerary1);
-        flightsResource.queryParams(qParams3).post();
+        MultivaluedMap<String,String> queryParametersForFlight_3_1 = new MultivaluedMapImpl();
+        queryParametersForFlight_3_1.add("bookintNumber", flightContainer3.flight.get(0).getBookingNumber());
+        queryParametersForFlight_3_1.add("itineraryId", itinerary1);
+        flightsResource.queryParams(queryParametersForFlight_3_1).post();
+        /*
+        MultivaluedMap<String, String> queryParametersForHotel_2 = new MultivaluedMapImpl();
+        queryParametersForHotel_2.add("city", city1);
+        queryParametersForHotel_2.add("arrivalDate", fromDate1);
+        queryParametersForHotel_2.add("departureDate", toDate1);
+        BookingContainer bookingContainer2 = hotelsResource.queryParams(queryParametersForHotel_2).get(new GenericType<BookingContainer>() {});
         
-        MultivaluedMap<String, String> params6 = new MultivaluedMapImpl();
-        params6.add("city", city1);
-        params6.add("arrivalDate", fromDate1);
-        params6.add("departureDate", toDate1);
-        BookingContainer bookingContainer2 = hotelsResource.queryParams(params6).get(new GenericType<BookingContainer>() {});
-        
-        MultivaluedMap<String,String> qParams7 = new MultivaluedMapImpl();
-        qParams7.add("bookintNumber", bookingContainer2.hotel.get(0).getBookingNumber());
-        qParams7.add("itineraryId", itinerary1);
-        hotelsResource.queryParams(qParams7).post();
+        MultivaluedMap<String,String> queryParametersForHotel_2_1 = new MultivaluedMapImpl();
+        queryParametersForHotel_2_1.add("bookintNumber", bookingContainer2.hotel.get(0).getBookingNumber());
+        queryParametersForHotel_2_1.add("itineraryId", itinerary1);
+        hotelsResource.queryParams(queryParametersForHotel_2_1).post();
+        */
     }
     /*
     @Test
