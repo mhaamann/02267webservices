@@ -10,7 +10,11 @@ import com.sun.jersey.api.client.GenericType;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.core.util.MultivaluedMapImpl;
 import dk.dtu.xml.BookingContainer;
+import dk.dtu.xml.Flight;
 import dk.dtu.xml.FlightContainer;
+import dk.dtu.xml.Hotel;
+import dk.dtu.xml.ItineraryContainer;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -105,7 +109,38 @@ public class BookingServiceRESTtest {
         hotelsResource.queryParams(addQueryParametersForHotel_2).post();
         */
         
+        ItineraryContainer itinerary = 
+                itineraryResource.path(itinerary1).get(new GenericType<ItineraryContainer>() {});
         
+        
+        for (Flight flight : itinerary.itinerary.flights) {
+            assertEquals("unconfirmed", flight.status);
+        }
+        
+        for (Hotel hotel : itinerary.itinerary.hotels) {
+            assertEquals("unconfirmed", hotel.status);
+        }
+        
+       //================ 
+        MultivaluedMap formData = new MultivaluedMapImpl();
+        formData.add("name", "Tobiasen Inge"); // Person with unlimited funds
+        formData.add("number", "50408823");
+        formData.add("year", "10");
+        formData.add("month", "9");
+        String response = itineraryResource.path(itinerary1).type(MediaType.APPLICATION_FORM_URLENCODED).put(String.class, formData);
+        
+        itinerary = 
+                itineraryResource.path(itinerary1).get(new GenericType<ItineraryContainer>() {});
+        
+        /*
+        for (Flight flight : itinerary.itinerary.flights) {
+            assertEquals("confirmed", flight.status);
+        }
+        
+        for (Hotel hotel : itinerary.itinerary.hotels) {
+            assertEquals("confirmed", hotel.status);
+        }
+        */
     }
     /*
     @Test
