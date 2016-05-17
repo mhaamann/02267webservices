@@ -6,6 +6,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import javax.xml.ws.WebServiceRef;
 
 /**
  *
@@ -18,9 +19,17 @@ public class HotelsDB {
     private BankServiceWrapper bank = new BankServiceWrapper();
     private static int hotelBankGroupId = 50308815;
     private boolean reserveHotels = false; // TODO: for debug purposes.
+    private static HotelsDB singletonHotelsDB = null;
     
     public HotelsDB() {
         resetData();
+    }
+    
+    public static HotelsDB getHotelsDB() {
+        if (singletonHotelsDB == null) {
+            singletonHotelsDB = new HotelsDB();
+        }
+        return singletonHotelsDB;
     }
 
     /** 
