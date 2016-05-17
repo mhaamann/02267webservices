@@ -122,7 +122,7 @@ public class BookingServiceRESTtest {
         }
         
         //================ 
-        /*
+        
         MultivaluedMap formData = new MultivaluedMapImpl();
         formData.add("year", "9");
         formData.add("month", "6");
@@ -141,7 +141,7 @@ public class BookingServiceRESTtest {
         for (Hotel hotel : itinerary.itinerary.hotels) {
             assertEquals("confirmed", hotel.status);
         }
-        */
+        
     }
     /*
     @Test
