@@ -24,7 +24,7 @@ import static org.junit.Assert.*;
  *
  * @author DFS
  */
-public class BookingServiceRESTtest {
+public class TestP {
     
     String city1 = "Copenhagen";
     String city2 = "Berlin";
@@ -45,7 +45,7 @@ public class BookingServiceRESTtest {
         
     
     
-    public BookingServiceRESTtest() {
+    public TestP() {
     }
 
     @Test
@@ -142,17 +142,10 @@ public class BookingServiceRESTtest {
         }
         
     }
-    /*
-    @Test
-    public void testP2() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
-    }
     
     @Test
-    public void testB() {
-        String result = res.get(String.class);
-        assertEquals(result, "DTU");
-    }*/
+    public void testP2() {
+        assertEquals(true, false);
+    }
     
 }
