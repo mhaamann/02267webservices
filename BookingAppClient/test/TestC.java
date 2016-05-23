@@ -45,7 +45,7 @@ public class TestC {
     trip and check that now the booking status is cancelled for all bookings of the itinerary.*/
     
     @Test
-    public void testC1() {
+    public void testC1_BPEL() {
         BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
         Random randomGenerator = new Random();
         int random = randomGenerator.nextInt(10000);
@@ -182,7 +182,7 @@ public class TestC {
     has cancelled as the first and third booking and confirmed for the second booking.*/
     
     @Test
-    public void testC2() {
+    public void testC2_BPEL() {
         BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
         Random randomGenerator = new Random();
         int random = randomGenerator.nextInt(10000);

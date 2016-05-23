@@ -47,7 +47,7 @@ public class TestB {
     status of the first booking and unconfirmed for the status of the second and third booking.*/
     
     @Test
-    public void testB() {
+    public void testB_BPEL() {
         BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
         Random randomGenerator = new Random();
         int random = randomGenerator.nextInt(10000);

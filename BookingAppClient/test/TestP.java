@@ -51,7 +51,7 @@ public class TestP {
     Book the itinerary and ask again for the itinerary. Check that each booking status is now confirmed.*/
 
     @Test
-    public void testP1() {
+    public void testP1_BPEL() {
         
         BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
         Random randomGenerator = new Random();
@@ -192,7 +192,7 @@ public class TestP {
     Then cancel planning.*/
     
     @Test
-    public void testP2() {
+    public void testP2_BPEL() {
         BookingServiceBPELWrapper bookingServiceBPEL = new BookingServiceBPELWrapper();
 
         //Create itinerary
