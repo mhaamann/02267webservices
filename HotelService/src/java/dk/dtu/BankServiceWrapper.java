@@ -8,8 +8,8 @@ package dk.dtu;
 import dk.dtu.imm.fastmoney.CreditCardFaultMessage;
 
 /**
- *
- * @author mhaamann
+ * Place holder for the credit card methods.
+ * @author Matthias Haamann
  */
 public class BankServiceWrapper {
 

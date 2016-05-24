@@ -9,7 +9,7 @@ import java.util.Date;
 import javax.xml.datatype.DatatypeConfigurationException;
 
 /**
- * @author DFS
+ * @author Djoni Frank Strømsten
  */
 class FlightInfo {
     

@@ -10,7 +10,7 @@ import javax.xml.ws.WebServiceRef;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class HotelsDB {
 

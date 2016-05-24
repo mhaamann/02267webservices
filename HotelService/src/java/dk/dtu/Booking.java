@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class Booking {
     public String city;

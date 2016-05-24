@@ -21,7 +21,7 @@ import javax.xml.ws.WebServiceRef;
 
 /**
  *
- * @author DFS
+ * @author Djoni Frank Strømsten
  */
 @WebService(serviceName = "AirlineWebService")
 public class AirlineWebService {
