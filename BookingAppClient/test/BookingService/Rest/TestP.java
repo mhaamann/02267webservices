@@ -5,6 +5,8 @@
  */
 package BookingService.Rest;
 
+import ExternalBookingService.Booking;
+import ExternalBookingService.FlightInfo;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -15,6 +17,8 @@ import dk.dtu.xml.Flight;
 import dk.dtu.xml.FlightContainer;
 import dk.dtu.xml.Hotel;
 import dk.dtu.xml.ItineraryContainer;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import org.junit.Test;
@@ -22,116 +26,112 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author DFS
+ * @author Matthias Haamann.
  */
 public class TestP {
-    
-    String city1 = "Copenhagen";
-    String city2 = "Berlin";
-    String fromDate1 = "2016-01-01";
-    String toDate1 = "2016-01-30";
-    String toDateFlight1 = "2016-01-10";
-    String itinerary1 = "";
-    String bookingNumber1 = "1";
-    String bookingNumber2 = "2";
-    String flightBooking1 = "B12341";
-    String hotelBookingNo1 = "7";
-    String hotelBookingNo2 = "12";
-    
+
     Client client = Client.create();
-        WebResource itineraryResource = client.resource("http://localhost:8080/BookingRestService/webresources/itinerary");
-        WebResource flightsResource = client.resource("http://localhost:8080/BookingRestService/webresources/flights");
-        WebResource hotelsResource = client.resource("http://localhost:8080/BookingRestService/webresources/hotels");
-        
-    
+    WebResource itineraryResource = client.resource("http://localhost:8080/BookingRestService/webresources/itinerary");
+    WebResource flightsResource = client.resource("http://localhost:8080/BookingRestService/webresources/flights");
+    WebResource hotelsResource = client.resource("http://localhost:8080/BookingRestService/webresources/hotels");
+ 
     
     public TestP() {
     }
 
     @Test
     public void testP1() {
-        itinerary1 = itineraryResource.post(String.class);
-        int itineraryId = Integer.parseInt(itinerary1);
-        assertTrue(itineraryId > 0);
+        // List that holds the hotel and flight selection.
+        LinkedList<String> hotelBookingList = new LinkedList<>();
+        LinkedList<String> flightBookingList = new LinkedList<>();
         
-        MultivaluedMap<String, String> getQueryParametersForFlight_1 = new MultivaluedMapImpl();
-        getQueryParametersForFlight_1.add("origin", city1);
-        getQueryParametersForFlight_1.add("destination", city2);
-        getQueryParametersForFlight_1.add("departureDate", fromDate1);
-        FlightContainer flightContainer = flightsResource.queryParams(getQueryParametersForFlight_1).get(new GenericType<FlightContainer>() {});
+        // Create itinerary Id.
+        String itineraryId = itineraryResource.post(String.class);
+        System.out.print(itineraryId);
+
+        // Prepare Get hotels query params.
+        MultivaluedMap<String, String> hotelQueryParams = new MultivaluedMapImpl();
+        hotelQueryParams.add("city", "Copenhagen");
+        hotelQueryParams.add("arrivalDate", "2016-02-01");
+        hotelQueryParams.add("departureDate", "2016-02-5");
+        BookingContainer hotels = hotelsResource.queryParams(hotelQueryParams).get(new GenericType<BookingContainer>() {
+        });
+
+        for (Booking booking : hotels.hotel) {
+            hotelBookingList.add(booking.getBookingNumber());
+        }
+
+        // Prepare Get flights query params - For FLIGHT 1.
+        MultivaluedMap<String, String> queryParamsFlights = new MultivaluedMapImpl();
+        queryParamsFlights.add("origin", "Copenhagen");
+        queryParamsFlights.add("destination", "Berlin");
+        queryParamsFlights.add("departureDate", "2016-01-01");
+        FlightContainer flights = flightsResource.queryParams(queryParamsFlights).get(new GenericType<FlightContainer>() {
+        });
+
+        for (FlightInfo flight : flights.flight) {
+           flightBookingList.add(flight.getBookingNumber());
+        }
         
-        MultivaluedMap<String,String> addQueryParametersForFlight_1 = new MultivaluedMapImpl();
-        addQueryParametersForFlight_1.add("bookintNumber", flightContainer.flight.get(0).getBookingNumber());
-        addQueryParametersForFlight_1.add("itineraryId", itinerary1);
-        ClientResponse response = flightsResource.queryParams(addQueryParametersForFlight_1).post(ClientResponse.class);
+        // Prepare Get flights query params - For FLIGHT 2.
+        queryParamsFlights = new MultivaluedMapImpl();
+        queryParamsFlights.add("origin", "Berlin");
+        queryParamsFlights.add("destination", "Amsterdam");
+        queryParamsFlights.add("departureDate", "2016-01-01");
+        flights = flightsResource.queryParams(queryParamsFlights).get(new GenericType<FlightContainer>() {
+        });
+
+        for (FlightInfo flight : flights.flight) {
+           flightBookingList.add(flight.getBookingNumber());
+        }
         
-        MultivaluedMap<String, String> getQueryParametersForHotel_1 = new MultivaluedMapImpl();
-        getQueryParametersForHotel_1.add("city", city1);
-        getQueryParametersForHotel_1.add("arrivalDate", fromDate1);
-        getQueryParametersForHotel_1.add("departureDate", toDate1);
-        BookingContainer bookingContainer = hotelsResource.queryParams(getQueryParametersForHotel_1).get(new GenericType<BookingContainer>() {});
+        // Prepare Get flights query params - For FLIGHT 3.
+        queryParamsFlights = new MultivaluedMapImpl();
+        queryParamsFlights.add("origin", "Amsterdam");
+        queryParamsFlights.add("destination", "Paris");
+        queryParamsFlights.add("departureDate", "2016-01-01");
+        flights = flightsResource.queryParams(queryParamsFlights).get(new GenericType<FlightContainer>() {
+        });
+
+        for (FlightInfo flight : flights.flight) {
+           flightBookingList.add(flight.getBookingNumber());
+        }
         
-        MultivaluedMap<String,String> addQueryParametersForHotel_1 = new MultivaluedMapImpl();
-        addQueryParametersForHotel_1.add("bookintNumber", bookingContainer.hotel.get(0).getBookingNumber());
-        addQueryParametersForHotel_1.add("itineraryId", itinerary1);
-        ClientResponse response4 = hotelsResource.queryParams(addQueryParametersForHotel_1).post(ClientResponse.class);
-        
-        MultivaluedMap<String, String> getQueryParametersForFlight_2 = new MultivaluedMapImpl();
-        getQueryParametersForFlight_2.add("origin", city1);
-        getQueryParametersForFlight_2.add("destination", city2);
-        getQueryParametersForFlight_2.add("departureDate", fromDate1);
-        FlightContainer flightContainer2 = flightsResource.queryParams(getQueryParametersForFlight_2).get(new GenericType<FlightContainer>() {});
-        
-        MultivaluedMap<String,String> addQueryParametersForFlight_2 = new MultivaluedMapImpl();
-        addQueryParametersForFlight_2.add("bookintNumber", flightContainer2.flight.get(0).getBookingNumber());
-        addQueryParametersForFlight_2.add("itineraryId", itinerary1);
-        ClientResponse response2 = flightsResource.queryParams(addQueryParametersForFlight_2).post(ClientResponse.class);
-       
-        MultivaluedMap<String, String> getQueryParametersForFlight_3 = new MultivaluedMapImpl();
-        getQueryParametersForFlight_3.add("origin", city1);
-        getQueryParametersForFlight_3.add("destination", city2);
-        getQueryParametersForFlight_3.add("departureDate", fromDate1);
-        FlightContainer flightContainer3 = flightsResource.queryParams(getQueryParametersForFlight_3).get(new GenericType<FlightContainer>() {});
-        
-        MultivaluedMap<String,String> addQueryParametersForFlight_3 = new MultivaluedMapImpl();
-        addQueryParametersForFlight_3.add("bookintNumber", flightContainer3.flight.get(0).getBookingNumber());
-        addQueryParametersForFlight_3.add("itineraryId", itinerary1);
-        ClientResponse response3 = flightsResource.queryParams(addQueryParametersForFlight_3).post(ClientResponse.class);
-        
-        MultivaluedMap<String, String> getQueryParametersForHotel_2 = new MultivaluedMapImpl();
-        getQueryParametersForHotel_2.add("city", city1);
-        getQueryParametersForHotel_2.add("arrivalDate", fromDate1);
-        getQueryParametersForHotel_2.add("departureDate", toDate1);
-        BookingContainer bookingContainer2 = hotelsResource.queryParams(getQueryParametersForHotel_2).get(new GenericType<BookingContainer>() {});
-        
-        MultivaluedMap<String,String> addQueryParametersForHotel_2 = new MultivaluedMapImpl();
-        addQueryParametersForHotel_2.add("bookintNumber", bookingContainer2.hotel.get(0).getBookingNumber());
-        addQueryParametersForHotel_2.add("itineraryId", itinerary1);
-        ClientResponse response5 = hotelsResource.queryParams(addQueryParametersForHotel_2).post(ClientResponse.class);
-        
+        // first planning a flight (i.e. getting a list of flights and then
+        // adding a flight to the itinerary), then by planning a hotel, another
+        // flight, a third flight, and finally a hotel.
+        addFlight(itineraryId, flightBookingList.pop());
+        addHotel(itineraryId, hotelBookingList.pop());
+        addFlight(itineraryId, flightBookingList.pop());
+        addHotel(itineraryId, hotelBookingList.pop());
+        addFlight(itineraryId, flightBookingList.pop());
+        addHotel(itineraryId, hotelBookingList.pop());
         
         ItineraryContainer itinerary = 
-                itineraryResource.path(itinerary1).get(new GenericType<ItineraryContainer>() {});
-        
+                itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
         
         for (Flight flight : itinerary.itinerary.flights) {
             assertEquals("unconfirmed", flight.status);
         }
         
+        
         for (Hotel hotel : itinerary.itinerary.hotels) {
             assertEquals("unconfirmed", hotel.status);
         }
+        // Ensure that we have 3 hotels and 3 flights on our itinerary.
+        assertEquals(itinerary.itinerary.flights.size(), 3);
+        assertEquals(itinerary.itinerary.hotels.size(), 3);
         
-        //================ 
+        // Book the itinerary.
         
         MultivaluedMap formData = new MultivaluedMapImpl();
         formData.add("name", "Anne Strandberg"); // Person with unlimited funds
         formData.add("number", "50408816");
         formData.add("year", "9");
         formData.add("month", "5");
-        String s_response = itineraryResource.path(itinerary1).type(MediaType.APPLICATION_FORM_URLENCODED).put(String.class, formData);
+        String s_response = itineraryResource.path(itineraryId).type(MediaType.APPLICATION_FORM_URLENCODED).put(String.class, formData);
         
-        itinerary = itineraryResource.path(itinerary1).get(new GenericType<ItineraryContainer>() {});
+        itinerary = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
         
         for (Flight flight : itinerary.itinerary.flights) {
             assertEquals("confirmed", flight.status);
@@ -140,12 +140,97 @@ public class TestP {
         for (Hotel hotel : itinerary.itinerary.hotels) {
             assertEquals("confirmed", hotel.status);
         }
+        // Ensure that we have 3 hotels and 3 flights on our itinerary.
+        assertEquals(itinerary.itinerary.flights.size(), 3);
+        assertEquals(itinerary.itinerary.hotels.size(), 3);
         
     }
     
     @Test
     public void testP2() {
-        assertEquals(true, false);
+        // List that holds the hotel and flight selection.
+        LinkedList<String> hotelBookingList = new LinkedList<>();
+        LinkedList<String> flightBookingList = new LinkedList<>();
+        
+        // Create itinerary Id.
+        String itineraryId = itineraryResource.post(String.class);
+        System.out.print(itineraryId);
+
+        // Prepare Get flights query params - For FLIGHT 1.
+        MultivaluedMap<String, String> queryParamsFlights = new MultivaluedMapImpl();
+        queryParamsFlights.add("origin", "Copenhagen");
+        queryParamsFlights.add("destination", "Berlin");
+        queryParamsFlights.add("departureDate", "2016-01-01");
+        FlightContainer flights = flightsResource.queryParams(queryParamsFlights).get(new GenericType<FlightContainer>() {
+        });
+
+        for (FlightInfo flight : flights.flight) {
+           flightBookingList.add(flight.getBookingNumber());
+        }
+        
+        // Add flight to itinerary.
+        addFlight(itineraryId, flightBookingList.pop());
+        
+        ItineraryContainer itinerary = 
+                itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
+        
+        for (Flight flight : itinerary.itinerary.flights) {
+            assertEquals("unconfirmed", flight.status);
+        }
+        
+        // Ensure that we have 0 hotels and 1 flights on our itinerary.
+        assertEquals(itinerary.itinerary.flights.size(), 1);
+        assertEquals(itinerary.itinerary.hotels.size(), 0);
+        
+        // Book the itinerary.
+        
+        MultivaluedMap formData = new MultivaluedMapImpl();
+        formData.add("name", "Anne Strandberg"); // Person with unlimited funds
+        formData.add("number", "50408816");
+        formData.add("year", "9");
+        formData.add("month", "5");
+        String s_response = itineraryResource.path(itineraryId).type(MediaType.APPLICATION_FORM_URLENCODED).put(String.class, formData);
+        
+        itinerary = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
+        
+        for (Flight flight : itinerary.itinerary.flights) {
+            assertEquals("confirmed", flight.status);
+        }
+        
+        // Ensure that we have 0 hotels and 1 flights on our itinerary.
+        assertEquals(itinerary.itinerary.flights.size(), 1);
+        assertEquals(itinerary.itinerary.hotels.size(), 0);
+        
+        // Now cancel the itinerary.
+        itineraryResource.path(itineraryId).delete(String.class);
+        
+        itinerary = itineraryResource.path(itineraryId).get(new GenericType<ItineraryContainer>() {});
+        
+        for (Flight flight : itinerary.itinerary.flights) {
+            assertEquals("cancelled", flight.status);
+        }
+        
+        // Ensure that we have 0 hotels and 1 flights on our itinerary.
+        assertEquals(itinerary.itinerary.flights.size(), 1);
+        assertEquals(itinerary.itinerary.hotels.size(), 0);
+    }
+    
+    public ClientResponse addFlight(String itineraryId, String bookingNumber) {
+        // Prepare Add flight query params.
+        MultivaluedMap queryParamsAddFlight = new MultivaluedMapImpl();
+        queryParamsAddFlight.add("itineraryId", itineraryId);
+        queryParamsAddFlight.add("bookingNumber", bookingNumber);
+        // Add flight.
+        return flightsResource.queryParams(queryParamsAddFlight).post(ClientResponse.class);
+    }
+    
+    public ClientResponse addHotel(String itineraryId, String bookingNumber) {
+        // Prepare Add hotel query params.
+        MultivaluedMap queryParamsAddHotel = new MultivaluedMapImpl();
+        queryParamsAddHotel.add("itineraryId", itineraryId);
+        queryParamsAddHotel.add("bookingNumber", bookingNumber);
+        // Add hotel.
+        return hotelsResource.queryParams(queryParamsAddHotel).post(ClientResponse.class);
     }
     
 }
