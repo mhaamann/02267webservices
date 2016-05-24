@@ -18,7 +18,7 @@ import java.util.Random;
 
 /**
  *
- * @author jens
+ * @author Jens Paulsen
  */
 public class TestP {
     

@@ -7,7 +7,7 @@ package dk.dtu;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 class Payment {
 

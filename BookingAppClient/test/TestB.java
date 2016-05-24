@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author jens
+ * @author Jens Paulsen
  */
 public class TestB {
     
