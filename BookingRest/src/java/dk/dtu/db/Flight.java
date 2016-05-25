@@ -7,7 +7,7 @@ package dk.dtu.db;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 class Flight {
     public String bookingNumber;

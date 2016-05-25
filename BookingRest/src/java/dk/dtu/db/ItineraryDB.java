@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class ItineraryDB {
 

@@ -24,7 +24,7 @@ import javax.xml.bind.annotation.XmlElementWrapper;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 @Path("hotels")
 public class HotelRestService {

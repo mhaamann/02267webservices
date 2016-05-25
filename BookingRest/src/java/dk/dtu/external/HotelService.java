@@ -10,7 +10,7 @@ import dk.dtu.ParseException_Exception;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class HotelService {
 

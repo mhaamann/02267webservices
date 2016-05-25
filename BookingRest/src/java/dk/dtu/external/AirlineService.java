@@ -10,7 +10,7 @@ import dk.dtu.airline.CreditCardFaultMessage;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class AirlineService {
 

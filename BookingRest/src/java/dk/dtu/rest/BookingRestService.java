@@ -20,7 +20,7 @@ import javax.ws.rs.PUT;
 /**
  * REST Web Service
  *
- * @author User
+ * @author Matthias Haamann
  */
 @Path("")
 public class BookingRestService {

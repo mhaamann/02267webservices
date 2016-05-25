@@ -24,7 +24,7 @@ import javax.ws.rs.core.Response;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 @Path("itinerary")
 public class ItineraryRestService {

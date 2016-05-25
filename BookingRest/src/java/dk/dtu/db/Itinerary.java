@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class Itinerary {
     static int PlanningState = 0;

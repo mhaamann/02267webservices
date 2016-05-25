@@ -7,7 +7,7 @@ package dk.dtu.xml;
 
 /**
  *
- * @author mhaamann
+ * @author Matthias Haamann
  */
 public class Action {
     public String method;
