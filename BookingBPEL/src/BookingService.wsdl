@@ -76,7 +76,7 @@
         <part name="itineraryId" type="xsd:string"/>
     </message>
     <message name="CancelItineraryResponse">
-        <part name="status" type="tns:hotelList"/>
+        <part name="status" type="xsd:string"/>
     </message>
     <message name="ResetRequest">
         <part name="itineraryId" type="xsd:string"/>
@@ -98,7 +98,7 @@
         <part name="year" type="xsd:integer"/>
     </message>
     <message name="BookItineraryResponse">
-        <part name="status" type="tns:hotelList"/>
+        <part name="status" type="xsd:string"/>
     </message>
     <portType name="BookingServicePortType">
         <operation name="CreateItinerary">

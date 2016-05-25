@@ -88,8 +88,9 @@ public class BookingAppClient {
         }
        
         System.out.println("Booking..");
-        HotelList hotelListBooked = bookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", "50408816", BigInteger.valueOf(5), BigInteger.valueOf(9));
-        for (HotelReservation reservation : hotelListBooked.getReservation()) {
+        bookingServiceBPEL.bookItinerary(itineraryId, "Anne Strandberg", "50408816", BigInteger.valueOf(5), BigInteger.valueOf(9));
+        List<HotelReservation> hotelListBooked = bsWrapper.getHotelItineraryList(itineraryId);
+        for (HotelReservation reservation : hotelListBooked) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }
@@ -111,8 +112,9 @@ public class BookingAppClient {
         }
         
         System.out.println("Cancelling..");
-        HotelList list3 = bookingServiceBPEL.cancelItinerary(itineraryId);
-        for (HotelReservation reservation : list3.getReservation()) {
+        bookingServiceBPEL.cancelItinerary(itineraryId);
+        List<FlightReservation> list3 = bsWrapper.getFlightItineraryList(itineraryId);
+        for (FlightReservation reservation : list3) {
             System.out.print(reservation.getBookingNumber() + " - Status:");
             System.out.println(reservation.getStatus());
         }

@@ -342,7 +342,7 @@
                                     </forEach>
                                     <assign name="Assign9">
                                         <copy>
-                                            <from variable="hotelList"/>
+                                            <from>'success'</from>
                                             <to variable="BookItineraryOut" part="status"/>
                                         </copy>
                                         <copy>
@@ -514,7 +514,7 @@
                                             
                                             <assign name="Assign9">
                                                 <copy>
-                                                    <from variable="hotelList"/>
+                                                    <from>'success'</from>
                                                     <to variable="CancelItineraryOut" part="status"/>
                                                 </copy>
                                             </assign>

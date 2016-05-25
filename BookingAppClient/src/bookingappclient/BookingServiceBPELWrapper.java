@@ -23,10 +23,9 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     BookingServiceBPEL bookingServiceBPEL = new BookingServiceBPEL();
     
     @Override
-    public List<HotelReservation> bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year) {
-        HotelList hotelList = bookingServiceBPEL.bookItinerary(itineraryId, name, number, month, year);
-        List<HotelReservation> hotelReservationList = hotelList.getReservation();
-        return hotelReservationList;
+    public String bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year) {
+        String answer = bookingServiceBPEL.bookItinerary(itineraryId, name, number, month, year);
+        return answer;
     }
 
     @Override
@@ -73,10 +72,9 @@ public class BookingServiceBPELWrapper implements BookingServiceInterface{
     }
     
     @Override
-    public List<HotelReservation> cancelItinerary(String itineraryId) {
-        HotelList hotelList = bookingServiceBPEL.cancelItinerary(itineraryId);
-        List<HotelReservation> hotelReservationList = hotelList.getReservation();
-        return hotelReservationList;
+    public String cancelItinerary(String itineraryId) {
+        String status = bookingServiceBPEL.cancelItinerary(itineraryId);
+        return status;
     }
 
     @Override

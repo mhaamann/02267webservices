@@ -17,7 +17,7 @@ import java.util.List;
 public interface BookingServiceInterface {
     // Itinerary operations - Start
     
-    public List<HotelReservation> bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year);
+    public String bookItinerary(java.lang.String itineraryId, java.lang.String name, java.lang.String number, java.math.BigInteger month, java.math.BigInteger year);
 
     public String createItinerary(java.lang.String itineraryId);
     
@@ -27,7 +27,7 @@ public interface BookingServiceInterface {
     
     public List<FlightReservation> getFlightItineraryList(String itineraryId);
 
-    public List<HotelReservation> cancelItinerary(java.lang.String itineraryId);
+    public String cancelItinerary(java.lang.String itineraryId);
     
     // Itinerary operations - End
     

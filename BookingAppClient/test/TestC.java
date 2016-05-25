@@ -10,6 +10,7 @@ import ExternalBookingService.FlightReservation;
 import ExternalBookingService.HotelReservation;
 import bookingappclient.BookingServiceBPELWrapper;
 import java.math.BigInteger;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
@@ -63,7 +64,6 @@ public class TestC {
         //Get list of flights
         System.out.println("Finding flights..");
         List<FlightInfo> flightBookingList = bookingServiceBPEL.getFlights(city1, city2, fromDateFlight1, itinerary1);
-        System.out.println(flightBookingList);
         assertFalse(flightBookingList.isEmpty() );
         
         //Add flight to itinerary
@@ -78,11 +78,15 @@ public class TestC {
         assertNotNull(hotelBookingList);
         assertFalse(hotelBookingList.isEmpty() );
         
-        //Add hotel to itinerary
-        //Get bookingnumber from returned hotels
+        List<HotelReservation> hotelReservationList = new ArrayList<>();
         System.out.println("Adding first hotel..");
-        hotelBookingNo1 = hotelBookingList.get(0).getBookingNumber();
-        List<HotelReservation> hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
+        for(Booking booking : hotelBookingList){
+            if (!booking.isCreditcardGuarantee()){
+                hotelBookingNo1 = booking.getBookingNumber();
+                hotelReservationList = bookingServiceBPEL.addHotel(hotelBookingNo1, itinerary1);
+                break;
+            }
+        }
         assertNotNull(hotelReservationList);
         assertEquals(1, hotelReservationList.size());
         assertEquals(hotelBookingNo1, hotelReservationList.get(0).getBookingNumber());
@@ -122,7 +126,8 @@ public class TestC {
         
         //Book itinerary
         System.out.println("Booking itinerary..");
-        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(bookItineraryReply);
         assertFalse(bookItineraryReply.isEmpty());
         
@@ -148,12 +153,23 @@ public class TestC {
         }
         
         //Cancel booking
-        List<HotelReservation> cancelItineraryReply = bookingServiceBPEL.cancelItinerary(itinerary1);
+        System.out.println("Cancelling Booking...");
+        bookingServiceBPEL.cancelItinerary(itinerary1);
+        List<HotelReservation> cancelItineraryReply = bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(cancelItineraryReply);
         assertFalse(cancelItineraryReply.isEmpty());
         
         //Assert all entries have status cancelled
         System.out.println("Asserting all statuses are cancelled...");
+        
+        fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        assertNotNull(fReservationList);
+        assertFalse(fReservationList.isEmpty());
+        
+        for (FlightReservation reservation : fReservationList){
+            assertEquals(statusCancelled, reservation.getStatus());
+            
+        }
         
         hReservationList = bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(hReservationList);
@@ -164,14 +180,7 @@ public class TestC {
             
         }
         
-        fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
-        assertNotNull(fReservationList);
-        assertFalse(fReservationList.isEmpty());
         
-        for (FlightReservation reservation : fReservationList){
-            assertEquals(statusCancelled, reservation.getStatus());
-            
-        }
         
     }
     
@@ -264,7 +273,8 @@ public class TestC {
         
         //Book itinerary
         System.out.println("Booking itinerary..");
-        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(bookItineraryReply);
         assertFalse(bookItineraryReply.isEmpty());
         
@@ -290,15 +300,10 @@ public class TestC {
         }
         
         //Cancel booking
-        List<HotelReservation> cancelItineraryReply = bookingServiceBPEL.cancelItinerary(itinerary1);
+        bookingServiceBPEL.cancelItinerary(itinerary1);
+        List<HotelReservation> cancelItineraryReply = bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(cancelItineraryReply);
         assertFalse(cancelItineraryReply.isEmpty());
-        
-        
-        //TODO: Second trip cancelling fails - hardcode in SOAP-service?
-
-        //TODO: Assert error status from SOAP-service?
-        
         
         HashMap hm = new HashMap();
         

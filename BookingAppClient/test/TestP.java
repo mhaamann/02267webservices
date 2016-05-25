@@ -121,7 +121,6 @@ public class TestP {
         System.out.println("Getting Itinerary..");
         
         
-        
         //Assert all flights added
         System.out.println("Asserting all flights added..");
         List<FlightReservation> fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
@@ -159,7 +158,8 @@ public class TestP {
         
         //Book itinerary
         System.out.println("Booking itinerary..");
-        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(bookItineraryReply);
         assertFalse(bookItineraryReply.isEmpty());
         
@@ -200,7 +200,6 @@ public class TestP {
         int random = randomGenerator.nextInt(10000);
         itinerary1 = Integer.toString(random);
         
-        //Create itinerary
         System.out.println("Creating Itinerary number " + itinerary1);
         String itineraryString = bookingServiceBPEL.createItinerary(itinerary1);
         assertNotNull(itineraryString);
@@ -217,16 +216,41 @@ public class TestP {
         assertNotNull(flightReservationList);
         assertEquals(1, flightReservationList.size());
 
+        //Assert all flights added
+        System.out.println("Asserting all flights added..");
+        List<FlightReservation> fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        assertEquals(1, fReservationList.size());
+        
+        //Book itinerary
+        System.out.println("Booking itinerary..");
+        bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        List<FlightReservation> bookItineraryReply =  bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        assertNotNull(bookItineraryReply);
+        assertFalse(bookItineraryReply.isEmpty());
+        
+        //Assert all statuses are confirmed
+        System.out.println("Asserting all statuses are confirmed...");
+        
+        fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        assertNotNull(fReservationList);
+        assertFalse(fReservationList.isEmpty());
+        
+        for (FlightReservation reservation : fReservationList){
+            assertEquals(statusConfirmed, reservation.getStatus());
+            
+        }
+        
         //Cancel Planning
         System.out.println("Cancelling planning..");
-        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.cancelItinerary(itinerary1);
+        bookingServiceBPEL.cancelItinerary(itinerary1);
+        bookItineraryReply =  bookingServiceBPEL.getFlightItineraryList(itinerary1);
         assertNotNull(bookItineraryReply);
         assertFalse(bookItineraryReply.isEmpty());
 
         //Assert status of flight is cancelled...
         System.out.println("Asserting status of flight is cancelled..");
         System.out.println("Asserting booking number of flight is correct..");
-        List<FlightReservation> fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
+        fReservationList = bookingServiceBPEL.getFlightItineraryList(itinerary1);
         assertNotNull(fReservationList);
         assertFalse(fReservationList.isEmpty());
         

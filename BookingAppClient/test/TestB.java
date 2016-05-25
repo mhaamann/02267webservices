@@ -129,7 +129,8 @@ public class TestB {
         
         //Book itinerary
         System.out.println("Booking itinerary..");
-        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        bookingServiceBPEL.bookItinerary(itinerary1, CreditCardName1, CreditCardNumber1, CreditCardMonth1, CreditCardYear1);
+        List<HotelReservation> bookItineraryReply =  bookingServiceBPEL.getHotelItineraryList(itinerary1);
         assertNotNull(bookItineraryReply);
         assertFalse(bookItineraryReply.isEmpty());
         
