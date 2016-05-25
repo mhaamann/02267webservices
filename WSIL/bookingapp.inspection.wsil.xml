@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<inspection xmlns="http://schemas.xmlsoap.org/ws/2001/10/inspection/">
+    <service>
+        <name>BookingAppService</name>
+        <abstract>The BookingAppService allows creating, filling, booking, cancelling and listing of itineraries.</abstract>
+        <description referencedNamespace="http://schemas.xmlsoap.org/wsdl/"
+                 location="http://localhost:9080/service1/BookingServicePort?wsdl"/>
+    </service>
+    <link referencedNamespace="http://schemas.xmlsoap.org/ws/2001/10/inspection/"
+        location="http://localhost:8080/HotelWebService/inspection.wsil"/>
+    <link referencedNamespace="http://schemas.xmlsoap.org/ws/2001/10/inspection/"
+        location="http://localhost:8080/AirlineWebService/inspection.wsil"/>
+</inspection>
