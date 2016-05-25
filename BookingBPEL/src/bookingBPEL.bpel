@@ -102,16 +102,40 @@
                                     <correlation set="CorrelationSet2" initiate="no"/>
                                 </correlations>
                                 <sequence name="Sequence6">
-                                    <assign name="Assign22">
+                                    <if name="if1">
+                                        <condition>$numberOfHotels &gt; 0</condition>
+                                        <assign name="Assign221">
                                         <copy>
                                             <from variable="hotelList"/>
                                             <to>$ListItineraryOut.status/ns1:hotels</to>
                                         </copy>
+                                        </assign>
+                                        <else>
+                                            <assign name="Assign2212">
+                                                <copy>
+                                                    <from>'Empty'</from>
+                                                    <to>$ListItineraryOut.status/ns1:hotels</to>
+                                                </copy>
+                                            </assign>  
+                                        </else>
+                                    </if>
+                                    <if name="if2">
+                                        <condition>$numberOfFlights &gt; 0</condition>
+                                        <assign name="Assign222">
                                         <copy>
                                             <from variable="flightList"/>
                                             <to>$ListItineraryOut.status/ns1:flights</to>
                                         </copy>
-                                    </assign>
+                                        </assign>
+                                        <else>
+                                            <assign name="Assign2222">
+                                                <copy>
+                                                    <from>'Empty'</from>
+                                                    <to>$ListItineraryOut.status/ns1:flights</to>
+                                                </copy>
+                                            </assign>  
+                                        </else>
+                                    </if>
                                     <reply name="Reply4" partnerLink="PartnerLink1" operation="ListItinerary" portType="ns0:BookingServicePortType" variable="ListItineraryOut"/>
                                 </sequence>
                             </onMessage>
